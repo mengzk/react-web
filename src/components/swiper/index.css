@@ -1,0 +1,21 @@
+.swiper {
+  display: flex;
+  position: relative;
+}
+.swiper-list {
+  max-width: 100vw;
+  display: flex;
+  overflow: clip;
+}
+
+.swiper-list-item {
+  display: flex;
+  /* transform: translateX(10px); */
+  /* transform: scale(1); */
+}
+
+.swiper-list-img {
+  width: 300px;
+  height: 200px;
+  border-radius: 12px;
+}

@@ -1,0 +1,15 @@
+.v-grid-view {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 3;
+  background-color: transparent;
+}
+.v-grid-list {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+}
+
+.v-grid-list::-webkit-scrollbar {
+  border: none;
+}

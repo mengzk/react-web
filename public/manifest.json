@@ -1,0 +1,32 @@
+{
+  "short_name": "App",
+  "name": "step",
+  "version": "0.0.6",
+  "env": "prod",
+  "date": "20240415175027",
+  "dev": "0.0.1",
+  "uat": "0.0.1",
+  "test": "0.0.2",
+  "prod": "0.0.6",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

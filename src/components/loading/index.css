@@ -1,0 +1,52 @@
+.v-loading-view {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.v-loading-view2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.v-loading-view-ic {
+  font-size: 26px;
+  color: white;
+}
+
+.v-loading-view-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation-delay: 0;
+  animation-duration: 1s;
+  animation-name: loadingAnim;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes loadingAnim {
+  from {
+    transform: rotateZ(0);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+.v-loading-view-text {
+  color: white;
+  font-size: 10px;
+  margin-top: 8px;
+}
+.v-loading-progress {
+  position: absolute;
+  z-index: 3;
+  color: #232323;
+  font-size: 20px;
+}

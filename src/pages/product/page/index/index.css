@@ -1,0 +1,14 @@
+.product {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.product-products {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 30px;
+  row-gap: 30px;
+  margin: 0 calc(50vw - 700px);
+}

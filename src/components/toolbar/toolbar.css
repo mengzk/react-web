@@ -1,0 +1,47 @@
+.v-toolbar-box {
+  width: 100vw;
+  height: 56px;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* background-color: transparent; */
+}
+
+.v-toolbar-btn {
+  margin-left: 24px;
+  display: flex;
+  align-items: center;
+}
+.v-toolbar-logo {
+  width: 24px;
+  height: 24px;
+}
+.v-toolbar-name {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+.v-toolbar-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 6vw 0 0;
+  column-gap: 64px;
+}
+.v-toolbar-tab-li {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+
+.v-toolbar-height {
+  width: 1px;
+  min-height: 56px;
+}

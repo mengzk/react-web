@@ -11,29 +11,42 @@ import { navigate } from "../../../routes";
 import { Toolbar, Footer } from "../../../../components/index";
 import { GoodsItem, Banner, Product } from "../../component/index";
 
-
 const bgImgUrl =
   "https://s.cn.bing.net/th?id=OHR.BrightonBoxes_ZH-CN0947219018_1920x1080.webp&qlt=50";
 function HomePage(props) {
   useEffect(() => {}, []);
+  const [count, setCount] = useState(5);
 
   function onBarChange(res) {
-    console.log('onChange', res)
-    if(res === 'goods') {
-      navigate('product');
+    console.log("onChange", res);
+    if (res === "goods") {
+      navigate("product");
     }
+  }
+
+  function onProductClick() {
+    setCount(count + 5);
+    setCount(count + 5);
+    alert(count);
+    setCount(count + 5);
+    setCount(count + 5);
   }
 
   return (
     <>
       <img className="home-img-bg" src={bgImgUrl} />
       <div className="home">
-        <Toolbar onChange={onBarChange}/>
+        <Toolbar onChange={onBarChange} />
         <div className="home-banner">
           <Banner />
         </div>
         <div className="home-box">
-          <h1 className="home-label">产品展示</h1>
+          <h1
+            className="home-label"
+            onClick={onProductClick}
+          >
+            产品展示 {count}
+          </h1>
           <div className="home-products">
             <GoodsItem />
             <GoodsItem />

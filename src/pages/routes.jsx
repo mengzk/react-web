@@ -7,6 +7,7 @@
 import React from "react";
 import { createBrowserRouter, redirect } from "react-router-dom";
 
+import MainPage from "./main";
 import { HomePage } from "./home/page/index";
 import { ProductPage, ProductDetailPage } from "./product/page/index";
 import ErrorPage from "./warn/ErrorPage";
@@ -48,9 +49,11 @@ function lazyPage(element, path, title, index = false) {
 const routes = createBrowserRouter([
   {
     path: "/",
-    // element: <HomePage />,
+    element: <MainPage />,
     // errorElement: <ErrorPage />,
-    children: [lazyPage(<HomePage />, "", "首页", true)],
+    children: [
+      lazyPage(<HomePage />, "", "首页", true)
+    ],
   },
   {
     path: "product",

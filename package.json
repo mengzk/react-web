@@ -11,20 +11,20 @@
     "push": "react-scripts build && node cli/index"
   },
   "dependencies": {
-    "axios": "^1.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.15.0",
-    "react-scripts": "5.0.1",
-    "react-window": "^1.8.9",
+    "axios": "^1.7.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.0",
+    "react-scripts": "^5.0.1",
+    "react-window": "^1.8.10",
     "request-no": "^0.0.17",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^4.2.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "archiver": "^6.0.0",
-    "inquirer": "^9.2.11"
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/react": "^16.0.0",
+    "archiver": "^7.0.1",
+    "inquirer": "^9.3.0"
   },
   "eslintConfig": {
     "extends": [

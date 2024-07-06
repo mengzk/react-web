@@ -9,6 +9,7 @@ import { network, requestUrl, mergeHeaders, mergeParams } from "./config";
 // 请求入口
 export function request({
   url,
+  host = "api",
   method = "GET",
   params = {},
   headers = {},
@@ -31,7 +32,7 @@ export function request({
     }
     let result = null;
 
-    function onResult(result, resolve) {
+    function onResult() {
       if (loading) {
         onShowLoading(false);
       }
@@ -66,10 +67,10 @@ export function request({
             });
             return;
           } else {
-            onResult(result, resolve);
+            onResult();
           }
         } else {
-          onResult(result, resolve);
+          onResult();
         }
       });
   });

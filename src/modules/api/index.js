@@ -4,7 +4,7 @@
  * Modify: 2023-08-31
  * Desc: 
  */
-import { request } from "../network/index";
+import { request } from "../request/index";
 
 // 接口示例
 export function test(params = { user: "123", memo: "12314" }) {

@@ -6,32 +6,25 @@
  *
  */
 
-export default class LocalStorage {
-
-  getUserInfo() {
-    const data = window.localStorage.getItem('app-user-info');
-    if (data) {
-      return JSON.parse(data);
-    }
-    return null;
-  }
-
-  setUserInfo(data) {
-    window.localStorage.setItem('app-user-info', JSON.stringify(data));
-    window.dispatchEvent(new Event("login-storage"));
-  }
-
+export default class Local {
   // 获取存储数据
-  getStorage(key) {
+  static getStorage(key) {
     const data = window.localStorage.getItem(key);
-    if (data && data.indexOf("{") == 0 && data.lastIndexOf("}") == (data.length - 1)) {
-      return JSON.parse(data);
+    if (data === null) {
+      return null;
     } else {
-      return data;
+      const size = data.length - 1;
+      if (data.indexOf("{") == 0 && data.lastIndexOf("}") == size) {
+        return JSON.parse(data);
+      } else if (data.indexOf("[") == 0 && data.lastIndexOf("]") == size) {
+        return JSON.parse(data);
+      } else {
+        return data;
+      }
     }
   }
   // 存储数据
-  setStorage(key, data) {
+  static setStorage(key, data) {
     if (typeof data == "object") {
       window.localStorage.setItem(key, JSON.stringify(data));
     } else {
@@ -41,16 +34,23 @@ export default class LocalStorage {
   }
 
   // 获取存储数据 -异步
-  getAsyncStorage(key) {
+  static getAsyncStorage(key) {
     const data = window.localStorage.getItem(key);
-    if (data && data.indexOf("{") == 0 && data.lastIndexOf("}") == (data.length - 1)) {
-      return JSON.parse(data);
+    if (data === null) {
+      return null;
     } else {
-      return data;
+      const size = data.length - 1;
+      if (data.indexOf("{") == 0 && data.lastIndexOf("}") == size) {
+        return JSON.parse(data);
+      } else if (data.indexOf("[") == 0 && data.lastIndexOf("]") == size) {
+        return JSON.parse(data);
+      } else {
+        return data;
+      }
     }
   }
   // 存储数据 -异步
-  setAsyncStorage(key, data) {
+  static setAsyncStorage(key, data) {
     if (typeof data == "object") {
       window.localStorage.setItem(key, JSON.stringify(data));
     } else {
@@ -58,12 +58,14 @@ export default class LocalStorage {
     }
     window.dispatchEvent(new Event("storage"));
   }
+
   // 移除指定的数据
-  removeStorage(key) {
+  static remove(key) {
     window.localStorage.removeItem(key);
   }
+
   // 清空存储
-  clearStorage() {
+  static clear() {
     window.localStorage.clear();
   }
 }

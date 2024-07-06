@@ -10,11 +10,14 @@ import "./index.css";
 import { navigate } from "../../../routes";
 import { Toolbar, Footer } from "../../../../components/index";
 import { GoodsItem, Banner, Product } from "../../component/index";
+import { test } from "../../../../modules/api/index";
 
 const bgImgUrl =
   "https://s.cn.bing.net/th?id=OHR.BrightonBoxes_ZH-CN0947219018_1920x1080.webp&qlt=50";
 function HomePage(props) {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    test()
+  }, []);
   const [count, setCount] = useState(5);
 
   function onBarChange(res) {

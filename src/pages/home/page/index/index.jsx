@@ -24,14 +24,6 @@ function HomePage(props) {
     }
   }
 
-  function onProductClick() {
-    setCount(count + 5);
-    setCount(count + 5);
-    alert(count);
-    setCount(count + 5);
-    setCount(count + 5);
-  }
-
   return (
     <>
       <img className="home-img-bg" src={bgImgUrl} />
@@ -41,12 +33,7 @@ function HomePage(props) {
           <Banner />
         </div>
         <div className="home-box">
-          <h1
-            className="home-label"
-            onClick={onProductClick}
-          >
-            产品展示 {count}
-          </h1>
+          <h1 className="home-label">产品展示</h1>
           <div className="home-products">
             <GoodsItem />
             <GoodsItem />

@@ -11,6 +11,7 @@ import MainPage from "./main";
 import { HomePage } from "./home/page/index";
 import { ProductPage, ProductDetailPage } from "./product/page/index";
 import ErrorPage from "./warn/ErrorPage";
+import TestPage from "./warn/TestPage";
 import FallbackPage from "./warn/Fallback";
 // const ErrorPage = React.lazy(() => import("./warn/ErrorPage"));
 
@@ -52,7 +53,7 @@ const routes = createBrowserRouter([
     element: <MainPage />,
     // errorElement: <ErrorPage />,
     children: [
-      lazyPage(<HomePage />, "", "首页", true)
+      lazyPage(<TestPage />, "", "首页", true)
     ],
   },
   {

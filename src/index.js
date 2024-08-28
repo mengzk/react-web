@@ -6,6 +6,8 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import VConsole from 'vconsole';
+
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -23,3 +25,4 @@ reportWebVitals();
 systemInit();
 // console.log('package:', info)
 // console.log('process:', process.env)
+new VConsole();

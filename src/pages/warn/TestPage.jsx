@@ -6,8 +6,7 @@
  */
 import React, {useState} from "react";
 
-import TestView from "../test/test";
-import TestView2 from "../test/test2";
+import MobxDemo from "../test/mobx/MobxDemo";
 
 function TestPage() {
   const [visible, setVisible] = useState(false);
@@ -23,7 +22,7 @@ function TestPage() {
   return (
     <div className="test">
       <h1>测试代码</h1>
-      {visible ? <TestView /> : <TestView2 />}
+      <MobxDemo />
       <div>
         <button onClick={() => setVisible(!visible)}>切换</button>
       </div>

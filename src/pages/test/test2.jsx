@@ -10,12 +10,11 @@ import testReducer from "./testReducer.js";
 
 let nextId = 3;
 const initialTasks = [
-  { id: 0, text: "测试页面1 02", done: false },
-  { id: 1, text: "测试页面1 03", done: false },
-  { id: 2, text: "打卡列侬墙", done: false },
+  { id: 0, text: "测试页面2 02", done: false },
+  { id: 1, text: "测试页面2 03", done: false },
 ];
 
-export default function TestView() {
+export default function TestView2() {
   const [tasks, dispatch] = useReducer(testReducer, initialTasks);
 
   function handleAddTask(text) {
@@ -54,7 +53,7 @@ export default function TestView() {
 
   return (
     <>
-      <h1>测试组件</h1>
+      <h1>测试组件2</h1>
       {tasks.map(taskView)}
       <button onClick={() => handleAddTask("新任务")}>添加任务</button>
     </>

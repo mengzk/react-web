@@ -3,10 +3,11 @@
  * Date: 2024-08-29
  * Modify: 2024-08-29
  * Desc:
+ * https://www.mobx.org.cn/README.html
  */
 
 import React, {useState} from "react";
-import { observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 
 import MobxModel from "./MobxModel";
 

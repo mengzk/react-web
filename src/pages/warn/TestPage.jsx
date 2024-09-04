@@ -7,6 +7,7 @@
 import React, {useState} from "react";
 
 import MobxDemo from "../test/mobx/MobxDemo";
+import TestRedux from "../test/redux/index";
 
 function TestPage() {
   const [visible, setVisible] = useState(false);
@@ -22,10 +23,8 @@ function TestPage() {
   return (
     <div className="test">
       <h1>测试代码</h1>
-      <MobxDemo />
-      <div>
-        <button onClick={() => setVisible(!visible)}>切换</button>
-      </div>
+      {/* <MobxDemo /> */}
+      <TestRedux />
     </div>
   );
 }

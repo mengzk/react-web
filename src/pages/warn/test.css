@@ -1,0 +1,23 @@
+.test {
+  height: 100vh;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f3f3;
+}
+
+.test-actions {
+  display: grid;
+  grid-gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+
+  &>button {
+    padding: 10px 0;
+    border-radius: 8px;
+    border: none;
+    background-color: #1890ff;
+
+    color: white;
+    font-size: 16px;
+  }
+}

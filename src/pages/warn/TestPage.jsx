@@ -25,22 +25,45 @@ function TestPage() {
   }
 
   function onTest() {
-    // console.log("onTest bnq", window.bnqBridge);
-    if (window.bnqBridge) {
-      window.bnqBridge.emit({ event: "takePhoto", data: { name: "test" } });
+    // console.log("onTest bnq", window.bnq);
+    if (window.bnq) {
+      window.bnq.emit({ event: "takePhoto", data: { name: "test" } });
     }
   }
 
   function onChoosePhoto() {
-    if (window.bnqBridge) {
-      const test = window.bnqBridge.choosePhoto();
+    if (window.bnq) {
+      const test = window.bnq.choosePhoto();
       console.log("onTest res ", test);
     }
   }
 
   function onChooseFile() {
-    if (window.bnqBridge) {
-      const test = window.bnqBridge.emit();
+    if (window.bnq) {
+      const test = window.bnq.emit();
+    }
+  }
+
+  function onShare() {
+    if (window.bnq) {
+      window.bnq.share({
+        title: "分享",
+        data: [
+          {mold: 1, title: '', desc: '分享内容', url: 'https://www.baidu.com'},
+          {mold: 1, title: '', desc: '分享内容', url: 'https://www.baidu.com'},
+        ],
+      });
+    }
+  }
+
+  function onNav() {
+    if (window.bnq) {
+      window.bnq.mapNavigation({
+        lat: 39.915, 
+        lng: 116.404,
+        name: '天安门',
+        address: '北京市东城区东长安街天安门广场',
+      });
     }
   }
 
@@ -51,11 +74,10 @@ function TestPage() {
       <div className="test-actions">
         <button onClick={onChoosePhoto}>选择照片</button>
         <button onClick={onChooseFile}>选择文件</button>
-        <button onClick={onTest}>拍摄照片</button>
-        <button onClick={onTest}>拍摄照片</button>
-        <button onClick={onTest}>拍摄照片</button>
-        <button onClick={onTest}>拍摄照片</button>
-        <button onClick={onTest}>拍摄照片</button>
+        <button onClick={onShare}>分享</button>
+        <button onClick={onNav}>导航</button>
+        <button onClick={onTest}>选择照片</button>
+        <button onClick={onTest}>拍照/视频</button>
         <button onClick={onTest}>拍摄照片</button>
         <button onClick={onTest}>拍摄照片</button>
         <button onClick={onTest}>拍摄照片</button>

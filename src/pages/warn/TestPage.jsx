@@ -39,7 +39,7 @@ function TestPage() {
 
   function onChooseFile() {
     if (window.bnq) {
-      const test = window.bnq.emit();
+      const test = window.bnq.openFolder();
     }
   }
 
@@ -51,6 +51,16 @@ function TestPage() {
           {mold: 1, title: '', desc: '分享内容', url: 'https://www.baidu.com'},
           {mold: 1, title: '', desc: '分享内容', url: 'https://www.baidu.com'},
         ],
+      });
+    }
+  }
+
+  function onShare2() {
+    if (window.bnq) {
+      window.bnq.sysShare({
+        title: '分享',
+        desc: '分享内容',
+        url: 'https://www.baidu.com',
       });
     }
   }
@@ -74,13 +84,13 @@ function TestPage() {
 
   function onScan(){
     if (window.bnq) {
-      window.bnq.scanCode();
+      window.bnq.qrcodeScan();
     }
   }
 
   function onCamera(){
     if (window.bnq) {
-      window.bnq.scanCode();
+      window.bnq.openCamera();
     }
   }
 
@@ -93,22 +103,131 @@ function TestPage() {
     }
   }
 
-  function showLoading(){}
-  function hideLoading(){}
-  function setHeader(){}
-  function onClear(){}
+  function setHeader(){
+    if (window.bnq) {
+      window.bnq.headerConfig({
+        title: '测试标题',
+        actions: [{
+          text: '测试',
+        }],
+      });
+    }
+  }
+  function onClear(){
+    if (window.bnq) {
+      window.bnq.clearCache();
+    }
+  }
 
-  function onDebug(){}
-  function onRecord(){}
-  function onMediaPlay(){}
-  function getLocation(){}
-  function onChooseAddress(){}
-  function onSendSms(){}
-  function onCallPhone(){}
-  function onOpenApp(){}
-  function onSetting(){}
+  function onDebug(){
+    if (window.bnq) {
+      window.bnq.isDebug();
+    }
+  }
+  function onRecord(){
+    if (window.bnq) {
+      window.bnq.record();
+    }
+  }
+  function onMediaPlay(){
+    if (window.bnq) {
+      window.bnq.mediaPlayer('https://www.runoob.com/try/demo_source/movie.mp4');
+    }
+  }
+  function getLocation(){
+    if (window.bnq) {
+      window.bnq.getLocation();
+    }
+  }
+  function onChooseAddress(){
+    if (window.bnq) {
+      window.bnq.chooseAddress();
+    }
+  }
+  function onSendSms(){
+    if (window.bnq) {
+      window.bnq.sendSms('10086','测试短信');
+    }
+  }
+  function onCallPhone(){
+    if (window.bnq) {
+      window.bnq.callPhone('10086');
+    }
+  }
+  function onOpenApp(){
+    if (window.bnq) {
+      window.bnq.openApp('com.bnq.app');
+    }
+  }
+  function onSetting(){
+    if (window.bnq) {
+      window.bnq.openSetting();
+    }
+  }
 
-
+  function onOpenFolder(){
+    if (window.bnq) {
+      window.bnq.openFolder();
+    }
+  }
+  function onAppInfo(){
+    if (window.bnq) {
+      window.bnq.screenInfo();
+    }
+  }
+  function onDeviceInfo(){
+    if (window.bnq) {
+      window.bnq.deviceInfo();
+    }
+  }
+  function onUserInfo(){
+    if (window.bnq) {
+      window.bnq.userInfo();
+    }
+  }
+  function onLogin(){
+    if (window.bnq) {
+      window.bnq.login();
+    }
+  }
+  function onLogout(){
+    if (window.bnq) {
+      window.bnq.logout();
+    }
+  }
+  function onRemove(){
+    if (window.bnq) {
+      window.bnq.remove();
+    }
+  }
+  function onAddEmit(){
+    if (window.bnq) {
+      window.bnq.listener('test', onResult);
+    }
+  }
+  function onEmit(){
+    if (window.bnq) {
+      window.bnq.emit('test', '测试');
+    }
+  }
+  function onPreview(){
+    if (window.bnq) {
+      window.bnq.previewDocs({
+        index: 0,
+        data: [],
+      });
+    }
+  }
+  function showLoading(){
+    if (window.bnq) {
+      window.bnq.showLoading('加载中...');
+    }
+  }
+  function hideLoading(){
+    if (window.bnq) {
+      window.bnq.hideLoading();
+    }
+  }
 
   return (
     <div className="test">
@@ -119,6 +238,7 @@ function TestPage() {
         <button onClick={onChooseFile}>选择文件</button>
         <button onClick={onCamera}>拍照/视频</button>
         <button onClick={onShare}>分享</button>
+        <button onClick={onShare2}>系统分享</button>
         <button onClick={onNav}>导航</button>
         <button onClick={onScan}>扫码</button>
         <button onClick={onToast}>Toast</button>
@@ -133,16 +253,15 @@ function TestPage() {
         <button onClick={onCallPhone}>拨打电话</button>
         <button onClick={onOpenApp}>打开App</button>
         <button onClick={onSetting}>打开设置</button>
-        <button onClick={onTest}>打开文件夹</button>
-        <button onClick={onTest}>应用信息</button>
-        <button onClick={onTest}>设备信息</button>
-        <button onClick={onTest}>用户信息</button>
-        <button onClick={onTest}>登录账号</button>
-        <button onClick={onTest}>退出账号</button>
-        <button onClick={onTest}>移除消息</button>
-        <button onClick={onTest}>添加消息</button>
-        <button onClick={onTest}>发送消息</button>
-
+        <button onClick={onOpenFolder}>打开文件夹</button>
+        <button onClick={onAppInfo}>应用信息</button>
+        <button onClick={onDeviceInfo}>设备信息</button>
+        <button onClick={onUserInfo}>用户信息</button>
+        <button onClick={onLogin}>登录账号</button>
+        <button onClick={onLogout}>退出账号</button>
+        <button onClick={onRemove}>移除消息</button>
+        <button onClick={onAddEmit}>添加消息</button>
+        <button onClick={onEmit}>发送消息</button>
         <button onClick={onPreview}>预览图片</button>
         <button onClick={showLoading}>showLoading</button>
         <button onClick={hideLoading}>hideLoading</button>

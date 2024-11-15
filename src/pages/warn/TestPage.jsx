@@ -30,10 +30,16 @@ function TestPage() {
     }
   }
 
-  function onChoosePhoto() {
+  async function onChoosePhoto() {
     if (window.bnq) {
-      const test = window.bnq.choosePhoto();
-      console.log("onTest res ", test);
+      const res = await window.bnq.chooseAlbum({
+        count: 6,
+        mode: 0,
+      });
+      if(res.code == 0) {
+        setImgs(res.list);
+      }
+      console.log("chooseAlbum res ", res);
     }
   }
 
@@ -88,9 +94,16 @@ function TestPage() {
     }
   }
 
-  function onCamera(){
+  async function onCamera(){
     if (window.bnq) {
-      window.bnq.openCamera();
+      const res = await window.bnq.openCamera({
+        mode: 0,
+        position: 0,
+      });
+      console.log("openCamera res ", res);
+      if(res.code == 0) {
+        setImgs([res.data]);
+      }
     }
   }
 
@@ -165,14 +178,18 @@ function TestPage() {
     }
   }
 
-  function onOpenFolder(){
+  async function onOpenFolder(){
     if (window.bnq) {
-      window.bnq.openFolder();
+      const res = await window.bnq.openFolder();
+      console.log("openFolder res ", res);
+      if(res.code == 0) {
+        setFiles(res.list);
+      }
     }
   }
   function onAppInfo(){
     if (window.bnq) {
-      window.bnq.screenInfo();
+      window.bnq.appInfo();
     }
   }
   function onDeviceInfo(){
@@ -274,9 +291,10 @@ function TestPage() {
       </div>
 
       <div className="grid-box">
-        {files.map((item, index) => (
-          <span key={index}></span>
-        ))}
+        {files.map((item, index) => {
+          const fileName = item.split("/").pop();
+          return <span key={index}>{fileName}</span>;
+        })}
       </div>
     </div>
   );

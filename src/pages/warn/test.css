@@ -40,3 +40,16 @@
     color: #1890ff;
   }
 }
+.list-box {
+  margin: 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+
+  &>span {
+    font-size: 14px;
+    color: #1890ff;
+    line-height: 1.2;
+    padding: 6px 0;
+  }
+}

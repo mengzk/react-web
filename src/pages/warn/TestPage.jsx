@@ -5,6 +5,7 @@
  * Desc:
  */
 import React, { useEffect, useState, useRef } from "react";
+import { bridgeTools } from "../../libs/bnq/index";
 import "./test.css";
 
 function TestPage() {
@@ -24,9 +25,17 @@ function TestPage() {
   }
 
   function onTest() {
-    // console.log("onTest bnq", window.bnq);
-    if (window.bnq) {
-      window.bnq.emit({ event: "takePhoto", data: { name: "test" } });
+    try {
+      bridgeTools(
+        "watermarkImg",
+        {title: '测试', content: '测试内容'},
+        (res) => {
+          console.log("bridgeTools res ", res);
+        },
+        2
+      );
+    } catch (error) {
+      console.log("error", error);
     }
   }
 
@@ -36,7 +45,7 @@ function TestPage() {
         count: 6,
         mode: 0,
       });
-      if(res.code == 0) {
+      if (res.code == 0) {
         setImgs(res.list);
       }
       console.log("chooseAlbum res ", res);
@@ -54,8 +63,18 @@ function TestPage() {
       window.bnq.share({
         title: "分享",
         data: [
-          {mold: 1, title: '', desc: '分享内容', url: 'https://www.baidu.com'},
-          {mold: 1, title: '', desc: '分享内容', url: 'https://www.baidu.com'},
+          {
+            mold: 1,
+            title: "",
+            desc: "分享内容",
+            url: "https://www.baidu.com",
+          },
+          {
+            mold: 1,
+            title: "",
+            desc: "分享内容",
+            url: "https://www.baidu.com",
+          },
         ],
       });
     }
@@ -64,9 +83,9 @@ function TestPage() {
   function onShare2() {
     if (window.bnq) {
       window.bnq.sysShare({
-        title: '分享',
-        desc: '分享内容',
-        url: 'https://www.baidu.com',
+        title: "分享",
+        desc: "分享内容",
+        url: "https://www.baidu.com",
       });
     }
   }
@@ -74,40 +93,40 @@ function TestPage() {
   function onNav() {
     if (window.bnq) {
       window.bnq.mapNavigation({
-        lat: 39.915, 
+        lat: 39.915,
         lng: 116.404,
-        name: '天安门',
-        address: '北京市东城区东长安街天安门广场',
+        name: "天安门",
+        address: "北京市东城区东长安街天安门广场",
       });
     }
   }
 
-  function onToast(){
+  function onToast() {
     if (window.bnq) {
-      window.bnq.toast('测试toast', 2000);
+      window.bnq.toast("测试toast", 2000);
     }
   }
 
-  function onScan(){
+  function onScan() {
     if (window.bnq) {
       window.bnq.qrcodeScan();
     }
   }
 
-  async function onCamera(){
+  async function onCamera() {
     if (window.bnq) {
       const res = await window.bnq.openCamera({
         mode: 0,
         position: 0,
       });
       console.log("openCamera res ", res);
-      if(res.code == 0) {
+      if (res.code == 0) {
         setImgs([res.data]);
       }
     }
   }
 
-  function onPreview(){
+  function onPreview() {
     if (window.bnq) {
       window.bnq.previewImage({
         current: 0,
@@ -116,118 +135,122 @@ function TestPage() {
     }
   }
 
-  function setHeader(){
+  function setHeader() {
     if (window.bnq) {
       window.bnq.headerConfig({
-        title: '测试标题',
-        actions: [{
-          text: '测试',
-        }],
+        title: "测试标题",
+        actions: [
+          {
+            text: "测试",
+          },
+        ],
       });
     }
   }
-  function onClear(){
+  function onClear() {
     if (window.bnq) {
       window.bnq.clearCache();
     }
   }
 
-  function onDebug(){
+  function onDebug() {
     if (window.bnq) {
       window.bnq.isDebug();
     }
   }
-  function onRecord(){
+  function onRecord() {
     if (window.bnq) {
       window.bnq.record();
     }
   }
-  function onMediaPlay(){
+  function onMediaPlay() {
     if (window.bnq) {
-      window.bnq.mediaPlayer('https://www.runoob.com/try/demo_source/movie.mp4');
+      window.bnq.mediaPlayer(
+        "https://www.runoob.com/try/demo_source/movie.mp4"
+      );
     }
   }
-  function getLocation(){
+  function getLocation() {
     if (window.bnq) {
       window.bnq.getLocation();
     }
   }
-  function onChooseAddress(){
+  function onChooseAddress() {
     if (window.bnq) {
       window.bnq.chooseAddress();
     }
   }
-  function onSendSms(){
+  function onSendSms() {
     if (window.bnq) {
-      window.bnq.sendSms('10086','测试短信');
+      window.bnq.sendSms("10086", "测试短信");
     }
   }
-  function onCallPhone(){
+  function onCallPhone() {
     if (window.bnq) {
-      window.bnq.callPhone('10086');
+      window.bnq.callPhone("10086");
     }
   }
-  function onOpenApp(){
+  function onOpenApp() {
     if (window.bnq) {
-      window.bnq.openApp('com.bnq.app');
+      window.bnq.openApp("com.bnq.app");
     }
   }
-  function onSetting(){
+  function onSetting() {
     if (window.bnq) {
       window.bnq.openSetting();
     }
   }
 
-  async function onOpenFolder(){
+  async function onOpenFolder() {
     if (window.bnq) {
       const res = await window.bnq.openFolder();
       console.log("openFolder res ", res);
-      if(res.code == 0) {
+      if (res.code == 0) {
         setFiles(res.list);
       }
     }
   }
-  function onAppInfo(){
+  function onAppInfo() {
     if (window.bnq) {
       window.bnq.appInfo();
     }
   }
-  function onDeviceInfo(){
+  function onDeviceInfo() {
     if (window.bnq) {
       window.bnq.deviceInfo();
     }
   }
-  function onUserInfo(){
+  function onUserInfo() {
     if (window.bnq) {
       window.bnq.userInfo();
     }
   }
-  function onLogin(){
+  function onLogin() {
     if (window.bnq) {
       window.bnq.login();
     }
   }
-  function onLogout(){
+  function onLogout() {
     if (window.bnq) {
       window.bnq.logout();
     }
   }
-  function onRemove(){
+  function onRemove() {
     if (window.bnq) {
       window.bnq.remove();
     }
   }
-  function onAddEmit(){
+  function onAddEmit() {
     if (window.bnq) {
-      window.bnq.listener('test', onResult);
+      window.bnq.listener("test", onResult);
     }
   }
-  function onEmit(){
+  function onEmit() {
     if (window.bnq) {
-      window.bnq.emit('test', '测试');
+      window.bnq.emit("test", "测试");
     }
   }
-  function onPreview(){
+  function onPreview() {
     if (window.bnq) {
       window.bnq.previewDocs({
         index: 0,
@@ -235,12 +258,12 @@ function TestPage() {
       });
     }
   }
-  function showLoading(){
+  function showLoading() {
     if (window.bnq) {
-      window.bnq.showLoading('加载中...');
+      window.bnq.showLoading("加载中...");
     }
   }
-  function hideLoading(){
+  function hideLoading() {
     if (window.bnq) {
       window.bnq.hideLoading();
     }
@@ -250,6 +273,7 @@ function TestPage() {
     <div className="test">
       {/* <h1>测试鸿蒙</h1> */}
 
+      <button onClick={onTest}>测试住小橙</button>
       <div className="test-actions">
         <button onClick={onChoosePhoto}>选择照片</button>
         <button onClick={onChooseFile}>选择文件</button>
@@ -290,7 +314,7 @@ function TestPage() {
         ))}
       </div>
 
-      <div className="grid-box">
+      <div className="list-box">
         {files.map((item, index) => {
           const fileName = item.split("/").pop();
           return <span key={index}>{fileName}</span>;

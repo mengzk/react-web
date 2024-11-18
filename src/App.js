@@ -37,6 +37,9 @@ function App() {
             // 2. 接收ets侧发送过来的消息。
             const result = event.data;
             console.log("h5Port----->", result);
+            if (window.bnq) {
+              window.bnq.toast(result, 2000);
+            }
           };
         }
       }

@@ -5,7 +5,7 @@
  * Desc:
  */
 import React, { useEffect, useState, useRef } from "react";
-import { bnqBridge } from "../../libs/bnq/index";
+import { bridgeTools } from "../../libs/bnq/index";
 import "./test.css";
 
 function TestPage() {
@@ -24,19 +24,50 @@ function TestPage() {
     console.log("onResult", value, e);
   }
 
+  function onFinish(e) {
+    console.log("onSubmit", e);
+
+    for (const key in object) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
+        const element = object[key];
+        
+      }
+    }
+  }
+
   function onTest() {
-    
+    try {
+      // bridgeTools(
+      //   "watermarkImg",
+      //   {title: '测试', content: '测试内容'},
+      //   (res) => {
+      //     console.log("bridgeTools res ", res);
+      //   },
+      //   2
+      // );
+
+    } catch (error) {
+      console.log("error", error);
+    }
   }
 
   async function onChoosePhoto() {
-    bnqBridge("openAppAlbum2", {}, (res) => {
-      console.log("choosePhoto res ", res);
-      
-    });
+    if (window.bnq) {
+      const res = await window.bnq.chooseAlbum({
+        count: 6,
+        mode: 0,
+      });
+      if (res.code == 0) {
+        setImgs(res.list);
+      }
+      console.log("chooseAlbum res ", res);
+    }
   }
 
   function onChooseFile() {
-    
+    if (window.bnq) {
+      const test = window.bnq.openFolder();
+    }
   }
 
   function onShare() {
@@ -255,6 +286,7 @@ function TestPage() {
     <div className="test">
       {/* <h1>测试鸿蒙</h1> */}
 
+      <button onClick={onTest}>测试住小橙</button>
       <div className="test-actions">
         <button onClick={onChoosePhoto}>选择照片</button>
         <button onClick={onChooseFile}>选择文件</button>

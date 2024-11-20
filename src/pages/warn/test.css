@@ -8,6 +8,7 @@
 
 .test-actions {
   display: grid;
+  margin-top: 12px;
   grid-gap: 12px;
   grid-template-columns: repeat(3, 1fr);
 

@@ -71,7 +71,9 @@ function TestPage() {
       setFiles([...files, res]);
     });
   }
-  function onShare2() {}
+  function onShare2() {
+    bnqBridge("sysShare", { url: "com.bnq.crm" });
+  }
   function onNav() {
     bnqBridge(
       "openNativeMap",
@@ -100,8 +102,12 @@ function TestPage() {
       // setImgs([...imgs, res]);
     });
   }
-  function onPreview() {}
-  function setHeader() {}
+  function onPreviewDocs() {
+    bnqBridge("previewFile", { img: imgs[0] });
+  }
+  function setHeader() {
+    bnqBridge("customConfig", { title: "测试标题", hideNav: true });
+  }
   function onClear() {
     bnqBridge("clearCache", {});
   }
@@ -110,15 +116,29 @@ function TestPage() {
       console.log("debug res ", res);
     });
   }
-  function onRecord() {}
-  function onMediaPlay() {}
+  function onRecord() {
+    bnqBridge("record", {}, (res) => {
+      console.log("record res ", res);
+    });
+  }
+  function onMediaPlay() {
+    bnqBridge("mediaPlayer", {}, (res) => {
+      console.log("mediaPlay res ", res);
+    });
+  }
   function getLocation() {
     bnqBridge("GetGaodeLocationV2", {}, (res) => {
       console.log("location res ", res);
     });
   }
-  function onChooseAddress() {}
-  function onSendSms() {}
+  function onChooseAddress() {
+    bnqBridge("chooseAddress", {}, (res) => {
+      console.log("chooseAddress res ", res);
+    });
+  }
+  function onSendSms() {
+    bnqBridge("onSendSms", { phone: "10086", msg: "测试短信" });
+  }
   function onCallPhone() {
     bnqBridge("telMobile", { mobile: "10086" });
   }
@@ -148,16 +168,51 @@ function TestPage() {
       console.log("userInfo res ", res);
     });
   }
-  function onLogin() {}
-  function onLogout() {}
-  function onRemove() {}
-  function onAddEmit() {}
+  function onLogin() {
+    bnqBridge("login", {});
+  }
+  function onLogout() {
+    bnqBridge("logout", {});
+  }
+  function onRemove() {
+    bnqEmitter("remove", { key: "removeMsg" });
+  }
+  function onAddEmit() {
+    bnqEmitter("listener", { key: "addMsg" });
+  }
   function onEmit() {
     bnqEmitter("refreshTaskDetail", { key: "refreshTaskDetail" });
   }
-  function onPreview() {}
-  function showLoading() {}
-  function hideLoading() {}
+  function onPreview() {
+    bnqBridge("previewAlbum", { img: imgs[0] });
+  }
+  function onSaveFile() {
+    bnqBridge("saveFile", { img: imgs[0] });
+  }
+  function onReadFile() {
+    bnqBridge("readFile", { img: imgs[0] });
+  }
+  function onDelFile() {
+    bnqBridge("deleteFile", { img: imgs[0] });
+  }
+  function onSetItem() {
+    bnqBridge("setItem", { key: "test", value: "test" });
+  }
+  function onGetItem() {
+    bnqBridge("getItem", { key: "test" });
+  }
+  function onRemoveItem() {
+    bnqBridge("removeItem", { key: "test" });
+  }
+  function onRouteStack() {
+    bnqBridge("routeStack", { canBack: true });
+  }
+  function showLoading() {
+    bnqBridge("showLoading", { text: "加载中" });
+  }
+  function hideLoading() {
+    bnqBridge("hintLoading", {});
+  }
 
   return (
     <div className="test">
@@ -193,6 +248,14 @@ function TestPage() {
         <button onClick={onAddEmit}>添加消息</button>
         <button onClick={onEmit}>发送消息</button>
         <button onClick={onPreview}>预览图片</button>
+        <button onClick={onPreviewDocs}>预览文档</button>
+        <button onClick={onSaveFile}>保存文件</button>
+        <button onClick={onReadFile}>读取文件</button>
+        <button onClick={onDelFile}>删除文件</button>
+        <button onClick={onSetItem}>保存数据</button>
+        <button onClick={onGetItem}>获取数据</button>
+        <button onClick={onRemoveItem}>删除数据</button>
+        <button onClick={onRouteStack}>更新路由</button>
         <button onClick={showLoading}>showLoading</button>
         <button onClick={hideLoading}>hideLoading</button>
       </div>

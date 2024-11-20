@@ -163,7 +163,7 @@ class Tools {
             channel: 30,
             url: arg.copyUrl,
             title: arg.title,
-            desc: arg.description
+            desc: arg.description,
           });
           break;
         case 2:
@@ -171,7 +171,7 @@ class Tools {
             channel: 31,
             url: arg.copyUrl,
             title: arg.title,
-            desc: arg.description
+            desc: arg.description,
           });
           break;
         case 100:
@@ -188,6 +188,13 @@ class Tools {
     });
 
     HMApi.share(arg);
+  }
+
+  /**
+   * 系统分享
+   */
+  static sysShare(arg) {
+    HMApi.sysShare(arg);
   }
 
   /**
@@ -249,8 +256,8 @@ class Tools {
   /**
    * 预览图片
    */
-  static previewImage(arg) {
-    HMApi.previewImage(arg);
+  static previewAlbum(arg) {
+    HMApi.previewAlbum(arg);
   }
 
   /**
@@ -409,8 +416,8 @@ class Tools {
   /**
    * 保存数据
    */
-  static saveItem(key, data) {
-    HMApi.saveItem(key, data);
+  static setItem(key, data) {
+    HMApi.setItem(key, data);
   }
 
   /**

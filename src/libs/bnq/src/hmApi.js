@@ -164,6 +164,12 @@ class HMApi {
   }
 
   /**
+   * 系统分享
+   */
+  static sysShare(arg) {
+    bnqHm.sysShare(arg);
+  }
+  /**
    * 配置标题栏
    */
   static headerConfig(arg) {
@@ -208,8 +214,8 @@ class HMApi {
   /**
    * 预览图片
    */
-  static previewImage(arg) {
-    bnqHm.previewImage(arg);
+  static previewAlbum(arg) {
+    bnqHm.previewAlbum(arg);
   }
 
   /**
@@ -355,8 +361,8 @@ class HMApi {
   /**
    * 保存数据
    */
-  static saveItem(key, data) {
-    bnqHm.saveItem(key, data);
+  static setItem(key, data) {
+    bnqHm.setItem(key, data);
   }
 
   /**

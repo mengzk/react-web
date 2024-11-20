@@ -10,6 +10,7 @@ const methodMap = {
   openAppAlbum: "chooseAlbum",
   openAppAlbum2: "chooseAlbum",
   watermarkImg: "pictureEdit",
+  openCameraVideo: "chooseMedia",
   isDeveloperMode: 'isDebug',
   setTitle: 'headerConfig',
   customConfig: 'headerConfig',
@@ -23,9 +24,11 @@ const methodMap = {
   pushToAppSetting: 'openSetting',
   selectFile: 'openFolder',
   cashier2: 'cashier',
+  gotoBnqCashier: 'cashier',
   sendMsgToRN: 'invoke',
   deviceInfoV2: 'deviceInfo',
   reqLoginInfoV2: 'userInfo',
+  previewFile: 'previewDocs',
 };
 
 export { methodMap };

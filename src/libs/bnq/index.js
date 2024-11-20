@@ -9,7 +9,7 @@ import ToolsV2 from "./src/tools2";
 import HMApi from "./src/hmApi";
 import { methodMap } from "./src/rnToHm";
 
-const bnqHM = window?.bnq;
+const bnqHM = window.bnq;
 
 // 通过版本号判断调用的方法
 function bnqBridge(key, data = {}, callback, version = 2) {

@@ -4,7 +4,7 @@
  * Desc: 第一版
  */
 
-import { postMessage } from './tools';
+import { postMessage } from './emitter';
 
 
 let toolOption = null;

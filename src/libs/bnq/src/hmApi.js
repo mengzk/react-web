@@ -5,7 +5,7 @@
  * Desc:
  */
 
-let bnqHm = window?.bnq || {}; // 与原生通信的对象
+let bnqHm = window.bnq || {}; // 与原生通信的对象
 
 let nativeEmitter = []; // 与原生通信的对象
 let h5Port = null; // 与原生通信的端口
@@ -50,14 +50,19 @@ class HMApi {
    * ❗️调用方法
    */
   static invoke(name, data={}) {
-    const methodList = Object.getOwnPropertyNames(HMApi).filter(
-      (prop) => typeof HMApi[prop] === "function"
-    );
-    const hasMethod = methodList.includes(key);
-    if (hasMethod) {
-      return bnqHm[name](...data);
-    } else {
-      console.warn(`App不支持 ${name} 方法, 请联系开发人员`);
+    if(bnqHm) {
+      const methodList = Object.getOwnPropertyNames(bnqHm).filter(
+        (prop) => typeof bnqHm[prop] === "function"
+      );
+      // console.log("invoke method --->", name, methodList.join(","));
+      const hasMethod = methodList.includes(name);
+      if (hasMethod) {
+        return bnqHm[name](data);
+      } else {
+        console.warn(`App不支持 ${name} 方法, 请联系开发人员`);
+      }
+    }else {
+      console.warn(`App未提供SDK, 请联系开发人员`);
     }
   }
 

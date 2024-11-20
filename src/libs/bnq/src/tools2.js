@@ -5,7 +5,7 @@
  */
 
 import Bus from './bus';
-import { postMessage } from './tools';
+import { postMessage } from './emitter';
 
 let toolV2Option = null;
 class RNTool2 {

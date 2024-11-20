@@ -34,28 +34,21 @@ export function postMessage(msg) {
   lastTime = Date.now();
   lastKey = msg.key;
   return new Promise((resolve) => {
-    if (msg.mode == "long") {
-      Bus.add(
-        msg.requestId,
-        (data) => {
-          resolve(data);
-        },
-        msg.key,
-        2
-      );
-    } else {
-      Bus.once(
-        msg.requestId,
-        (data) => {
-          resolve(data);
-        },
-        msg.key
-      );
+    function onHandler(data) {
+      resolve(data);
     }
-    console.log("---> postMessage: ", msg);
+    if (msg.mode == "long") {
+      delete msg.mode;
+      Bus.add(msg.requestId, onHandler, 2);
+    } else {
+      Bus.once(msg.requestId, onHandler);
+    }
+    
     if (isMobile) {
       try {
-        if (window.ReactNativeWebView) {
+        const isRn = window.ReactNativeWebView;
+        if (isRn) {
+          console.log('---> postMessage type ReactNativeWebView');
           window.ReactNativeWebView.postMessage(JSON.stringify(msg));
         } else {
           if (isIos) {
@@ -64,8 +57,9 @@ export function postMessage(msg) {
             document.postMessage(JSON.stringify(msg), "*");
           }
         }
+        console.log(`---> postMessage rn:${isRn}, msg:`, msg);
       } catch (error) {
-        console.log("---> bridge postMessage error:", error);
+        console.warn("---> bridge postMessage error:", error);
       }
     } else {
       console.log("---> bridge init error: not a handheld device");
@@ -73,42 +67,39 @@ export function postMessage(msg) {
   });
 }
 
-// 监听原生消息
-function initTools() {
-  getPlatform();
-
-  Bus.clear();
-
-  if (isMobile) {
-    // if (isIos) {
-    //   window.addEventListener("message", (msg = {}) => {
-    //     handlerEmit(msg.data);
-    //   });
-    // } else {
-    //   document.addEventListener("message", (msg = {}) => {
-    //     handlerEmit(msg.data);
-    //   });
-    // }
-    window.RNBridge = { onMessage: handlerEmit };
-    console.log("---> initTools message init !");
-  } else {
-    console.log("---> bridge init error: not a handheld device");
-  }
-}
-
 // 解析 Rn 端的消息
 function handlerEmit(event) {
-  console.log("---> handlerEmit: ", event);
   let data = event;
   try {
-    data = JSON.parse(event);
+    if(typeof event === 'string'){
+      data = JSON.parse(event);
+    }
   } catch (e) {
-    console.warn("parse catch", e);
+    console.warn("---> parse catch", event, e);
   }
   if (data != null) {
     const eventKey = data.id || data.key;
-    console.log("---> handlerEmit eventKey: ", eventKey);
     Bus.send(eventKey, data.data);
+    console.log("---> handlerEmit key: ", eventKey);
+  }else {
+    console.log("---> handlerEmit data is null");
+  }
+}
+
+// 监听原生消息
+function initTools() {
+  Bus.clear();
+  getPlatform();
+
+  if (isMobile) {
+    window.RNBridge = { onMessage: handlerEmit };
+    console.log("---> initTools message init !");
+  } else {
+    window.addEventListener("message", (msg) => {
+      handlerEmit(msg.data);
+    });
+    // document.addEventListener("message", (e) => {});
+    console.log("---> bridge init error: not a handheld device");
   }
 }
 

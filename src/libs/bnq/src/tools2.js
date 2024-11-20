@@ -62,7 +62,7 @@ class RNTool2 {
    */
   static postMessageToRN(requestId, key, data, callback) {
     const callNotNull = callback != null;
-    postMessage({ requestId, key, data, bridgev: "v2", mode: 's'}).then(res => {
+    postMessage({ requestId, key, data, bridgev: "v2"}).then(res => {
       if(callNotNull) {
         callback(RNTool2.formatData(res));
       }

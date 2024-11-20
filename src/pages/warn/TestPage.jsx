@@ -4,7 +4,7 @@
  * Modify: 2023-08-31
  * Desc:
  */
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { bnqBridge } from "../../libs/bnq/index";
 import "./test.css";
 
@@ -53,7 +53,7 @@ function TestPage() {
   function onNav() {}
   function onToast() {}
   function onScan() {}
-  async function onCamera() {}
+  function onCamera() {}
   function onPreview() {}
   function setHeader() {}
   function onClear() {}

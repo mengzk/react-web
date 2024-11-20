@@ -12,20 +12,30 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>React App</title>
-    <script>
+    <!-- <script>
       this.globalThis || (this.globalThis = this);
-    </script>
+    </script> -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
+    <!-- 错误捕捉 -->
     <script>
       window.onerror = function(message, source, lineno, colno, error) {
         console.warn('Error:', message, 'Source:', source, 'Line:', lineno, 'Column:', colno, 'Stack trace:', error.stack);
         const file = source.substring(source.lastIndexOf('static'));
-        const dic3 = document.getElementById('root');
-        const style = 'width: 96vw;display: flex;flex-direction: column;margin: 32px 12px;color: red;font-size: 16px;white-space: normal;word-wrap: break-word;word-break: break-all;';
+        // const dic3 = document.getElementById('root');
+        const dic3 = document.body;
+        const style = 'width: 96vw;display: flex;flex-direction: column;margin: 32px 12px;color: red;font-size: 16px;line-height: 1.5;white-space: normal;word-wrap: break-word;word-break: break-all;';
         dic3.innerHTML = `<div style="${style}"> <div>${message}</div> <div>${file}:${lineno}-${colno}</div> </div>`;
       };
     </script>

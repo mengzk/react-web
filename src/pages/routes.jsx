@@ -50,21 +50,21 @@ function lazyPage(element, path, title, index = false) {
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <MainPage />,
+    // element: <MainPage />,
     // errorElement: <ErrorPage />,
     children: [
       lazyPage(<TestPage />, "", "首页", true)
     ],
   },
-  {
-    path: "product",
-    // element: <ProductPage />,
-    // errorElement: <ErrorPage />,
-    children: [
-      lazyPage(<ProductPage />, "", "商品列表", true),
-      lazyPage(<ProductDetailPage />, "detail", "商品详情"),
-    ],
-  },
+  // {
+  //   path: "product",
+  //   // element: <ProductPage />,
+  //   // errorElement: <ErrorPage />,
+  //   children: [
+  //     lazyPage(<ProductPage />, "", "商品列表", true),
+  //     lazyPage(<ProductDetailPage />, "detail", "商品详情"),
+  //   ],
+  // },
   {
     path: "*",
     async lazy() {

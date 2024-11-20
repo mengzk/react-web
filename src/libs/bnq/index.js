@@ -9,49 +9,42 @@ import ToolsV2 from "./src/tools2";
 import HMApi from "./src/hmApi";
 import { methodMap } from "./src/rnToHm";
 
+const bnqHM = window?.bnq;
+
 // 通过版本号判断调用的方法
 function bnqBridge(key, data = {}, callback, version = 2) {
-  if (window.bnq) {
+  if (bnqHM) {
     let event = methodMap[key];
     if (!event) {
       event = key;
     }
-    return hmBridge(event, data);
+    return _hmBridge(event, data);
   } else {
     const vers = version || 2;
-
     switch (vers) {
       case 1:
-        bridgeInvokeV1(key, data, callback);
+        _bridgeInvokeV1(key, data, callback);
         break;
       default:
-        bridgeInvokeV2(key, data, callback);
+        _bridgeInvokeV2(key, data, callback);
         break;
     }
   }
 }
 
 // 发送消息
-function bnqEmitter({key='', data = {}, event='', version = 2, callback}={}) {
-  if (window.bnq) {
+function bnqEmitter({key='', data = {}, event=''}={}) {
+  if (bnqHM) {
     const time = Date.now();
     return HMApi.emit({time, key, event, data });
   } else {
-    const vers = version || 2;
-    switch (vers) {
-      case 1:
-        ToolsV1.sendMessage(key, data, callback);
-        break;
-      default:
-        ToolsV2.emit(key, data);
-        break;
-    }
+    ToolsV2.emit(key, data);
   }
 }
 
 // 发送消息
 function invokeMathod(key='', data = {}, callback) {
-  if (window.bnq) {
+  if (bnqHM) {
     return HMApi.invoke(key, data);
   } else {
     ToolsV2.sendMsgToRN(key, data, callback);
@@ -61,12 +54,12 @@ function invokeMathod(key='', data = {}, callback) {
 /** -----------===------------ */
 
 // 鸿蒙调用
-function hmBridge(key, data) {
+function _hmBridge(key, data) {
   return HMApi.invoke(key, data);
 }
 
 // 版本1调用
-function bridgeInvokeV1(key, data, callback) {
+function _bridgeInvokeV1(key, data, callback) {
   const methodList = Object.getOwnPropertyNames(ToolsV1).filter(
     (prop) => typeof ToolsV1[prop] === "function"
   );
@@ -83,7 +76,7 @@ function bridgeInvokeV1(key, data, callback) {
 }
 
 // 版本2调用
-function bridgeInvokeV2(key, data, callback) {
+function _bridgeInvokeV2(key, data, callback) {
   try {
     ToolsV2.sendMsgToRN(key, data, callback);
   } catch (error) {

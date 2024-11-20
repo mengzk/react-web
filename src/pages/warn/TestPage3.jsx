@@ -5,7 +5,7 @@
  * Desc:
  */
 import React, { useEffect, useState, useRef } from "react";
-import { bridgeTools } from "../../libs/bnq/index";
+import { bnqBridge } from "../../libs/bnq/index";
 import "./test.css";
 
 function TestPage() {
@@ -14,10 +14,6 @@ function TestPage() {
 
   useEffect(() => {
     console.log("useEffect");
-
-    if (window.bnq) {
-      window.bnq.routeStack(false);
-    }
   }, []);
 
   function onResult(value, e) {
@@ -30,22 +26,12 @@ function TestPage() {
     for (const key in object) {
       if (Object.prototype.hasOwnProperty.call(object, key)) {
         const element = object[key];
-        
       }
     }
   }
 
   function onTest() {
     try {
-      // bridgeTools(
-      //   "watermarkImg",
-      //   {title: '测试', content: '测试内容'},
-      //   (res) => {
-      //     console.log("bridgeTools res ", res);
-      //   },
-      //   2
-      // );
-
     } catch (error) {
       console.log("error", error);
     }
@@ -286,7 +272,6 @@ function TestPage() {
     <div className="test">
       {/* <h1>测试鸿蒙</h1> */}
 
-      <button onClick={onTest}>测试住小橙</button>
       <div className="test-actions">
         <button onClick={onChoosePhoto}>选择照片</button>
         <button onClick={onChooseFile}>选择文件</button>

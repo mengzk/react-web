@@ -5,7 +5,7 @@
  * Desc:
  */
 
-let bnqHm = window.bnq || {}; // 与原生通信的对象
+let bnqHm = window?.bnq || {}; // 与原生通信的对象
 
 let nativeEmitter = []; // 与原生通信的对象
 let h5Port = null; // 与原生通信的端口

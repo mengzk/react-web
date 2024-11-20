@@ -14,242 +14,70 @@ function TestPage() {
 
   useEffect(() => {
     console.log("useEffect");
-
-    if (window.bnq) {
-      window.bnq.routeStack(false);
-    }
   }, []);
 
   function onResult(value, e) {
     console.log("onResult", value, e);
   }
 
-  function onTest() {
-    
-  }
-
-  async function onChoosePhoto() {
-    bnqBridge("openAppAlbum2", {}, (res) => {
-      console.log("choosePhoto res ", res);
-      
-    });
-  }
-
-  function onChooseFile() {
-    
-  }
+  function onTest() {}
 
   function onShare() {
-    if (window.bnq) {
-      window.bnq.share({
-        title: "分享",
-        data: [
-          {
-            mold: 1,
-            title: "",
-            desc: "分享内容",
-            url: "https://www.baidu.com",
-          },
-          {
-            mold: 1,
-            title: "",
-            desc: "分享内容",
-            url: "https://www.baidu.com",
-          },
-        ],
-      });
-    }
+    // if (window.bnq) {
+    //   window.bnq.share({
+    //     title: "分享",
+    //     data: [
+    //       {
+    //         mold: 1,
+    //         title: "",
+    //         desc: "分享内容",
+    //         url: "https://www.baidu.com",
+    //       },
+    //       {
+    //         mold: 1,
+    //         title: "",
+    //         desc: "分享内容",
+    //         url: "https://www.baidu.com",
+    //       },
+    //     ],
+    //   });
+    // }
   }
-
-  function onShare2() {
-    if (window.bnq) {
-      window.bnq.sysShare({
-        title: "分享",
-        desc: "分享内容",
-        url: "https://www.baidu.com",
-      });
-    }
+  function onChoosePhoto() {
+    bnqBridge("openAppAlbum2", {}, (res) => {
+      console.log("choosePhoto res ", res);
+    });
   }
-
-  function onNav() {
-    if (window.bnq) {
-      window.bnq.mapNavigation({
-        lat: 39.915,
-        lng: 116.404,
-        name: "天安门",
-        address: "北京市东城区东长安街天安门广场",
-      });
-    }
-  }
-
-  function onToast() {
-    if (window.bnq) {
-      window.bnq.toast("测试toast", 2000);
-    }
-  }
-
-  function onScan() {
-    if (window.bnq) {
-      window.bnq.qrcodeScan();
-    }
-  }
-
-  async function onCamera() {
-    if (window.bnq) {
-      const res = await window.bnq.openCamera({
-        mode: 0,
-        position: 0,
-      });
-      console.log("openCamera res ", res);
-      if (res.code == 0) {
-        setImgs([res.data]);
-      }
-    }
-  }
-
-  function onPreview() {
-    if (window.bnq) {
-      window.bnq.previewImage({
-        current: 0,
-        urls: [],
-      });
-    }
-  }
-
-  function setHeader() {
-    if (window.bnq) {
-      window.bnq.headerConfig({
-        title: "测试标题",
-        canBack: true,
-        actions: [
-          {
-            text: "测试",
-          },
-        ],
-      });
-    }
-  }
-  function onClear() {
-    if (window.bnq) {
-      window.bnq.clearCache();
-    }
-  }
-
-  function onDebug() {
-    if (window.bnq) {
-      window.bnq.isDebug();
-    }
-  }
-  function onRecord() {
-    if (window.bnq) {
-      window.bnq.record();
-    }
-  }
-  function onMediaPlay() {
-    if (window.bnq) {
-      window.bnq.mediaPlayer(
-        "https://www.runoob.com/try/demo_source/movie.mp4"
-      );
-    }
-  }
-  function getLocation() {
-    if (window.bnq) {
-      window.bnq.getLocation();
-    }
-  }
-  function onChooseAddress() {
-    if (window.bnq) {
-      window.bnq.chooseAddress();
-    }
-  }
-  function onSendSms() {
-    if (window.bnq) {
-      window.bnq.sendSms("10086", "测试短信");
-    }
-  }
-  function onCallPhone() {
-    if (window.bnq) {
-      window.bnq.callPhone("10086");
-    }
-  }
-  function onOpenApp() {
-    if (window.bnq) {
-      window.bnq.openApp("com.bnq.app");
-    }
-  }
-  function onSetting() {
-    if (window.bnq) {
-      window.bnq.openSetting();
-    }
-  }
-
-  async function onOpenFolder() {
-    if (window.bnq) {
-      const res = await window.bnq.openFolder();
-      console.log("openFolder res ", res);
-      if (res.code == 0) {
-        setFiles(res.list);
-      }
-    }
-  }
-  function onAppInfo() {
-    if (window.bnq) {
-      window.bnq.appInfo();
-    }
-  }
-  function onDeviceInfo() {
-    if (window.bnq) {
-      window.bnq.deviceInfo();
-    }
-  }
-  function onUserInfo() {
-    if (window.bnq) {
-      window.bnq.userInfo();
-    }
-  }
-  function onLogin() {
-    if (window.bnq) {
-      window.bnq.login();
-    }
-  }
-  function onLogout() {
-    if (window.bnq) {
-      window.bnq.logout();
-    }
-  }
-  function onRemove() {
-    if (window.bnq) {
-      window.bnq.remove();
-    }
-  }
-  function onAddEmit() {
-    if (window.bnq) {
-      window.bnq.listener("test", onResult);
-    }
-  }
-  function onEmit() {
-    if (window.bnq) {
-      window.bnq.emit("test", "测试");
-    }
-  }
-  function onPreview() {
-    if (window.bnq) {
-      window.bnq.previewDocs({
-        index: 0,
-        data: [],
-      });
-    }
-  }
-  function showLoading() {
-    if (window.bnq) {
-      window.bnq.showLoading("加载中...");
-    }
-  }
-  function hideLoading() {
-    if (window.bnq) {
-      window.bnq.hideLoading();
-    }
-  }
+  function onChooseFile() {}
+  function onShare2() {}
+  function onNav() {}
+  function onToast() {}
+  function onScan() {}
+  async function onCamera() {}
+  function onPreview() {}
+  function setHeader() {}
+  function onClear() {}
+  function onDebug() {}
+  function onRecord() {}
+  function onMediaPlay() {}
+  function getLocation() {}
+  function onChooseAddress() {}
+  function onSendSms() {}
+  function onCallPhone() {}
+  function onOpenApp() {}
+  function onSetting() {}
+  function onOpenFolder() {}
+  function onAppInfo() {}
+  function onDeviceInfo() {}
+  function onUserInfo() {}
+  function onLogin() {}
+  function onLogout() {}
+  function onRemove() {}
+  function onAddEmit() {}
+  function onEmit() {}
+  function onPreview() {}
+  function showLoading() {}
+  function hideLoading() {}
 
   return (
     <div className="test">

@@ -22,9 +22,11 @@
 
     <script>
       window.onerror = function(message, source, lineno, colno, error) {
-        console.error('Error:', message, 'Source:', source, 'Line:', lineno, 'Column:', colno, 'Stack trace:', error.stack);
-        var dic3 = document.getElementById('root');
-        dic3.innerHTML = `<div style="color: red; font-size: 24px; text-align: center; margin-top: 50px;">${message}, ${error.stack}.</div>`;
+        console.warn('Error:', message, 'Source:', source, 'Line:', lineno, 'Column:', colno, 'Stack trace:', error.stack);
+        const file = source.substring(source.lastIndexOf('static'));
+        const dic3 = document.getElementById('root');
+        const style = 'width: 96vw;display: flex;flex-direction: column;margin: 32px 12px;color: red;font-size: 16px;white-space: normal;word-wrap: break-word;word-break: break-all;';
+        dic3.innerHTML = `<div style="${style}"> <div>${message}</div> <div>${file}:${lineno}-${colno}</div> </div>`;
       };
     </script>
   </body>

@@ -13,7 +13,7 @@ const methodMap = {
   isDeveloperMode: 'isDebug',
   setTitle: 'headerConfig',
   customConfig: 'headerConfig',
-  openNativeMap: 'openMap',
+  openNativeMap: 'mapNavigation',
   QRCodePage: 'qrcodeScan',
   LinkingOpen: 'openApp',
   GetGaodeLocationV2: 'getLocation',
@@ -24,6 +24,8 @@ const methodMap = {
   selectFile: 'openFolder',
   cashier2: 'cashier',
   sendMsgToRN: 'invoke',
+  deviceInfoV2: 'deviceInfo',
+  reqLoginInfoV2: 'userInfo',
 };
 
 export { methodMap };

@@ -34,10 +34,10 @@ function bnqBridge(key, data = {}, callback, version = 2) {
 }
 
 // 发送消息
-function bnqEmitter({key='', data = {}, event=''}={}) {
+function bnqEmitter(key, data = {}) {
   if (bnqHM) {
-    const time = Date.now();
-    Tools.emit({time, key, event, data });
+    // const time = Date.now();
+    Tools.emit({key: 'h5EmitToRN', event: key, data });
   } else {
     ToolsV2.emit(key, data);
   }

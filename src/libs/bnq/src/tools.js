@@ -138,6 +138,55 @@ class Tools {
    * 显示分享面板
    */
   static share(arg) {
+    //     copyUrl: "https://bing.com", // 分享的链接，默认使用当前网页地址
+    //     miniProgramId: "wxa75c0de48ec3635d", //小程序原始ID 非必填需要分享小程序需要传递
+    //     miniProgramPageUrl: "/pages/home/home", //小程序页面 非必填需要分享小程序需要传递
+    //     isFriendNeedMiniProgram: false, // 分享微信是否是需要小程序
+    //     isFriendCircleNeedMinProgram: false, // 分享朋友圈是否是需要小程序
+    //     withoutShareBoard: false, // 如果为true，不弹出分享面板，直接调用分享
+    //     shareChannel: [1, 100], // 分享面板的分享渠道 数组可包含 分享的类型 0,新浪 1,微信 2,朋友圈  4,qq  5,Qzone     100,复制链接 101,海报分享
+    //     path: "/pages/home/home", //小程序页面路径
+    //     description: "你有一个百安居任务，请及时处理",
+    //     img: "https://dhstatic.bthome.com/app_icon/wechat_share.png",
+    //     appId: "gh_200143425872",
+    //     title: "你有一个百安居任务，请及时处理",
+    //     mode: "mini",
+    //     version: 2,
+
+    const list = []; // 新渠道: 1链接；20图片；30微信；40小程序
+
+    (arg.shareChannel || [1]).forEach((channel) => {
+      // 类型 1,微信 2,朋友圈  4,qq  5,Qzone 100,复制链接 101,海报分享
+      switch (channel) {
+        case 1:
+          list.push({
+            channel: 30,
+            url: arg.copyUrl,
+            title: arg.title,
+            desc: arg.description
+          });
+          break;
+        case 2:
+          list.push({
+            channel: 31,
+            url: arg.copyUrl,
+            title: arg.title,
+            desc: arg.description
+          });
+          break;
+        case 100:
+          list.push({
+            channel: 1,
+            url: arg.copyUrl,
+            title: arg.title,
+            desc: arg.description,
+          });
+          break;
+        default:
+          break;
+      }
+    });
+
     HMApi.share(arg);
   }
 
@@ -172,7 +221,7 @@ class Tools {
    */
   static chooseAlbum(arg, callback) {
     HMApi.chooseAlbum(arg).then((res) => {
-      let imgs = (res || {}).data || [];
+      let imgs = (res || {}).list || [];
       callback && callback(imgs);
     });
   }
@@ -182,7 +231,7 @@ class Tools {
    */
   static chooseMedia(arg, callback) {
     HMApi.chooseMedia(arg).then((res) => {
-      let files = (res || {}).data || [];
+      let files = (res || {}).list || [];
       callback && callback(files);
     });
   }
@@ -192,7 +241,7 @@ class Tools {
    */
   static chooseFile(arg, callback) {
     HMApi.chooseFile(arg).then((res) => {
-      let files = (res || {}).data || [];
+      let files = (res || {}).list || [];
       callback && callback(files);
     });
   }
@@ -216,7 +265,7 @@ class Tools {
    */
   static openFolder(arg, callback) {
     HMApi.openFolder(arg).then((res) => {
-      const files = (res || {}).data || [];
+      const files = (res || {}).list || [];
       callback && callback(files);
     });
   }
@@ -259,8 +308,8 @@ class Tools {
   /**
    * 拨打电话
    */
-  static callPhone(phone) {
-    HMApi.callPhone(phone);
+  static callPhone({ mobile } = {}) {
+    HMApi.callPhone(mobile);
   }
 
   /**

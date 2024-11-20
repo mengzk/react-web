@@ -4,6 +4,7 @@
  * Desc: 调用原生Api
  */
 
+import Tools from "./src/tools";
 import ToolsV1 from "./src/tools1";
 import ToolsV2 from "./src/tools2";
 import HMApi from "./src/hmApi";
@@ -18,7 +19,7 @@ function bnqBridge(key, data = {}, callback, version = 2) {
     if (!event) {
       event = key;
     }
-    return _hmBridge(event, data);
+    return _hmBridge(event, data, callback);
   } else {
     const vers = version || 2;
     switch (vers) {
@@ -36,7 +37,7 @@ function bnqBridge(key, data = {}, callback, version = 2) {
 function bnqEmitter({key='', data = {}, event=''}={}) {
   if (bnqHM) {
     const time = Date.now();
-    return HMApi.emit({time, key, event, data });
+    Tools.emit({time, key, event, data });
   } else {
     ToolsV2.emit(key, data);
   }
@@ -45,7 +46,7 @@ function bnqEmitter({key='', data = {}, event=''}={}) {
 // 发送消息
 function invokeMathod(key='', data = {}, callback) {
   if (bnqHM) {
-    return HMApi.invoke(key, data);
+    Tools.invoke(key, data);
   } else {
     ToolsV2.sendMsgToRN(key, data, callback);
   }
@@ -54,8 +55,8 @@ function invokeMathod(key='', data = {}, callback) {
 /** -----------===------------ */
 
 // 鸿蒙调用
-function _hmBridge(key, data) {
-  return HMApi.invoke(key, data);
+function _hmBridge(key, data, callback) {
+  return Tools.invoke(key, data, callback);
 }
 
 // 版本1调用

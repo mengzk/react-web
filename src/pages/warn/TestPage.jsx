@@ -52,8 +52,17 @@ function TestPage() {
   function onShare2() {}
   function onNav() {}
   function onToast() {}
-  function onScan() {}
-  function onCamera() {}
+  function onScan() {
+    bnqBridge("QRCodePage", {}, (res) => {
+      console.log("scan res ", res);
+    });
+  }
+  function onCamera() {
+    bnqBridge("openAppCamera2", {}, (res) => {
+      console.log("camera res ", res);
+      // setImgs([...imgs, res]);
+    });
+  }
   function onPreview() {}
   function setHeader() {}
   function onClear() {}

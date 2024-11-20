@@ -35,10 +35,9 @@ function handlerMsg(e) {
 }
 
 class HMApi {
-
   // 监听原生消息
   static nativeEmit(key, callback) {
-    nativeEmitter.push({key, callback});
+    nativeEmitter.push({ key, callback });
   }
 
   // 移除监听
@@ -49,20 +48,16 @@ class HMApi {
   /**
    * ❗️调用方法
    */
-  static invoke(name, data={}) {
-    if(bnqHm) {
-      const methodList = Object.getOwnPropertyNames(bnqHm).filter(
-        (prop) => typeof bnqHm[prop] === "function"
-      );
-      // console.log("invoke method --->", name, methodList.join(","));
-      const hasMethod = methodList.includes(name);
-      if (hasMethod) {
-        return bnqHm[name](data);
-      } else {
-        console.warn(`App不支持 ${name} 方法, 请联系开发人员`);
-      }
-    }else {
-      console.warn(`App未提供SDK, 请联系开发人员`);
+  static invoke(name, data = {}) {
+    const methodList = Object.getOwnPropertyNames(HMApi).filter(
+      (prop) => typeof HMApi[prop] === "function"
+    );
+    // console.log("invoke method --->", name, methodList.join(","));
+    const hasMethod = methodList.includes(name);
+    if (hasMethod) {
+      return HMApi[name](data);
+    } else {
+      console.warn(`App不支持 ${name} 方法, 请联系开发人员`);
     }
   }
 
@@ -361,7 +356,7 @@ class HMApi {
    * 保存数据
    */
   static saveItem(key, data) {
-     bnqHm.saveItem(key, data);
+    bnqHm.saveItem(key, data);
   }
 
   /**
@@ -375,7 +370,7 @@ class HMApi {
    * 删除数据
    */
   static removeItem(key) {
-     bnqHm.removeItem(key);
+    bnqHm.removeItem(key);
   }
 
   /**
@@ -400,7 +395,7 @@ class HMApi {
   /**
    * 显示toast
    */
-  static toast(text, duration=2000) {
+  static toast(text, duration = 2000) {
     bnqHm.toast(text, duration);
   }
 }

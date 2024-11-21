@@ -37,18 +37,35 @@ function bnqBridge(key, data = {}, callback, version = 2) {
 function bnqEmitter(key, data = {}) {
   if (bnqHM) {
     // const time = Date.now();
-    Tools.emit({key: 'h5EmitToRN', event: key, data });
+    Tools.emit({ key: "h5EmitToRN", event: key, data });
   } else {
     ToolsV2.emit(key, data);
   }
 }
 
-// 发送消息
-function invokeMathod(key='', data = {}, callback) {
+// 兼容调用rn-hm
+function compatInvoke(key = "", data, callback) {
   if (bnqHM) {
-    Tools.invoke(key, data);
+    switch (key) {
+      case "setTitle":
+        Tools.headerConfig({ title: data });
+        break;
+      default:
+        Tools.invoke(key, data, callback);
+        break;
+    }
   } else {
-    ToolsV2.sendMsgToRN(key, data, callback);
+    switch (key) {
+      case "QRCodePage":
+        ToolsV2.push("QRCodePage", data, callback);
+        break;
+      case "emit":
+        ToolsV2.emit(key, data);
+        break;
+      default:
+        ToolsV2.sendMsgToRN(key, data, callback);
+        break;
+    }
   }
 }
 
@@ -79,11 +96,18 @@ function _bridgeInvokeV1(key, data, callback) {
 // 版本2调用
 function _bridgeInvokeV2(key, data, callback) {
   try {
-    ToolsV2.sendMsgToRN(key, data, callback);
+    switch (key) {
+      case "QRCodePage":
+        ToolsV2.push("QRCodePage", data, callback);
+        break;
+      default:
+        ToolsV2.sendMsgToRN(key, data, callback);
+        break;
+    }
   } catch (error) {
     console.warn(`App不支持 ${key} 方法, 请联系开发人员`);
   }
 }
 
 // 导出
-export { HMApi, bnqBridge, bnqEmitter, invokeMathod };
+export { HMApi, bnqBridge, bnqEmitter, compatInvoke };

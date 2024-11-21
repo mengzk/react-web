@@ -13,6 +13,9 @@ window.removeEventListener("message", handlerMsg);
 window.addEventListener("message", handlerMsg);
 
 function handlerMsg(e) {
+  if(!window.bnq) {
+    return;
+  }
   console.log("hm message init -----> ", e);
   if (e != null && e.data === "__hmos_port" && e.ports != null) {
     h5Port = e.ports[0]; // 1. 保存从应用侧发送过来的端口。

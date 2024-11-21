@@ -90,6 +90,10 @@ function handlerEmit(event) {
 function initTools() {
   Bus.clear();
   getPlatform();
+  
+  if(window.bnq){
+    return;
+  }
 
   if (isMobile) {
     window.RNBridge = { onMessage: handlerEmit };

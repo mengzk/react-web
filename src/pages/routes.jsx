@@ -53,7 +53,7 @@ const routes = createBrowserRouter([
     // element: <MainPage />,
     // errorElement: <ErrorPage />,
     children: [
-      lazyPage(<TestPage />, "", "首页", true)
+      lazyPage(<TestPage />, "", "测试AppBridge", true)
     ],
   },
   // {

@@ -36,8 +36,9 @@ class Tools {
   /**
    * 监听 Native 消息
    */
-  static listener(arg) {
+  static listener(arg, callback) {
     HMApi.listener(arg);
+    Tools.nativeEmit(arg.key, callback);
   }
 
   /**
@@ -113,9 +114,8 @@ class Tools {
    * 获取个人信息
    */
   static userInfo(mode, callback) {
-    HMApi.userInfo(mode).then((res) => {
-      callback && callback(res);
-    });
+    const info = HMApi.userInfo(mode);
+    callback && callback(info);
   }
 
   /**
@@ -308,15 +308,15 @@ class Tools {
   /**
    * 发送短信
    */
-  static sendSms({ phone, msg = "" } = {}) {
-    HMApi.sendSms(phone, msg);
+  static sendSms(arg) {
+    HMApi.sendSms(arg);
   }
 
   /**
    * 拨打电话
    */
-  static callPhone({ mobile } = {}) {
-    HMApi.callPhone(mobile);
+  static callPhone(arg) {
+    HMApi.callPhone(arg);
   }
 
   /**
@@ -408,23 +408,23 @@ class Tools {
   /**
    * 读取文件
    */
-  static readFile({ url, path = "" } = {}, callback) {
-    const file = HMApi.readFile(url, path);
+  static readFile(arg, callback) {
+    const file = HMApi.readFile(arg);
     callback && callback(file);
   }
 
   /**
    * 保存数据
    */
-  static setItem(key, data) {
-    HMApi.setItem(key, data);
+  static setStorage(arg) {
+    HMApi.setStorage(arg);
   }
 
   /**
    * 获取数据
    */
-  static getItem(key, callback) {
-    const item = HMApi.getItem(key);
+  static getStorage(key, callback) {
+    const item = HMApi.getStorage(key);
     callback && callback(item);
   }
 
@@ -458,8 +458,8 @@ class Tools {
   /**
    * 显示toast
    */
-  static toast({ text = "", duration = 2000 } = {}) {
-    HMApi.toast(text, duration);
+  static toast(arg) {
+    HMApi.toast(arg);
   }
   /**
    * 重新加载

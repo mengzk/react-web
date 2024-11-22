@@ -273,15 +273,15 @@ class HMApi {
   /**
    * 发送短信
    */
-  static sendSms(phone, msg) {
-    bnqHm.sendSms(phone, msg);
+  static sendSms(arg) {
+    bnqHm.sendSms(arg);
   }
 
   /**
    * 拨打电话
    */
-  static callPhone(phone) {
-    bnqHm.callPhone(phone);
+  static callPhone(arg) {
+    bnqHm.callPhone(arg);
   }
 
   /**
@@ -364,22 +364,22 @@ class HMApi {
   /**
    * 读取文件
    */
-  static readFile(url, path) {
-    return bnqHm.readFile(url, path);
+  static readFile(arg) {
+    return bnqHm.readFile(arg);
   }
 
   /**
    * 保存数据
    */
-  static setItem(key, data) {
-    bnqHm.setItem(key, data);
+  static setStorage(arg) {
+    bnqHm.setStorage(arg);
   }
 
   /**
    * 获取数据
    */
-  static getItem(key) {
-    return bnqHm.getItem(key);
+  static getStorage(key) {
+    return bnqHm.getStorage(key);
   }
 
   /**
@@ -411,8 +411,8 @@ class HMApi {
   /**
    * 显示toast
    */
-  static toast(text, duration = 2000) {
-    bnqHm.toast(text, duration);
+  static toast(arg) {
+    bnqHm.toast(arg);
   }
 
   /**

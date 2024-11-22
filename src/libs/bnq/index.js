@@ -108,5 +108,6 @@ function _bridgeInvokeV2(key, data, callback) {
   }
 }
 
+const rnToolV2 = ToolsV2; // 版本2工具
 // 导出
-export { HMApi, bnqBridge, bnqEmitter, compatInvoke };
+export { HMApi, rnToolV2, bnqBridge, bnqEmitter, compatInvoke };

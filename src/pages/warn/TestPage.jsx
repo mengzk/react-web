@@ -44,21 +44,21 @@ function TestPage() {
     // }
 
     bnqBridge("share", {
-        copyUrl: "https://bing.com", // 分享的链接，默认使用当前网页地址
-        miniProgramId: "wxa75c0de48ec3635d", //小程序原始ID 非必填需要分享小程序需要传递
-        miniProgramPageUrl: "/pages/home/home", //小程序页面 非必填需要分享小程序需要传递
-        isFriendNeedMiniProgram: false, // 分享微信是否是需要小程序
-        isFriendCircleNeedMinProgram: false, // 分享朋友圈是否是需要小程序
-        withoutShareBoard: false, // 如果为true，不弹出分享面板，直接调用分享
-        shareChannel: [1, 100], // 分享面板的分享渠道 数组可包含 分享的类型 0,新浪 1,微信 2,朋友圈  4,qq  5,Qzone     100,复制链接 101,海报分享
-        path: "/pages/home/home", //小程序页面路径
-        description: "你有一个百安居任务，请及时处理",
-        img: "https://dhstatic.bthome.com/app_icon/wechat_share.png",
-        appId: "gh_200143425872",
-        title: "你有一个百安居任务，请及时处理",
-        mode: "mini",
-        version: 2,
-      });
+      copyUrl: "https://bing.com", // 分享的链接，默认使用当前网页地址
+      miniProgramId: "wxa75c0de48ec3635d", //小程序原始ID 非必填需要分享小程序需要传递
+      miniProgramPageUrl: "/pages/home/home", //小程序页面 非必填需要分享小程序需要传递
+      isFriendNeedMiniProgram: false, // 分享微信是否是需要小程序
+      isFriendCircleNeedMinProgram: false, // 分享朋友圈是否是需要小程序
+      withoutShareBoard: false, // 如果为true，不弹出分享面板，直接调用分享
+      shareChannel: [1, 100], // 分享面板的分享渠道 数组可包含 分享的类型 0,新浪 1,微信 2,朋友圈  4,qq  5,Qzone     100,复制链接 101,海报分享
+      path: "/pages/home/home", //小程序页面路径
+      description: "你有一个百安居任务，请及时处理",
+      img: "https://dhstatic.bthome.com/app_icon/wechat_share.png",
+      appId: "gh_200143425872",
+      title: "你有一个百安居任务，请及时处理",
+      mode: "mini",
+      version: 2,
+    });
   }
   function onChoosePhoto() {
     bnqBridge("openAppAlbum2", {}, (res) => {
@@ -217,6 +217,15 @@ function TestPage() {
   return (
     <div className="test">
       {/* <h1>测试鸿蒙</h1> */}
+      <h1>测试兼容RN住小橙</h1>
+      <div className="test-actions">
+        <button onClick={onTest}>SendMsgToRN</button>
+        <button onClick={onTest}>setTitle</button>
+        <button onClick={onTest}>getUserInfo</button>
+        <button onClick={onTest}>back</button>
+        <button onClick={onTest}>push</button>
+        <button onClick={onTest}>emit</button>
+      </div>
 
       <div className="test-actions">
         <button onClick={onChoosePhoto}>选择照片</button>

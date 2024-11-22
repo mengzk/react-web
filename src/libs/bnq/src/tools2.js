@@ -33,7 +33,7 @@ class RNTool2 {
     const hm = hmDevice();
     if (hm) {
     } else {
-      RNTool2.postMessageToRN(
+      RNTool2._postMessageToRN(
         "AppState-listener",
         "RNAppState",
         null,
@@ -57,8 +57,9 @@ class RNTool2 {
   static addListener(eventType, callback) {
     const hm = hmDevice();
     if (hm) {
+      Tools.listener({ key: eventType }, callback);
     } else {
-      RNTool2.postMessageToRN(
+      RNTool2._postMessageToRN(
         `${eventType}-listener`,
         "listener",
         { type: eventType },
@@ -70,7 +71,7 @@ class RNTool2 {
   static emit(eventType, params) {
     const hm = hmDevice();
     if (hm) {
-      Tools.emit({ key: "h5EmitToRN", event: eventType, data: params });
+      Tools.emit({ event: eventType, data: params });
     } else {
       RNTool2.sendMsgToRN("h5EmitToRN", { eventType, params });
     }
@@ -90,7 +91,7 @@ class RNTool2 {
       Tools.invoke(event, params, callback);
     } else {
       let id = `${key}-${Date.now()}`;
-      RNTool2.postMessageToRN(id, key, params, callback);
+      RNTool2._postMessageToRN(id, key, params, callback);
     }
   }
 
@@ -99,6 +100,19 @@ class RNTool2 {
    *  其中为了兼容v1版本object：{data:object, id:string, key:string, callback: (res: any) => {}}
    */
   static postMessageToRN(requestId, key, data, callback) {
+    const hm = hmDevice();
+    if (hm) {
+      Tools.listener({ key: eventType, data }, callback);
+    } else {
+      RNTool2._postMessageToRN(requestId, key, data, callback);
+    }
+  }
+
+  /**
+   * modelName  在RN客户端中会根据modelName来进行具体的业务操作
+   *  其中为了兼容v1版本object：{data:object, id:string, key:string, callback: (res: any) => {}}
+   */
+  static _postMessageToRN(requestId, key, data, callback) {
     const callNotNull = callback != null;
     postMessage({ requestId, key, data, bridgev: "v2" })
       .then((res) => {
@@ -123,7 +137,14 @@ class RNTool2 {
   static push(routeName, param, callback) {
     const hm = hmDevice();
     if (hm) {
-      Tools.push(param);
+      switch (key) {
+        case "QRCodePage":
+          Tools.qrcodeScan();
+          break;
+        default:
+          Tools.push(param);
+          break;
+      }
     } else {
       RNTool2.sendMsgToRN("push", { pname: routeName, param }, callback);
     }

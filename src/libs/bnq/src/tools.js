@@ -461,6 +461,12 @@ class Tools {
   static toast({ text = "", duration = 2000 } = {}) {
     HMApi.toast(text, duration);
   }
+  /**
+   * 重新加载
+   */
+  static reload() {
+    HMApi.reload();
+  }
 }
 
 export default Tools;

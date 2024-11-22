@@ -8,13 +8,12 @@ import Tools from "./src/tools";
 import ToolsV1 from "./src/tools1";
 import ToolsV2 from "./src/tools2";
 import HMApi from "./src/hmApi";
+import { hmDevice } from "./src/emitter";
 import { methodMap } from "./src/rnToHm";
-
-const bnqHM = window.bnq;
 
 // 通过版本号判断调用的方法
 function bnqBridge(key, data = {}, callback, version = 2) {
-  if (bnqHM) {
+  if (hmDevice()) {
     let event = methodMap[key];
     if (!event) {
       event = key;
@@ -35,7 +34,7 @@ function bnqBridge(key, data = {}, callback, version = 2) {
 
 // 发送消息
 function bnqEmitter(key, data = {}) {
-  if (bnqHM) {
+  if (hmDevice()) {
     // const time = Date.now();
     Tools.emit({ key: "h5EmitToRN", event: key, data });
   } else {
@@ -45,7 +44,7 @@ function bnqEmitter(key, data = {}) {
 
 // 兼容调用rn-hm
 function compatInvoke(key = "", data, callback) {
-  if (bnqHM) {
+  if (hmDevice()) {
     switch (key) {
       case "setTitle":
         Tools.headerConfig({ title: data });

@@ -12,6 +12,8 @@ let h5Port = null; // 与原生通信的端口
 window.removeEventListener("message", handlerMsg);
 window.addEventListener("message", handlerMsg);
 
+window.addEventListener("load", loadResoue);
+
 function handlerMsg(e) {
   if(!window.bnq) {
     return;
@@ -37,7 +39,12 @@ function handlerMsg(e) {
   }
 }
 
+function loadResoue() {
+  bnqHm = window.bnq || {};
+}
+
 class HMApi {
+
   // 监听原生消息
   static nativeEmit(key, callback) {
     nativeEmitter.push({ key, callback });
@@ -406,6 +413,13 @@ class HMApi {
    */
   static toast(text, duration = 2000) {
     bnqHm.toast(text, duration);
+  }
+
+  /**
+   * 重新加载
+   */
+  static reload() {
+    bnqHm.reload();
   }
 }
 

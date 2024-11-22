@@ -7,8 +7,9 @@
 
 import Bus from "./bus";
 
-let isIos = false;
-let isMobile = true;
+let isHm = window.bnq; // 是否是鸿蒙系统
+let isIos = false; // 是否是ios系统
+let isMobile = true; // 是否是移动端
 let lastKey = "";
 let lastTime = 0;
 let minInterval = 100;
@@ -22,6 +23,15 @@ function getPlatform() {
   // return { mobile, ios };
 }
 
+export function iosDevice() {
+  return isIos;
+}
+export function hmDevice() {
+  return isHm;
+}
+export function mobileOS() {
+  return isMobile;
+}
 /**
  * 向原生发送消息
  * @param msg: -{key: '操作事项名', params: '参数', mode: '类型'}
@@ -88,10 +98,12 @@ function handlerEmit(event) {
 
 // 监听原生消息
 function initTools() {
+  isHm = window.bnq;
+
   Bus.clear();
   getPlatform();
   
-  if(window.bnq){
+  if(isHm){
     return;
   }
 
@@ -107,4 +119,5 @@ function initTools() {
   }
 }
 
+// window.addEventListener("load", initTools); // 初始化
 window.onload = initTools; // 初始化

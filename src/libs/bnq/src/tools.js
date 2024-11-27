@@ -126,6 +126,11 @@ class Tools {
     callback && callback(info);
   }
 
+  static getToken(_, callback) {
+    const info = HMApi.getToken();
+    callback && callback(info);
+  }
+
   /**
    * 获取设备屏幕相关信息
    */
@@ -428,12 +433,18 @@ class Tools {
     callback && callback(item);
   }
 
-  /**
+    /**
    * 删除数据
    */
-  static removeItem(key) {
-    HMApi.removeItem(key);
-  }
+    static removeStorage(key) {
+      bnqHm.removeItem(key);
+    }
+    /**
+     * 删除数据
+     */
+    static clearStorage() {
+      bnqHm.clearStorage();
+    }
 
   /**
    * 是否是debug模式

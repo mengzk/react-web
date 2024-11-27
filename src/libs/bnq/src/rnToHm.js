@@ -29,6 +29,10 @@ const methodMap = {
   deviceInfoV2: 'deviceInfo',
   reqLoginInfoV2: 'userInfo',
   previewFile: 'previewDocs',
+  h5AllCache: 'clearStorage',
+  h5SaveByKey: 'setStorage',
+  h5GetByKey: 'getStorage',
+  h5DeleteByKey: 'removeStorage',
 };
 
 export { methodMap };

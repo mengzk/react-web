@@ -5,7 +5,8 @@
  * Desc:
  */
 import React, { useEffect, useState } from "react";
-import { bnqBridge, bnqEmitter } from "../../libs/bnq/index";
+import { HMApi } from "bnq-app-bridge";
+import { bnqBridge, rnToolV2 } from "../../libs/bnq/index";
 import "./test.css";
 
 function TestPage() {
@@ -61,12 +62,12 @@ function TestPage() {
     });
   }
   function onChoosePhoto() {
-    bnqBridge("openAppAlbum2", {}, (res) => {
+    rnToolV2.sendMsgToRN("openAppAlbum2", {}, (res) => {
       console.log("choosePhoto res ", res);
     });
   }
   function onChooseFile() {
-    bnqBridge("selectFile", {}, (res) => {
+    rnToolV2.sendMsgToRN("selectFile", {}, (res) => {
       console.log("chooseFile res ", res);
       setFiles([...files, res]);
     });
@@ -75,7 +76,7 @@ function TestPage() {
     bnqBridge("sysShare", { url: "com.bnq.crm" });
   }
   function onNav() {
-    bnqBridge(
+    rnToolV2.sendMsgToRN(
       "openNativeMap",
       {
         lat: 30.67,
@@ -92,12 +93,12 @@ function TestPage() {
     bnqBridge("toast", { text: "提示信息" });
   }
   function onScan() {
-    bnqBridge("QRCodePage", {}, (res) => {
+    rnToolV2.push("QRCodePage", {}, (res) => {
       console.log("scan res ", res);
     });
   }
   function onCamera() {
-    bnqBridge("openAppCamera2", {}, (res) => {
+    rnToolV2.sendMsgToRN("openAppCamera2", {}, (res) => {
       console.log("camera res ", res);
       // setImgs([...imgs, res]);
     });
@@ -106,13 +107,13 @@ function TestPage() {
     bnqBridge("previewFile", { img: imgs[0] });
   }
   function setHeader() {
-    bnqBridge("customConfig", { title: "测试标题", hideNav: true });
+    rnToolV2.sendMsgToRN("customConfig", { title: "测试标题", hideNav: true });
   }
   function onClear() {
-    bnqBridge("clearCache", {});
+    rnToolV2.sendMsgToRN("clearCache", {});
   }
   function onDebug() {
-    bnqBridge("isDeveloperMode", {}, (res) => {
+    rnToolV2.sendMsgToRN("isDeveloperMode", {}, (res) => {
       console.log("debug res ", res);
     });
   }
@@ -127,7 +128,7 @@ function TestPage() {
     });
   }
   function getLocation() {
-    bnqBridge("GetGaodeLocationV2", {}, (res) => {
+    rnToolV2.sendMsgToRN("GetGaodeLocationV2", {}, (res) => {
       console.log("location res ", res);
     });
   }
@@ -140,16 +141,16 @@ function TestPage() {
     bnqBridge("onSendSms", { phone: "10086", msg: "测试短信" });
   }
   function onCallPhone() {
-    bnqBridge("telMobile", { mobile: "10086" });
+    rnToolV2.sendMsgToRN("telMobile", { mobile: "10086" });
   }
   function onOpenApp() {
-    bnqBridge("LinkingOpen", { url: "com.bnq.crm" });
+    rnToolV2.sendMsgToRN("LinkingOpen", { url: "com.bnq.crm" });
   }
   function onSetting() {
-    bnqBridge("pushToAppSetting", {});
+    rnToolV2.sendMsgToRN("pushToAppSetting", {});
   }
   function onOpenFolder() {
-    bnqBridge("selectFile", {}, (res) => {
+    rnToolV2.sendMsgToRN("selectFile", {}, (res) => {
       console.log("openFolder res ", res);
     });
   }
@@ -159,12 +160,12 @@ function TestPage() {
     });
   }
   function onDeviceInfo() {
-    bnqBridge("getDeviceInfo", {}, (res) => {
+    rnToolV2.sendMsgToRN("getDeviceInfo", {}, (res) => {
       console.log("deviceInfo res ", res);
     });
   }
   function onUserInfo() {
-    bnqBridge("reqLoginInfoV2", {}, (res) => {
+    rnToolV2.sendMsgToRN("reqLoginInfoV2", {}, (res) => {
       console.log("userInfo res ", res);
     });
   }
@@ -181,7 +182,7 @@ function TestPage() {
     bnqEmitter("listener", { key: "addMsg" });
   }
   function onEmit() {
-    bnqEmitter("refreshTaskDetail", { key: "refreshTaskDetail" });
+    rnToolV2.emit("refreshTaskDetail", { key: "refreshTaskDetail" });
   }
   function onPreview() {
     bnqBridge("previewAlbum", { img: imgs[0] });
@@ -217,16 +218,25 @@ function TestPage() {
   return (
     <div className="test">
       {/* <h1>测试鸿蒙</h1> */}
-      <h1>测试兼容RN住小橙</h1>
+      <h3>兼容RN住小橙</h3>
       <div className="test-actions">
-        <button onClick={onTest}>SendMsgToRN</button>
-        <button onClick={onTest}>setTitle</button>
-        <button onClick={onTest}>getUserInfo</button>
-        <button onClick={onTest}>back</button>
-        <button onClick={onTest}>push</button>
-        <button onClick={onTest}>emit</button>
+        <button onClick={onTest}>设置标题栏</button>
+        <button onClick={onTest}>设置标题</button>
+        <button onClick={onTest}>用户信息</button>
+        <button onClick={onTest}>返回</button>
+        <button onClick={onTest}>导航</button>
+        <button onClick={onTest}>发消息</button>
+        <button onClick={onTest}>选择照片</button>
+        <button onClick={onTest}>选择文件</button>
+        <button onClick={onTest}>拍照片</button>
+        <button onClick={onTest}>水印照片</button>
+        <button onClick={onTest}>分享</button>
+        <button onClick={onTest}>刷新任务</button>
+        <button onClick={onTest}>录音</button>
+        <button onClick={onTest}>播放</button>
       </div>
 
+      <h3>鸿蒙测试</h3>
       <div className="test-actions">
         <button onClick={onChoosePhoto}>选择照片</button>
         <button onClick={onChooseFile}>选择文件</button>

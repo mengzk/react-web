@@ -15,7 +15,7 @@ window.addEventListener("message", handlerMsg);
 window.addEventListener("load", loadResoue);
 
 function handlerMsg(e) {
-  if(!window.bnq) {
+  if (!window.bnq) {
     return;
   }
   console.log("hm message init -----> ", e);
@@ -44,7 +44,6 @@ function loadResoue() {
 }
 
 class HMApi {
-
   // 监听原生消息
   static nativeEmit(key, callback) {
     nativeEmitter.push({ key, callback });
@@ -157,6 +156,10 @@ class HMApi {
    */
   static deviceInfo() {
     return bnqHm.deviceInfo();
+  }
+
+  static getToken() {
+    return bnqHm.getToken();
   }
 
   /**
@@ -385,10 +388,15 @@ class HMApi {
   /**
    * 删除数据
    */
-  static removeItem(key) {
+  static removeStorage(key) {
     bnqHm.removeItem(key);
   }
-
+  /**
+   * 删除数据
+   */
+  static clearStorage() {
+    bnqHm.clearStorage();
+  }
   /**
    * 是否是debug模式
    */

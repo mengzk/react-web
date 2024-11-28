@@ -14,6 +14,9 @@ let lastKey = "";
 let lastTime = 0;
 let minInterval = 100;
 
+let hmNativeEmit = []; // 与原生通信的对象 -鸿蒙
+let hmH5Port = null; // 与原生通信的端口 -鸿蒙
+
 // 获取手机平台
 function getPlatform() {
   let u = window.navigator.userAgent;
@@ -32,6 +35,44 @@ export function hmDevice() {
 export function mobileOS() {
   return isMobile;
 }
+
+// 处理鸿蒙消息
+function handlerMsg(e) {
+  if (!window.bnq) {
+    return;
+  }
+  console.log("hm message init -----> ", e);
+  if (e != null && e.data === "__hmos_port" && e.ports != null) {
+    // 1. 保存从应用侧发送过来的端口。
+    hmH5Port = e.ports[0];
+    if (hmH5Port != null) {
+      hmH5Port.onmessage = (event) => {
+        // 2. 接收ets侧发送过来的消息。
+        const result = event.data;
+        console.log("hm message ----->", result);
+        // 3. 处理消息 -移除废弃的监听
+        hmNativeEmit = hmNativeEmit.filter((item) => !item.callback);
+        // 4. 通知监听
+        hmNativeEmit.forEach((item) => {
+          if (item.key === result.key) {
+            item.callback(result.data);
+          }
+        });
+      };
+    }
+  }
+}
+
+// 监听鸿蒙原生消息
+export function nativeHMEmit(key, callback) {
+  hmNativeEmit.push({ key, callback });
+}
+
+// 移除鸿蒙监听
+export function removeHMEmit(key) {
+  hmNativeEmit = hmNativeEmit.filter((item) => item.key !== key);
+}
+
 /**
  * 向原生发送消息
  * @param msg: -{key: '操作事项名', params: '参数', mode: '类型'}
@@ -53,12 +94,12 @@ export function postMessage(msg) {
     } else {
       Bus.once(msg.requestId, onHandler);
     }
-    
+
     if (isMobile) {
       try {
         const isRn = window.ReactNativeWebView;
         if (isRn) {
-          console.log('---> postMessage type ReactNativeWebView');
+          console.log("---> postMessage type ReactNativeWebView");
           window.ReactNativeWebView.postMessage(JSON.stringify(msg));
         } else {
           if (isIos) {
@@ -81,7 +122,7 @@ export function postMessage(msg) {
 function handlerEmit(event) {
   let data = event;
   try {
-    if(typeof event === 'string'){
+    if (typeof event === "string") {
       data = JSON.parse(event);
     }
   } catch (e) {
@@ -91,7 +132,7 @@ function handlerEmit(event) {
     const eventKey = data.id || data.key;
     Bus.send(eventKey, data.data);
     console.log("---> handlerEmit key: ", eventKey);
-  }else {
+  } else {
     console.log("---> handlerEmit data is null");
   }
 }
@@ -102,8 +143,8 @@ function initTools() {
 
   Bus.clear();
   getPlatform();
-  
-  if(isHm){
+
+  if (isHm) {
     return;
   }
 
@@ -121,3 +162,6 @@ function initTools() {
 
 // window.addEventListener("load", initTools); // 初始化
 window.onload = initTools; // 初始化
+
+window.removeEventListener("message", handlerMsg);
+window.addEventListener("message", handlerMsg);

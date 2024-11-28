@@ -7,37 +7,7 @@
 
 let bnqHm = window.bnq || {}; // 与原生通信的对象
 
-let nativeEmitter = []; // 与原生通信的对象
-let h5Port = null; // 与原生通信的端口
-window.removeEventListener("message", handlerMsg);
-window.addEventListener("message", handlerMsg);
-
 window.addEventListener("load", loadResoue);
-
-function handlerMsg(e) {
-  if (!window.bnq) {
-    return;
-  }
-  console.log("hm message init -----> ", e);
-  if (e != null && e.data === "__hmos_port" && e.ports != null) {
-    h5Port = e.ports[0]; // 1. 保存从应用侧发送过来的端口。
-    if (h5Port != null) {
-      h5Port.onmessage = (event) => {
-        // 2. 接收ets侧发送过来的消息。
-        const result = event.data;
-        console.log("hm message ----->", result);
-        // 3. 处理消息 -移除废弃的监听
-        nativeEmitter = nativeEmitter.filter((item) => !item.callback);
-        // 4. 通知监听
-        nativeEmitter.forEach((item) => {
-          if (item.key === result.key) {
-            item.callback(result.data);
-          }
-        });
-      };
-    }
-  }
-}
 
 function loadResoue() {
   bnqHm = window.bnq || {};
@@ -45,14 +15,10 @@ function loadResoue() {
 
 class HMApi {
   // 监听原生消息
-  static nativeEmit(key, callback) {
-    nativeEmitter.push({ key, callback });
-  }
+  static nativeEmit(key, callback) {}
 
   // 移除监听
-  static removeEmit(key) {
-    nativeEmitter = nativeEmitter.filter((item) => item.key !== key);
-  }
+  static removeEmit(key) {}
 
   /**
    * ❗️调用方法
@@ -269,8 +235,8 @@ class HMApi {
   /**
    * 打开app
    */
-  static openApp(arg) {
-    bnqHm.openApp(arg);
+  static openLink(arg) {
+    bnqHm.openLink(arg);
   }
 
   /**
@@ -413,8 +379,8 @@ class HMApi {
   /**
    * 隐藏加载框
    */
-  static hintLoading() {
-    bnqHm.hintLoading();
+  static hideLoading() {
+    bnqHm.hideLoading();
   }
   /**
    * 显示toast

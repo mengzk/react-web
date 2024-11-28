@@ -5,10 +5,10 @@
  * Desc:
  */
 import React, { useEffect, useState } from "react";
-import { HMApi } from "bnq-app-bridge";
 import { bnqBridge, rnToolV2 } from "../../libs/bnq/index";
 import "./test.css";
 
+let isLoading = false;
 function TestPage() {
   const [imgs, setImgs] = useState([]);
   const [files, setFiles] = useState([]);
@@ -107,7 +107,11 @@ function TestPage() {
     bnqBridge("previewFile", { img: imgs[0] });
   }
   function setHeader() {
-    rnToolV2.sendMsgToRN("customConfig", { title: "测试标题", hideNav: true });
+    const num = Math.round(Math.random() * 100);
+    rnToolV2.sendMsgToRN("customConfig", {
+      title: "标题-" + num,
+      hideNav: true,
+    });
   }
   function onClear() {
     rnToolV2.sendMsgToRN("clearCache", {});
@@ -208,35 +212,19 @@ function TestPage() {
   function onRouteStack() {
     bnqBridge("routeStack", { canBack: true });
   }
-  function showLoading() {
-    bnqBridge("showLoading", { text: "加载中" });
-  }
-  function hideLoading() {
-    bnqBridge("hintLoading", {});
+  function onLoading() {
+    if (isLoading) {
+      bnqBridge("hideLoading", {});
+    } else {
+      bnqBridge("showLoading", { text: "加载中..." });
+    }
+    isLoading = !isLoading;
   }
 
   return (
     <div className="test">
       {/* <h1>测试鸿蒙</h1> */}
       <h3>兼容RN住小橙</h3>
-      <div className="test-actions">
-        <button onClick={onTest}>设置标题栏</button>
-        <button onClick={onTest}>设置标题</button>
-        <button onClick={onTest}>用户信息</button>
-        <button onClick={onTest}>返回</button>
-        <button onClick={onTest}>导航</button>
-        <button onClick={onTest}>发消息</button>
-        <button onClick={onTest}>选择照片</button>
-        <button onClick={onTest}>选择文件</button>
-        <button onClick={onTest}>拍照片</button>
-        <button onClick={onTest}>水印照片</button>
-        <button onClick={onTest}>分享</button>
-        <button onClick={onTest}>刷新任务</button>
-        <button onClick={onTest}>录音</button>
-        <button onClick={onTest}>播放</button>
-      </div>
-
-      <h3>鸿蒙测试</h3>
       <div className="test-actions">
         <button onClick={onChoosePhoto}>选择照片</button>
         <button onClick={onChooseFile}>选择文件</button>
@@ -275,8 +263,7 @@ function TestPage() {
         <button onClick={onGetItem}>获取数据</button>
         <button onClick={onRemoveItem}>删除数据</button>
         <button onClick={onRouteStack}>更新路由</button>
-        <button onClick={showLoading}>showLoading</button>
-        <button onClick={hideLoading}>hideLoading</button>
+        <button onClick={onLoading}>加载中</button>
       </div>
 
       <div className="grid-box">

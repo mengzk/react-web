@@ -4,17 +4,23 @@
  * Modify: 2024-11-20
  * Desc: 鸿蒙调用兼容
  */
-import HMApi from "./hmApi";
+import {removeHMEmit, nativeHMEmit} from "./emitter";
+
+let bnqHm = window.bnq || {}; // 与原生通信的对象
+
+window.addEventListener("load", () => {
+  bnqHm = window.bnq || {};
+});
 
 class Tools {
   // 监听原生消息
   static nativeEmit(key, callback) {
-    HMApi.nativeEmit(key, callback);
+    nativeHMEmit(key, callback);
   }
 
   // 移除监听
   static removeEmit(key) {
-    HMApi.removeEmit(key);
+    removeHMEmit(key);
   }
 
   /**
@@ -37,7 +43,7 @@ class Tools {
    * 监听 Native 消息
    */
   static listener(arg, callback) {
-    HMApi.listener(arg);
+    bnqHm.listener(arg);
     Tools.nativeEmit(arg.key, callback);
   }
 
@@ -45,60 +51,60 @@ class Tools {
    * ❗️移除长监听
    */
   static remove(arg) {
-    HMApi.remove(arg);
+    bnqHm.remove(arg);
   }
 
   /**
    * 发送消息
    */
   static emit(arg) {
-    HMApi.emit(arg);
+    bnqHm.emit(arg);
   }
 
   /**
    * 页面跳转
    */
   static navigate(arg) {
-    HMApi.navigate(arg);
+    bnqHm.navigate(arg);
   }
   /**
    * 页面跳转
    */
   static push(arg) {
-    HMApi.push(arg);
+    bnqHm.push(arg);
   }
   /**
    * 页面返回
    */
   static back(arg) {
-    HMApi.back(arg);
+    bnqHm.back(arg);
   }
   /**
    * 页面替换
    */
   static replace(arg) {
-    HMApi.replace(arg);
+    bnqHm.replace(arg);
   }
 
   /**
    * h5路由栈到顶可以关闭H5页面
    */
   static routeStack(canBack) {
-    HMApi.routeStack(canBack);
+    bnqHm.routeStack(canBack);
   }
 
   /**
    * 清除缓存
    */
   static clearCache(arg) {
-    HMApi.clearCache(arg);
+    bnqHm.clearCache(arg);
   }
 
   /**
    * 登录帐号
    */
   static login(tag, callback) {
-    HMApi.login(tag).then((res) => {
+    bnqHm.login(tag).then((res) => {
       callback && callback(res);
     });
   }
@@ -107,14 +113,14 @@ class Tools {
    * 退出登录
    */
   static logout() {
-    HMApi.logout();
+    bnqHm.logout();
   }
 
   /**
    * 获取个人信息
    */
   static userInfo(mode, callback) {
-    const info = HMApi.userInfo(mode);
+    const info = bnqHm.userInfo(mode);
     callback && callback(info);
   }
 
@@ -122,12 +128,12 @@ class Tools {
    * 获取设备信息
    */
   static deviceInfo(_, callback) {
-    const info = HMApi.deviceInfo();
+    const info = bnqHm.deviceInfo();
     callback && callback(info);
   }
 
   static getToken(_, callback) {
-    const info = HMApi.getToken();
+    const info = bnqHm.getToken();
     callback && callback(info);
   }
 
@@ -135,7 +141,7 @@ class Tools {
    * 获取设备屏幕相关信息
    */
   static appInfo(_, callback) {
-    const info = HMApi.appInfo();
+    const info = bnqHm.appInfo();
     callback && callback(info);
   }
 
@@ -192,28 +198,28 @@ class Tools {
       }
     });
 
-    HMApi.share(arg);
+    bnqHm.share(arg);
   }
 
   /**
    * 系统分享
    */
   static sysShare(arg) {
-    HMApi.sysShare(arg);
+    bnqHm.sysShare(arg);
   }
 
   /**
    * 配置标题栏
    */
   static headerConfig(arg) {
-    HMApi.headerConfig(arg);
+    bnqHm.headerConfig(arg);
   }
 
   /**
    * 扫二维码
    */
   static qrcodeScan(_, callback) {
-    HMApi.qrcodeScan().then((res) => {
+    bnqHm.qrcodeScan().then((res) => {
       callback && callback(res);
     });
   }
@@ -222,7 +228,7 @@ class Tools {
    * 打开相机
    */
   static openCamera(arg, callback) {
-    HMApi.openCamera(arg).then((res) => {
+    bnqHm.openCamera(arg).then((res) => {
       let img = (res || {}).data;
       callback && callback(img ? [img] : []);
     });
@@ -232,7 +238,7 @@ class Tools {
    * 打开相册
    */
   static chooseAlbum(arg, callback) {
-    HMApi.chooseAlbum(arg).then((res) => {
+    bnqHm.chooseAlbum(arg).then((res) => {
       let imgs = (res || {}).list || [];
       callback && callback(imgs);
     });
@@ -242,7 +248,7 @@ class Tools {
    * 打开媒体库
    */
   static chooseMedia(arg, callback) {
-    HMApi.chooseMedia(arg).then((res) => {
+    bnqHm.chooseMedia(arg).then((res) => {
       let files = (res || {}).list || [];
       callback && callback(files);
     });
@@ -252,7 +258,7 @@ class Tools {
    * 选择文件
    */
   static chooseFile(arg, callback) {
-    HMApi.chooseFile(arg).then((res) => {
+    bnqHm.chooseFile(arg).then((res) => {
       let files = (res || {}).list || [];
       callback && callback(files);
     });
@@ -262,21 +268,21 @@ class Tools {
    * 预览图片
    */
   static previewAlbum(arg) {
-    HMApi.previewAlbum(arg);
+    bnqHm.previewAlbum(arg);
   }
 
   /**
    * 预览文档
    */
   static previewDocs(arg) {
-    HMApi.previewDocs(arg);
+    bnqHm.previewDocs(arg);
   }
 
   /**
    * 打开文件
    */
   static openFolder(arg, callback) {
-    HMApi.openFolder(arg).then((res) => {
+    bnqHm.openFolder(arg).then((res) => {
       const files = (res || {}).list || [];
       callback && callback(files);
     });
@@ -286,42 +292,42 @@ class Tools {
    * 打开设置
    */
   static openSetting(arg) {
-    HMApi.openSetting(arg);
+    bnqHm.openSetting(arg);
   }
 
   /**
    * 录音
    */
   static record(args) {
-    HMApi.record(args);
+    bnqHm.record(args);
   }
 
   /**
    * 媒体播放
    */
   static mediaPlayer(args) {
-    HMApi.mediaPlayer(args);
+    bnqHm.mediaPlayer(args);
   }
 
   /**
    * 打开app
    */
-  static openApp(arg) {
-    HMApi.openApp(arg);
+  static openLink(arg) {
+    bnqHm.openLink(arg);
   }
 
   /**
    * 发送短信
    */
   static sendSms(arg) {
-    HMApi.sendSms(arg);
+    bnqHm.sendSms(arg);
   }
 
   /**
    * 拨打电话
    */
   static callPhone(arg) {
-    HMApi.callPhone(arg);
+    bnqHm.callPhone(arg);
   }
 
   /**
@@ -329,14 +335,14 @@ class Tools {
    * @param arg
    */
   static liveVideo(arg) {
-    HMApi.liveVideo(arg);
+    bnqHm.liveVideo(arg);
   }
 
   /**
    * 选择地址
    */
   static chooseAddress(_, callback) {
-    HMApi.chooseAddress().then((res) => {
+    bnqHm.chooseAddress().then((res) => {
       callback && callback(res);
     });
   }
@@ -345,7 +351,7 @@ class Tools {
    * 获取当前定位
    */
   static getLocation(geocode, callback) {
-    HMApi.getLocation(geocode).then((res) => {
+    bnqHm.getLocation(geocode).then((res) => {
       callback && callback(res);
     });
   }
@@ -354,34 +360,34 @@ class Tools {
    * 打开地图导航
    */
   static mapNavigation(arg) {
-    HMApi.mapNavigation(arg);
+    bnqHm.mapNavigation(arg);
   }
 
   /**
    * 打开小程序
    */
   static openApplet(arg) {
-    HMApi.openApplet(arg);
+    bnqHm.openApplet(arg);
   }
 
   /**
    * 微信分享
    */
   static wechatShare(arg) {
-    HMApi.wechatShare(arg);
+    bnqHm.wechatShare(arg);
   }
 
   /**
    * 唤起收银台
    */
   static cashier(arg) {
-    HMApi.cashier(arg);
+    bnqHm.cashier(arg);
   }
   /**
    * 检查权限
    */
   static checkPermission(permissions, callback) {
-    HMApi.checkPermission(permissions).then((res) => {
+    bnqHm.checkPermission(permissions).then((res) => {
       callback && callback(res);
     });
   }
@@ -390,7 +396,7 @@ class Tools {
    * 获取权限
    */
   static requestPermission(permissions, callback) {
-    HMApi.requestPermission(permissions).then((res) => {
+    bnqHm.requestPermission(permissions).then((res) => {
       callback && callback(res);
     });
   }
@@ -399,7 +405,7 @@ class Tools {
    * 获取网络状态
    */
   static networkStatus(_, callback) {
-    const state = HMApi.networkStatus();
+    const state = bnqHm.networkStatus();
     callback && callback(state);
   }
 
@@ -407,14 +413,14 @@ class Tools {
    * 保存文件
    */
   static saveFile(params) {
-    HMApi.saveFile(params);
+    bnqHm.saveFile(params);
   }
 
   /**
    * 读取文件
    */
   static readFile(arg, callback) {
-    const file = HMApi.readFile(arg);
+    const file = bnqHm.readFile(arg);
     callback && callback(file);
   }
 
@@ -422,14 +428,14 @@ class Tools {
    * 保存数据
    */
   static setStorage(arg) {
-    HMApi.setStorage(arg);
+    bnqHm.setStorage(arg);
   }
 
   /**
    * 获取数据
    */
   static getStorage(key, callback) {
-    const item = HMApi.getStorage(key);
+    const item = bnqHm.getStorage(key);
     callback && callback(item);
   }
 
@@ -450,7 +456,7 @@ class Tools {
    * 是否是debug模式
    */
   static isDebug(_, callback) {
-    const bug = HMApi.isDebug();
+    const bug = bnqHm.isDebug();
     callback && callback(bug);
   }
 
@@ -458,25 +464,25 @@ class Tools {
    * 显示加载框
    */
   static showLoading(text) {
-    HMApi.showLoading(text);
+    bnqHm.showLoading(text);
   }
   /**
    * 隐藏加载框
    */
-  static hintLoading() {
-    HMApi.hintLoading();
+  static hideLoading() {
+    bnqHm.hideLoading();
   }
   /**
    * 显示toast
    */
   static toast(arg) {
-    HMApi.toast(arg);
+    bnqHm.toast(arg);
   }
   /**
    * 重新加载
    */
   static reload() {
-    HMApi.reload();
+    bnqHm.reload();
   }
 }
 

@@ -16,7 +16,7 @@ const methodMap = {
   customConfig: 'headerConfig',
   openNativeMap: 'mapNavigation',
   QRCodePage: 'qrcodeScan',
-  LinkingOpen: 'openApp',
+  LinkingOpen: 'openLink',
   GetGaodeLocationV2: 'getLocation',
   refreshTaskDetail: 'emit',
   launchMiniProgram: 'openApplet',

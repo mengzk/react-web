@@ -27,6 +27,7 @@ const methodMap = {
   gotoBnqCashier: 'cashier',
   sendMsgToRN: 'invoke',
   deviceInfoV2: 'deviceInfo',
+  getDeviceInfo: 'deviceInfo',
   reqLoginInfoV2: 'userInfo',
   previewFile: 'previewDocs',
   h5AllCache: 'clearStorage',

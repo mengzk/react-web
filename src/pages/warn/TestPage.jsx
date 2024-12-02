@@ -24,27 +24,7 @@ function TestPage() {
   function onTest() {}
 
   function onShare() {
-    // if (window.bnq) {
-    //   window.bnq.share({
-    //     title: "分享",
-    //     data: [
-    //       {
-    //         mold: 1,
-    //         title: "",
-    //         desc: "分享内容",
-    //         url: "https://www.baidu.com",
-    //       },
-    //       {
-    //         mold: 1,
-    //         title: "",
-    //         desc: "分享内容",
-    //         url: "https://www.baidu.com",
-    //       },
-    //     ],
-    //   });
-    // }
-
-    bnqBridge("share", {
+    rnToolV2.sendMsgToRN("share", {
       copyUrl: "https://bing.com", // 分享的链接，默认使用当前网页地址
       miniProgramId: "wxa75c0de48ec3635d", //小程序原始ID 非必填需要分享小程序需要传递
       miniProgramPageUrl: "/pages/home/home", //小程序页面 非必填需要分享小程序需要传递
@@ -69,7 +49,7 @@ function TestPage() {
   function onChooseFile() {
     rnToolV2.sendMsgToRN("selectFile", {}, (res) => {
       console.log("chooseFile res ", res);
-      setFiles([...files, res]);
+      setFiles(files.concat(res));
     });
   }
   function onShare2() {
@@ -103,8 +83,16 @@ function TestPage() {
       // setImgs([...imgs, res]);
     });
   }
+  function onCamera2() {
+    rnToolV2.sendMsgToRN("openAppCamera2", {mode: 1}, (res) => {
+      console.log("camera res ", res);
+      // setImgs([...imgs, res]);
+    });
+  }
   function onPreviewDocs() {
-    bnqBridge("previewFile", { img: imgs[0] });
+    // https://decorationhome.oss-cn-hangzhou.aliyuncs.com/prod/images/bigscreen/pdf/2023Yearbook.pdf
+    // https://decorationhome.oss-cn-hangzhou.aliyuncs.com/files/txt/%E5%90%88%E5%90%8C%E7%AD%BE%E7%BA%A6.txt
+    bnqBridge("previewFile", { data: ['https://dhstatic.bthome.com/prod/images/bigscreen/pdf/2023Yearbook.pdf'] });
   }
   function setHeader() {
     const num = Math.round(Math.random() * 100);
@@ -122,7 +110,12 @@ function TestPage() {
     });
   }
   function onRecord() {
-    bnqBridge("record", {}, (res) => {
+    bnqBridge("record", {action: 'start'}, (res) => {
+      console.log("record res ", res);
+    });
+  }
+  function onRecord2() {
+    bnqBridge("record", {action: 'stop'}, (res) => {
       console.log("record res ", res);
     });
   }
@@ -148,7 +141,7 @@ function TestPage() {
     rnToolV2.sendMsgToRN("telMobile", { mobile: "10086" });
   }
   function onOpenApp() {
-    rnToolV2.sendMsgToRN("LinkingOpen", { url: "com.bnq.crm" });
+    rnToolV2.sendMsgToRN("LinkingOpen", { link: "link://dev.test01.com" });
   }
   function onSetting() {
     rnToolV2.sendMsgToRN("pushToAppSetting", {});
@@ -228,7 +221,8 @@ function TestPage() {
       <div className="test-actions">
         <button onClick={onChoosePhoto}>选择照片</button>
         <button onClick={onChooseFile}>选择文件</button>
-        <button onClick={onCamera}>拍照/视频</button>
+        <button onClick={onCamera}>拍照</button>
+        <button onClick={onCamera2}>视频</button>
         <button onClick={onShare}>分享</button>
         <button onClick={onShare2}>系统分享</button>
         <button onClick={onNav}>导航</button>
@@ -237,7 +231,8 @@ function TestPage() {
         <button onClick={setHeader}>标题栏</button>
         <button onClick={onClear}>清除缓存</button>
         <button onClick={onDebug}>是否Debug</button>
-        <button onClick={onRecord}>录音</button>
+        <button onClick={onRecord}>开始录音</button>
+        <button onClick={onRecord2}>停止录音</button>
         <button onClick={onMediaPlay}>媒体播放</button>
         <button onClick={getLocation}>获取定位</button>
         <button onClick={onChooseAddress}>选择位置</button>

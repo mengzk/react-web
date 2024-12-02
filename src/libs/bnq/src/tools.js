@@ -164,17 +164,23 @@ class Tools {
     //     mode: "mini",
     //     version: 2,
 
-    const list = []; // 新渠道: 1链接；20图片；30微信；40小程序
+    const list = []; // 10链接；20图片；30微信；40小程序；50企业微信；60飞书
 
     (arg.shareChannel || [1]).forEach((channel) => {
-      // 类型 1,微信 2,朋友圈  4,qq  5,Qzone 100,复制链接 101,海报分享
+      // 类型 1微信 2朋友圈  4qq  5Qzone 100复制链接 101海报分享
       switch (channel) {
         case 1:
           list.push({
             channel: 30,
+            env: arg.version,
             url: arg.copyUrl,
             title: arg.title,
             desc: arg.description,
+            openId: arg.miniProgramId,
+            appId: arg.appId,
+            image: arg.img,
+            path: arg.path,
+            path: arg.miniProgramPageUrl,
           });
           break;
         case 2:
@@ -187,10 +193,8 @@ class Tools {
           break;
         case 100:
           list.push({
-            channel: 1,
-            url: arg.copyUrl,
-            title: arg.title,
-            desc: arg.description,
+            channel: 10,
+            link: arg.copyUrl
           });
           break;
         default:
@@ -198,7 +202,7 @@ class Tools {
       }
     });
 
-    bnqHm.share(arg);
+    bnqHm.share({title: arg.title, data: list});
   }
 
   /**
@@ -298,8 +302,10 @@ class Tools {
   /**
    * 录音
    */
-  static record(args) {
-    bnqHm.record(args);
+  static record(args, callback) {
+    bnqHm.record(args).then(res => {
+      callback && callback(res);
+    });
   }
 
   /**

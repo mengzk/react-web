@@ -7,7 +7,6 @@
 
 import Bus from "./bus";
 
-let isHm = window.bnq; // 是否是鸿蒙系统
 let isIos = false; // 是否是ios系统
 let isMobile = true; // 是否是移动端
 let lastKey = "";
@@ -29,8 +28,9 @@ function getPlatform() {
 export function iosDevice() {
   return isIos;
 }
+// 是否是鸿蒙系统
 export function hmDevice() {
-  return isHm;
+  return window.bnq != null && window.bnq != undefined;
 }
 export function mobileOS() {
   return isMobile;
@@ -48,16 +48,26 @@ function handlerMsg(e) {
     if (hmH5Port != null) {
       hmH5Port.onmessage = (event) => {
         // 2. 接收ets侧发送过来的消息。
-        const result = event.data;
+        let result = event.data;
         console.log("hm message ----->", result);
+        try {
+          result = JSON.parse(result);
+        } catch (err) {
+          console.log("hm parse err ----->", err);
+        }
         // 3. 处理消息 -移除废弃的监听
-        hmNativeEmit = hmNativeEmit.filter((item) => !item.callback);
-        // 4. 通知监听
-        hmNativeEmit.forEach((item) => {
-          if (item.key === result.key) {
-            item.callback(result.data);
-          }
-        });
+        // hmNativeEmit = hmNativeEmit.filter((item) => item.callback != null);
+        try {
+          // 4. 通知监听
+          hmNativeEmit.forEach((item) => {
+            if (item.key === result.key) {
+              item.callback(result.data);
+            }
+          });
+        } catch (err) {
+          // hmNativeEmit = hmNativeEmit.filter((item) => item.callback != null);
+          console.log("hm message error ----->", result.key, err);
+        }
       };
     }
   }
@@ -103,9 +113,13 @@ export function postMessage(msg) {
           window.ReactNativeWebView.postMessage(JSON.stringify(msg));
         } else {
           if (isIos) {
-            window.postMessage(JSON.stringify(msg), "*");
+            if (window.postMessage) {
+              window.postMessage(JSON.stringify(msg), "*");
+            }
           } else {
-            document.postMessage(JSON.stringify(msg), "*");
+            if (document != null && document.postMessage) {
+              document.postMessage(JSON.stringify(msg), "*");
+            }
           }
         }
         console.log(`---> postMessage rn:${isRn}, msg:`, msg);
@@ -139,12 +153,10 @@ function handlerEmit(event) {
 
 // 监听原生消息
 function initTools() {
-  isHm = window.bnq;
-
   Bus.clear();
   getPlatform();
 
-  if (isHm) {
+  if (window.bnq) {
     return;
   }
 

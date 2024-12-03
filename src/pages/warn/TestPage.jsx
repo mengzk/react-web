@@ -113,8 +113,21 @@ function TestPage() {
     bnqBridge("record", {action: 'start'}, (res) => {
       console.log("record res ", res);
     });
+    rnToolV2.postMessageToRN('audioRecorder-listener', 'audioRecorder', { action: 'start' }, (res) => {
+      console.log(res);
+    });
   }
   function onRecord2() {
+    bnqBridge("record", {action: 'pause'}, (res) => {
+      console.log("record res ", res);
+    });
+  }
+  function onRecord3() {
+    bnqBridge("record", {action: 'resume'}, (res) => {
+      console.log("record res ", res);
+    });
+  }
+  function onRecord4() {
     bnqBridge("record", {action: 'stop'}, (res) => {
       console.log("record res ", res);
     });
@@ -232,7 +245,9 @@ function TestPage() {
         <button onClick={onClear}>清除缓存</button>
         <button onClick={onDebug}>是否Debug</button>
         <button onClick={onRecord}>开始录音</button>
-        <button onClick={onRecord2}>停止录音</button>
+        <button onClick={onRecord2}>暂停录音</button>
+        <button onClick={onRecord3}>恢复录音</button>
+        <button onClick={onRecord4}>停止录音</button>
         <button onClick={onMediaPlay}>媒体播放</button>
         <button onClick={getLocation}>获取定位</button>
         <button onClick={onChooseAddress}>选择位置</button>

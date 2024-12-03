@@ -102,7 +102,7 @@ class RNTool2 {
   static postMessageToRN(requestId, key, data, callback) {
     const hm = hmDevice();
     if (hm) {
-      Tools.listener({ key: eventType, data }, callback);
+      Tools.listener({ key, data }, callback);
     } else {
       RNTool2._postMessageToRN(requestId, key, data, callback);
     }

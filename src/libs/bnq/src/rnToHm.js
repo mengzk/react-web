@@ -9,7 +9,7 @@ const methodMap = {
   openAppCamera2: "openCamera",
   openAppAlbum: "chooseAlbum",
   openAppAlbum2: "chooseAlbum",
-  watermarkImg: "pictureEdit",
+  watermarkImg: "watermarkPhoto",
   openCameraVideo: "chooseMedia",
   isDeveloperMode: 'isDebug',
   setTitle: 'headerConfig',
@@ -34,6 +34,12 @@ const methodMap = {
   h5SaveByKey: 'setStorage',
   h5GetByKey: 'getStorage',
   h5DeleteByKey: 'removeStorage',
+  reloadWebpage: 'reload',
+  saveImage: 'downloadFile',
+  uploadFiles: 'uploadFile',
+  h5EmitToRN: 'emit',
+  onPlayVideo: 'previewAlbum',
+  onSendSms: 'sendSms'
 };
 
 export { methodMap };

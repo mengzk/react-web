@@ -4,7 +4,7 @@
  * Modify: 2024-11-20
  * Desc: 鸿蒙调用兼容
  */
-import {removeHMEmit, nativeHMEmit} from "./emitter";
+import { removeHMEmit, nativeHMEmit } from "./emitter";
 
 let bnqHm = window.bnq || {}; // 与原生通信的对象
 
@@ -194,7 +194,7 @@ class Tools {
         case 100:
           list.push({
             channel: 10,
-            link: arg.copyUrl
+            link: arg.copyUrl,
           });
           break;
         default:
@@ -202,7 +202,7 @@ class Tools {
       }
     });
 
-    bnqHm.share({title: arg.title, data: list});
+    bnqHm.share({ title: arg.title, data: list });
   }
 
   /**
@@ -228,6 +228,15 @@ class Tools {
     });
   }
 
+  /**
+   *
+   */
+  static watermarkPhoto(arg, callback) {
+    bnqHm.openCamera({ upload: true, content: [] }).then((res) => {
+      let img = (res || {}).data;
+      callback && callback(img ? [img] : []);
+    });
+  }
   /**
    * 打开相机
    */
@@ -269,7 +278,8 @@ class Tools {
   }
 
   /**
-   * 预览图片
+   * 预览图片/视频
+   * 视频要加上 video: true
    */
   static previewAlbum(arg) {
     bnqHm.previewAlbum(arg);
@@ -303,16 +313,16 @@ class Tools {
    * 录音
    */
   static record(args, callback) {
-    bnqHm.record(args).then(res => {
+    bnqHm.record(args).then((res) => {
       callback && callback(res);
     });
   }
 
   /**
-   * 媒体播放
+   * 声音播放
    */
-  static mediaPlayer(args) {
-    bnqHm.mediaPlayer(args);
+  static audioPlayer(args) {
+    bnqHm.audioPlayer(args);
   }
 
   /**
@@ -416,6 +426,24 @@ class Tools {
   }
 
   /**
+   * 上传文件
+   */
+  static uploadFile(params, callback) {
+    bnqHm.uploadFile(params).then((res) => {
+      callback && callback(res);
+    });
+  }
+
+  /**
+   * 下载文件
+   */
+  static downloadFile(params, callback) {
+    bnqHm.downloadFile(params).then((res) => {
+      callback && callback(res);
+    });
+  }
+
+  /**
    * 保存文件
    */
   static saveFile(params) {
@@ -445,18 +473,18 @@ class Tools {
     callback && callback(item);
   }
 
-    /**
+  /**
    * 删除数据
    */
-    static removeStorage(key) {
-      bnqHm.removeItem(key);
-    }
-    /**
-     * 删除数据
-     */
-    static clearStorage() {
-      bnqHm.clearStorage();
-    }
+  static removeStorage(key) {
+    bnqHm.removeItem(key);
+  }
+  /**
+   * 删除数据
+   */
+  static clearStorage() {
+    bnqHm.clearStorage();
+  }
 
   /**
    * 是否是debug模式

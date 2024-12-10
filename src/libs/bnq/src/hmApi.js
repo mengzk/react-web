@@ -191,7 +191,8 @@ class HMApi {
   }
 
   /**
-   * 预览图片
+   * 预览图片/视频
+   * 视频要加上 video: true
    */
   static previewAlbum(arg) {
     bnqHm.previewAlbum(arg);
@@ -228,8 +229,8 @@ class HMApi {
   /**
    * 媒体播放
    */
-  static mediaPlayer(args) {
-    bnqHm.mediaPlayer(args);
+  static audioPlayer(args) {
+    bnqHm.audioPlayer(args);
   }
 
   /**
@@ -321,6 +322,20 @@ class HMApi {
    */
   static networkStatus() {
     return bnqHm.networkStatus();
+  }
+
+  /**
+   * 上传文件
+   */
+  static uploadFile(params) {
+    return bnqHm.uploadFile(params);
+  }
+
+  /**
+   * 下载文件
+   */
+  static downloadFile(params) {
+    return bnqHm.downloadFile(params);
   }
 
   /**

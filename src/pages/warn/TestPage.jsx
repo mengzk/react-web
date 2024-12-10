@@ -78,7 +78,7 @@ function TestPage() {
     });
   }
   function onCamera() {
-    rnToolV2.sendMsgToRN("openAppCamera2", {}, (res) => {
+    rnToolV2.sendMsgToRN("openAppCamera2", {mode: 0}, (res) => {
       console.log("camera res ", res);
       // setImgs([...imgs, res]);
     });
@@ -92,7 +92,12 @@ function TestPage() {
   function onPreviewDocs() {
     // https://decorationhome.oss-cn-hangzhou.aliyuncs.com/prod/images/bigscreen/pdf/2023Yearbook.pdf
     // https://decorationhome.oss-cn-hangzhou.aliyuncs.com/files/txt/%E5%90%88%E5%90%8C%E7%AD%BE%E7%BA%A6.txt
-    bnqBridge("previewFile", { data: ['https://dhstatic.bthome.com/prod/images/bigscreen/pdf/2023Yearbook.pdf'] });
+    // bnqBridge("previewFile", { data: ['https://dhstatic.bthome.com/prod/images/bigscreen/pdf/2023Yearbook.pdf'] });
+    bnqBridge("previewFile", { data: [
+      'https://dhstatic.bthome.com/prod/images/bigscreen/fitment/4dqy_ic1.png',
+      'https://dhstatic.bthome.com/prod/images/bigscreen/fitment/4dqy_ic2.png',
+      'https://dhstatic.bthome.com/prod/images/bigscreen/fitment/4dqy_ic3.png',
+    ] });
   }
   function setHeader() {
     const num = Math.round(Math.random() * 100);
@@ -110,7 +115,7 @@ function TestPage() {
     });
   }
   function onRecord() {
-    bnqBridge("record", {action: 'start'}, (res) => {
+    rnToolV2.sendMsgToRN("record", {action: 'start'}, (res) => {
       console.log("record res ", res);
     });
     rnToolV2.postMessageToRN('audioRecorder-listener', 'audioRecorder', { action: 'start' }, (res) => {
@@ -118,17 +123,27 @@ function TestPage() {
     });
   }
   function onRecord2() {
-    bnqBridge("record", {action: 'pause'}, (res) => {
+    rnToolV2.sendMsgToRN("record", {action: 'pause'}, (res) => {
       console.log("record res ", res);
     });
   }
   function onRecord3() {
-    bnqBridge("record", {action: 'resume'}, (res) => {
+    rnToolV2.sendMsgToRN("record", {action: 'resume'}, (res) => {
       console.log("record res ", res);
     });
   }
   function onRecord4() {
-    bnqBridge("record", {action: 'stop'}, (res) => {
+    rnToolV2.sendMsgToRN("record", {action: 'stop'}, (res) => {
+      console.log("record res ", res);
+    });
+  }
+  function onRecord5() {
+    rnToolV2.sendMsgToRN("record", {action: 'play', url: 'https://bajanju-p.oss-cn-shanghai.aliyuncs.com/c2d602b954ca4fea92f6451ae0cf7814.m4a'}, (res) => {
+      console.log("record res ", res);
+    });
+  }
+  function onRecord6() {
+    rnToolV2.sendMsgToRN("record", {action: 'stopPlay'}, (res) => {
       console.log("record res ", res);
     });
   }
@@ -148,7 +163,7 @@ function TestPage() {
     });
   }
   function onSendSms() {
-    bnqBridge("onSendSms", { phone: "10086", msg: "测试短信" });
+    rnToolV2.sendMsgToRN("onSendSms", { mobile: "10086", msg: "测试短信" });
   }
   function onCallPhone() {
     rnToolV2.sendMsgToRN("telMobile", { mobile: "10086" });
@@ -195,34 +210,48 @@ function TestPage() {
     rnToolV2.emit("refreshTaskDetail", { key: "refreshTaskDetail" });
   }
   function onPreview() {
-    bnqBridge("previewAlbum", { img: imgs[0] });
+    rnToolV2.sendMsgToRN("onPlayVideo", { video: true, url: 'https://dhstatic.bthome.com/files/video/video.mp4' });
+  }
+  function onDownFile() {
+    const url = "https://dhstatic.bthome.com/prod/images/bigscreen/fitment/4dqy_ic1.png";
+    rnToolV2.sendMsgToRN("downloadFile", { url }, (res) => {
+      console.log("downloadFile res ", res);
+    });
+  }
+  function onUploadFile() {
+    rnToolV2.sendMsgToRN("uploadFile", ['/data/storage/el2/base/haps/entry/cache/4dqy_ic1.png'], (res) => {
+      console.log("uploadFile res ", res);
+    });
   }
   function onSaveFile() {
-    bnqBridge("saveFile", { img: imgs[0] });
+    rnToolV2.sendMsgToRN("saveFile", { url: imgs[0], path: '' });
   }
   function onReadFile() {
-    bnqBridge("readFile", { img: imgs[0] });
+    rnToolV2.sendMsgToRN("readFile", { path: '' });
   }
   function onDelFile() {
-    bnqBridge("deleteFile", { img: imgs[0] });
+    rnToolV2.sendMsgToRN("deleteFile", { path: '' });
   }
   function onSetItem() {
-    bnqBridge("setItem", { key: "test", value: "test" });
+    rnToolV2.sendMsgToRN("setItem", { key: "test", value: "test" });
   }
   function onGetItem() {
-    bnqBridge("getItem", { key: "test" });
+    rnToolV2.sendMsgToRN("getItem", { key: "test" });
   }
   function onRemoveItem() {
-    bnqBridge("removeItem", { key: "test" });
+    rnToolV2.sendMsgToRN("removeItem", { key: "test" });
+  }
+  function onClearItem() {
+    rnToolV2.sendMsgToRN("clearItem", { });
   }
   function onRouteStack() {
-    bnqBridge("routeStack", { canBack: true });
+    rnToolV2.sendMsgToRN("routeStack", { canBack: true });
   }
   function onLoading() {
     if (isLoading) {
-      bnqBridge("hideLoading", {});
+      rnToolV2.sendMsgToRN("hideLoading", {});
     } else {
-      bnqBridge("showLoading", { text: "加载中..." });
+      rnToolV2.sendMsgToRN("showLoading", { text: "加载中..." });
     }
     isLoading = !isLoading;
   }
@@ -248,7 +277,8 @@ function TestPage() {
         <button onClick={onRecord2}>暂停录音</button>
         <button onClick={onRecord3}>恢复录音</button>
         <button onClick={onRecord4}>停止录音</button>
-        <button onClick={onMediaPlay}>媒体播放</button>
+        <button onClick={onRecord5}>播放录音</button>
+        <button onClick={onRecord6}>停止播放</button>
         <button onClick={getLocation}>获取定位</button>
         <button onClick={onChooseAddress}>选择位置</button>
         <button onClick={onSendSms}>发送短信</button>
@@ -264,14 +294,17 @@ function TestPage() {
         <button onClick={onRemove}>移除消息</button>
         <button onClick={onAddEmit}>添加消息</button>
         <button onClick={onEmit}>发送消息</button>
-        <button onClick={onPreview}>预览图片</button>
-        <button onClick={onPreviewDocs}>预览文档</button>
+        <button onClick={onPreview}>播放视频</button>
+        {/* <button onClick={onPreviewDocs}>预览文档</button> */}
+        <button onClick={onUploadFile}>上传文件</button>
+        <button onClick={onDownFile}>下载文件</button>
         <button onClick={onSaveFile}>保存文件</button>
         <button onClick={onReadFile}>读取文件</button>
         <button onClick={onDelFile}>删除文件</button>
         <button onClick={onSetItem}>保存数据</button>
         <button onClick={onGetItem}>获取数据</button>
         <button onClick={onRemoveItem}>删除数据</button>
+        <button onClick={onClearItem}>清除数据</button>
         <button onClick={onRouteStack}>更新路由</button>
         <button onClick={onLoading}>加载中</button>
       </div>

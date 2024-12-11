@@ -184,10 +184,10 @@ class HMApi {
   }
 
   /**
-   * 选择文件
+   * 打开文件
    */
-  static chooseFile(arg) {
-    return bnqHm.chooseFile(arg);
+  static chooseDocs(arg) {
+    return bnqHm.chooseDocs(arg);
   }
 
   /**
@@ -203,13 +203,6 @@ class HMApi {
    */
   static previewDocs(arg) {
     bnqHm.previewDocs(arg);
-  }
-
-  /**
-   * 打开文件
-   */
-  static openFolder(arg) {
-    return bnqHm.openFolder(arg);
   }
 
   /**
@@ -239,7 +232,13 @@ class HMApi {
   static openLink(arg) {
     bnqHm.openLink(arg);
   }
-
+  /**
+   * 能否打开链接
+   */
+  static canOpenLink(arg, callback) {
+    const canOpen = bnqHm.canOpenLink(arg);
+    callback && callback(canOpen);
+  }
   /**
    * 发送短信
    */

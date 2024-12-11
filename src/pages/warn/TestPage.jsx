@@ -175,8 +175,8 @@ function TestPage() {
     rnToolV2.sendMsgToRN("pushToAppSetting", {});
   }
   function onOpenFolder() {
-    rnToolV2.sendMsgToRN("selectFile", {}, (res) => {
-      console.log("openFolder res ", res);
+    rnToolV2.sendMsgToRN("chooseDocs", {}, (res) => {
+      console.log("chooseDocs res ", res);
     });
   }
   function onAppInfo() {

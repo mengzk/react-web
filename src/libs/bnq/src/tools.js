@@ -216,6 +216,9 @@ class Tools {
    * 配置标题栏
    */
   static headerConfig(arg) {
+    if(arg.hideNav) {
+      arg.hide = arg.hideNav;
+    }
     bnqHm.headerConfig(arg);
   }
 
@@ -241,6 +244,9 @@ class Tools {
    * 打开相机
    */
   static openCamera(arg, callback) {
+    if(arg.mediaType) {
+      arg.mode = arg.mediaType == "video" ? 1 : 0;
+    }
     bnqHm.openCamera(arg).then((res) => {
       let img = (res || {}).data;
       callback && callback(img ? [img] : []);
@@ -270,8 +276,9 @@ class Tools {
   /**
    * 选择文件
    */
-  static chooseFile(arg, callback) {
-    bnqHm.chooseFile(arg).then((res) => {
+  static chooseDocs(arg, callback) {
+    // arg.fileTypes = ['docx', 'ptx', 'xlsx', 'pdf'];
+    bnqHm.chooseDocs(arg).then((res) => {
       let files = (res || {}).list || [];
       callback && callback(files);
     });
@@ -290,16 +297,6 @@ class Tools {
    */
   static previewDocs(arg) {
     bnqHm.previewDocs(arg);
-  }
-
-  /**
-   * 打开文件
-   */
-  static openFolder(arg, callback) {
-    bnqHm.openFolder(arg).then((res) => {
-      const files = (res || {}).list || [];
-      callback && callback(files);
-    });
   }
 
   /**
@@ -332,6 +329,13 @@ class Tools {
     bnqHm.openLink(arg);
   }
 
+  /**
+   * 能否打开链接
+   */
+  static canOpenLink(arg, callback) {
+    const canOpen = bnqHm.canOpenLink(arg);
+    callback && callback(canOpen);
+  }
   /**
    * 发送短信
    */

@@ -1,13 +1,13 @@
 /**
  * Author: Meng
- * Date: 2022-09-01
- * Modify: 2022-09-01
+ * Date: 2024-07-12
+ * Modify: 2024-07-12
  * Desc: 工具类
  */
 
 const archiver = require('archiver');
-const path = require('path');
-const fs = require('fs');
+const path = require('node:path');
+const fs = require('node:fs');
 
 function formatNum(num) {
   return `${num > 9 ? '' : 0}${num}`;
@@ -27,7 +27,7 @@ function curDate() {
 }
 
 // 更新版本号
-function updateVersion(version = '') {
+function generateVersion(version = '') {
   const versions = version.split('.');
   const size = versions.length - 1;
   let carryNum = 1;
@@ -103,18 +103,32 @@ function generateZip(dir, fileName, version = '0.0.1', env = 'prod') {
 }
 
 // 写入版本信息
-function writeVersion(manifestDir, env, fileName, version) {
-  const manifest = require(manifestDir);
+function writeVersion(fileDir, env, version) {
+  const manifest = require(fileDir);
 
   manifest.env = env;
-  manifest.name = fileName;
+  // manifest.name = fileName;
   manifest.date = curDate();
   manifest.version = version;
   manifest[env] = version;
 
-  fs.writeFileSync(manifestDir, JSON.stringify(manifest, null, 2), 'utf-8');
-  const manifest2 = manifestDir.replace('/public/', '/build/');
-  fs.writeFileSync(manifest2, JSON.stringify(manifest, null, 2), 'utf-8');
+  fs.writeFileSync(fileDir, JSON.stringify(manifest, null, 2), 'utf-8');
+}
+
+// 写入版本信息
+function updateVersion(fileDir, env, version) {
+  const manifest = require(fileDir);
+
+  manifest.env = env;
+  // manifest.name = fileName;
+  manifest.date = curDate();
+  manifest.version = version;
+  manifest[env] = version;
+
+  fs.writeFileSync(fileDir, JSON.stringify(manifest, null, 2), 'utf-8');
+
+  // const manifest2 = fileDir.replace('/public/', '/dist/');
+  // fs.writeFileSync(manifest2, JSON.stringify(manifest, null, 2), 'utf-8');
 }
 
 function importToCommonJs(file = '') {
@@ -123,6 +137,8 @@ function importToCommonJs(file = '') {
 
 module.exports = {
   updateVersion,
+  writeVersion,
   generateZip,
+  generateVersion,
   importToCommonJs,
 };

@@ -14,7 +14,9 @@ const path = require("node:path");
 const { importToCommonJs } = require("./utils");
 const inquirerES = importToCommonJs("inquirer");
 
-// const appInfo = require("../package.json");
+const manifestDir = path.resolve(__dirname, "../public/manifest.json");
+const manifest = require("../public/manifest.json"); // 项目包配置
+// const packageInfo = require("../package.json");
 // const envInfo = dotenv.parse(fs.readFileSync(".env"));
 
 const choices = ["dev", "test", "uat", "prod"];
@@ -43,23 +45,28 @@ function deployApp(env) {
   let tagEnv = {};
   switch (env) {
     case "dev":
+      tagEnv = dotenv.parse(fs.readFileSync(".env.dev"));
     case "test":
     case "uat":
-      tagEnv = dotenv.parse(fs.readFileSync(`.env.${env}`));
+      tagEnv = dotenv.parse(fs.readFileSync(".env.test"));
       break;
     default:
       tagEnv = dotenv.parse(fs.readFileSync(".env.prod"));
       break;
   }
   const envKeys = Object.keys(tagEnv)
-    .map((key) => `${key}=${tagEnv[key]}`)
+    .map((key) => `${key}='${tagEnv[key]}'`)
     .join("\n");
 
-  console.log("<------ env setting:", tagEnv);
+  console.log("------> env setting:", tagEnv);
 
   // 写入环境变量
   fs.writeFileSync(".env", envKeys);
 
-  console.log(`<------------------ deploy  ${env}  end ------------------>`);
-  // 开始编译项目 后续操作可以读取写入的环境变量
+  // 写入环境到 manifest.json
+  manifest.env = env;
+  fs.writeFileSync(manifestDir, JSON.stringify(manifest, null, 2));
+
+  console.log(`<------------------ build  ${env}  start ------------------>`);
+  // 开始编译项目
 }

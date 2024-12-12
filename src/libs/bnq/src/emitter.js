@@ -45,6 +45,8 @@ function handlerMsg(e) {
   if (e != null && e.data === "__hmos_port" && e.ports != null) {
     // 1. 保存从应用侧发送过来的端口。
     hmH5Port = e.ports[0];
+    // hmH5Port.postMessage(data); // 通过端口向原生发送消息
+
     if (hmH5Port != null) {
       hmH5Port.onmessage = (event) => {
         // 2. 接收ets侧发送过来的消息。

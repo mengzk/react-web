@@ -19,6 +19,7 @@
     "dayjs": "^1.11.13",
     "mobx": "^6.13.1",
     "mobx-react-lite": "^4.0.7",
+    "pdfjs-dist": "^4.9.155",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",

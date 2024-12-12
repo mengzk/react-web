@@ -8,6 +8,8 @@ import React, { useEffect, useState } from "react";
 import { bnqBridge, rnToolV2 } from "../../libs/bnq/index";
 import "./test.css";
 
+import PDFView from "../../components/pdf";
+
 let isLoading = false;
 function TestPage() {
   const [imgs, setImgs] = useState([]);
@@ -259,6 +261,7 @@ function TestPage() {
   return (
     <div className="test">
       {/* <h1>测试鸿蒙</h1> */}
+      <PDFView url="https://dhstatic.bthome.com/prod/images/bigscreen/pdf/2023Yearbook.pdf"/>
       <h3>兼容RN住小橙</h3>
       <div className="test-actions">
         <button onClick={onChoosePhoto}>选择照片</button>

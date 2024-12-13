@@ -11,8 +11,11 @@ import * as PDFWorker from "pdfjs-dist/legacy/build/pdf.worker";
 import { canvasScale, getPageList } from "./util";
 import "./index.css";
 
-let looper = true; //
-let scrollTimeout = 0; //
+const loopSize = 2; //
+let isLoop = true; //
+let lastScrollY = 0; //
+let loopTimer = 0; //
+let scrollTimer = 0; //
 let rendList = []; //
 
 function PDFView(props) {
@@ -59,59 +62,72 @@ function PDFView(props) {
   function scrollListener(loadRes) {
     if (pdfRef.current) {
       pdfRef.current.addEventListener("scroll", (e) => {
-        looper = false;
-        if (scrollTimeout) {
-          clearTimeout(scrollTimeout);
+        isLoop = false;
+        if(loopTimer) {
+          clearTimeout(loopTimer);
+          loopTimer = 0;
         }
-        scrollTimeout = setTimeout(() => {
-          clearTimeout(scrollTimeout);
+        if (scrollTimer) {
+          clearTimeout(scrollTimer);
+          scrollTimer = 0;
+        }
+        scrollTimer = setTimeout(() => {
+          clearTimeout(scrollTimer);
           onScrollEnd(loadRes, e);
-        }, 200);
+        }, 300);
       });
     }
   }
 
   async function onScrollEnd(loadRes, e) {
-    const { scrollTop, scrollHeight,  } = e.target;
+    const { scrollTop, scrollHeight } = e.target;
     let total = pageNum.current;
     const pageHeight = scrollHeight / total;
-    let num3 = 1;
+    let isUp = scrollTop < lastScrollY;
+    let position = 1;
     if (scrollTop > pageHeight) {
-      num3 = Math.ceil(scrollTop / pageHeight) + 1;
+      position = Math.ceil(scrollTop / pageHeight) + 1;
     }
-    // console.log("---> scrollTop:",scrollHeight, scrollTop, pageHeight, num3);
-    if (num3 > 0 && num3 < total && num3 != curNum) {
-      setCurNum(num3);
-
-      rendList = getPageList(num3, 2);
+    // console.log("---> scrollTop:",scrollHeight, scrollTop, pageHeight, position);
+    if (position > 0 && position < total && position != curNum) {
+      setCurNum(position);
+      rendList = getPageList(position, loopSize);
       await renderDocs(loadRes, 0, rendList);
-      looper = true;
-      loopRender(loadRes, num3+2);
+      isLoop = true;
+      let nextIdx = position + ((loopSize+1) * (isUp ? -1 : 1));
+      loopRender(loadRes, nextIdx, isUp);
     }
   }
 
-  function loopRender(loadRes, num) {
-    if(looper) {
-      const loads = renderedList.current;
-      let list = pageList.current.filter(e => !loads.includes(e));
-      // console.log("---> loopRender:", list, loads);
-      if(list.length > 0) {
-        if(list.length > 3) {
-          // 处理加载优先级
-          const idx = list.indexOf(num); // 当前页
-          if(num > list[0] && idx > 0) {
-            list = list.slice(idx, idx+3);
-          }else {
-            list = list.slice(0, 3);
-          }
-        }
-        renderDocs(loadRes, 0, list).finally(() => {
-          const timer = setTimeout(() => {
-            clearTimeout(timer);
-            loopRender(loadRes, num + 3);
-          }, 6000);
-        });
+  function loopRender(loadRes, num, order) {
+    if (isLoop) {
+      if(loopTimer) {
+        clearTimeout(loopTimer);
       }
+      loopTimer = setTimeout(() => {
+        clearTimeout(loopTimer);
+        console.log("---> loopRender:", num);
+        const loads = renderedList.current;
+        let idx = loads.indexOf(num);
+        let list = pageList.current.filter((e) => !loads.includes(e));
+        if (list.length > 0) {
+          if (list.length > 3) {
+            // 处理加载优先级
+            idx = list.indexOf(num); // 当前页位置
+            if (num > list[0] && idx > 0) {
+              list = list.slice(idx, idx + 3);
+            } else {
+              list = list.slice(0, 3);
+            }
+          }
+          // console.log("---> loopRender list:", idx, list);
+          let nextIdx = order ? list[0] : list[list.length - 1];
+          nextIdx += (order ? -1 : 1);
+          renderDocs(loadRes, 0, list).finally(() => {
+            loopRender(loadRes, nextIdx, order);
+          });
+        }
+      }, 5000);
     }
   }
 
@@ -119,7 +135,7 @@ function PDFView(props) {
     await renderPage(loadRes, list[index]);
     if (index < list.length - 1) {
       renderDocs(loadRes, index + 1, list);
-    }else {
+    } else {
       return;
     }
   }
@@ -131,7 +147,7 @@ function PDFView(props) {
         console.log("---> page more than:", num);
       } else {
         // console.log("------> renderPage:", num);
-        if(renderedList.current.includes(num)) {
+        if (renderedList.current.includes(num)) {
           return;
         }
         const page = await loadRes.getPage(num);
@@ -142,7 +158,7 @@ function PDFView(props) {
         if (canvasDiv) {
           const context = canvasScale(canvasDiv, viewport);
           const renderContext = { canvasContext: context, viewport: viewport };
-          
+
           renderedList.current.push(num);
           setStatue(Date.now());
           await page.render(renderContext).promise;
@@ -171,7 +187,7 @@ function PDFView(props) {
     return (
       <div key={num} className="v-pdf-page" id={`pdf-page-${num}`}>
         <canvas id={`pdf-canvas-${num}`}></canvas>
-        {loaded ? <></>:<div className="v-pdf-page-load">加载中...</div>}
+        {loaded ? <></> : <div className="v-pdf-page-load">加载中...</div>}
       </div>
     );
   }
@@ -180,7 +196,7 @@ function PDFView(props) {
     <div ref={pdfRef} className="v-pdf-view">
       {pageList.current.map(pageView)}
       {inited ? <></> : <div className="v-pdf-loading">加载中...</div>}
-      {statue == 1 ? <div className="v-pdf-empty">加载失败！</div>:<></>}
+      {statue == 1 ? <div className="v-pdf-empty">加载失败！</div> : <></>}
       {/* <div className="v-pdf-page-num">
         {curNum}/{pageNum.current}
       </div> */}

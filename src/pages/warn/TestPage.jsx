@@ -72,7 +72,8 @@ function TestPage() {
     );
   }
   function onToast() {
-    bnqBridge("toast", { text: "提示信息" });
+    window.postMessage(JSON.stringify({ type: "toast", data: "提示信息" }));
+    rnToolV2.sendMsgToRN("toast", { msg: "提示信息" });
   }
   function onScan() {
     rnToolV2.push("QRCodePage", {}, (res) => {
@@ -260,8 +261,7 @@ function TestPage() {
 
   return (
     <div className="test">
-      {/* <h1>测试鸿蒙</h1> */}
-      <PDFView url="https://dhstatic.bthome.com/prod/images/bigscreen/pdf/2023Yearbook.pdf"/>
+      {/* <PDFView url="https://dhstatic.bthome.com/prod/images/bigscreen/pdf/2023Yearbook.pdf"/> */}
       <h3>兼容RN住小橙</h3>
       <div className="test-actions">
         <button onClick={onChoosePhoto}>选择照片</button>

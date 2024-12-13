@@ -63,7 +63,7 @@ function PDFView(props) {
     if (pdfRef.current) {
       pdfRef.current.addEventListener("scroll", (e) => {
         isLoop = false;
-        if(loopTimer) {
+        if (loopTimer) {
           clearTimeout(loopTimer);
           loopTimer = 0;
         }
@@ -94,14 +94,14 @@ function PDFView(props) {
       rendList = getPageList(position, loopSize);
       await renderDocs(loadRes, 0, rendList);
       isLoop = true;
-      let nextIdx = position + ((loopSize+1) * (isUp ? -1 : 1));
+      let nextIdx = position + (loopSize + 1) * (isUp ? -1 : 1);
       loopRender(loadRes, nextIdx, isUp);
     }
   }
 
   function loopRender(loadRes, num, order) {
     if (isLoop) {
-      if(loopTimer) {
+      if (loopTimer) {
         clearTimeout(loopTimer);
       }
       loopTimer = setTimeout(() => {
@@ -122,7 +122,7 @@ function PDFView(props) {
           }
           // console.log("---> loopRender list:", idx, list);
           let nextIdx = order ? list[0] : list[list.length - 1];
-          nextIdx += (order ? -1 : 1);
+          nextIdx += order ? -1 : 1;
           renderDocs(loadRes, 0, list).finally(() => {
             loopRender(loadRes, nextIdx, order);
           });
@@ -182,12 +182,48 @@ function PDFView(props) {
     return;
   }
 
+  function loadView() {
+    if (inited) {
+      return <></>;
+    }
+    if (props.loadView) {
+      return props.loadView();
+    }
+    return <div className="v-pdf-loading">加载中...</div>;
+  }
+
+  function errView() {
+    if (statue === 1) {
+      if (props.errView) {
+        return props.errView();
+      }
+      return <div className="v-pdf-empty">加载失败！</div>;
+    } else if (statue === 2) {
+      if (props.emptyView) {
+        return props.emptyView();
+      }
+      return <div className="v-pdf-empty">暂无资料</div>;
+    } else {
+      return <></>;
+    }
+  }
+
+  function pageLoadView(show) {
+    if (show) {
+      return <></>;
+    }
+    if (props.pageLoadView) {
+      return props.pageLoadView();
+    }
+    return <div className="v-pdf-page-load">加载中...</div>;
+  }
+
   function pageView(num) {
     const loaded = renderedList.current.includes(num);
     return (
       <div key={num} className="v-pdf-page" id={`pdf-page-${num}`}>
         <canvas id={`pdf-canvas-${num}`}></canvas>
-        {loaded ? <></> : <div className="v-pdf-page-load">加载中...</div>}
+        {pageLoadView(loaded)}
       </div>
     );
   }
@@ -195,11 +231,8 @@ function PDFView(props) {
   return (
     <div ref={pdfRef} className="v-pdf-view">
       {pageList.current.map(pageView)}
-      {inited ? <></> : <div className="v-pdf-loading">加载中...</div>}
-      {statue == 1 ? <div className="v-pdf-empty">加载失败！</div> : <></>}
-      {/* <div className="v-pdf-page-num">
-        {curNum}/{pageNum.current}
-      </div> */}
+      {loadView()}
+      {errView()}
     </div>
   );
 }

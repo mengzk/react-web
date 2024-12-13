@@ -9,6 +9,8 @@ const archiver = require('archiver');
 const path = require('node:path');
 const fs = require('node:fs');
 
+const outputDir = path.resolve(__dirname, "../output"); // 导出路径
+
 function formatNum(num) {
   return `${num > 9 ? '' : 0}${num}`;
 }
@@ -68,7 +70,6 @@ function generateZip(dir, fileName, version = '0.0.1', env = 'prod') {
     console.log(files);
 
     // 导出路径
-    const outputDir = path.resolve(__dirname, '../output');
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
@@ -131,6 +132,22 @@ function updateVersion(fileDir, env, version) {
   // fs.writeFileSync(manifest2, JSON.stringify(manifest, null, 2), 'utf-8');
 }
 
+function deleteOuputFolder() {
+  let files = [];
+  if (fs.existsSync(outputDir)) {
+    files = fs.readdirSync(outputDir);
+    files.forEach(file => {
+      const curPath = `${outputDir}/${file}`;
+      if (fs.statSync(curPath).isDirectory()) {
+        deleteFolder(curPath);
+      } else {
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(outputDir);
+  }
+}
+
 function importToCommonJs(file = '') {
   return import(file);
 }
@@ -141,4 +158,5 @@ module.exports = {
   generateZip,
   generateVersion,
   importToCommonJs,
+  deleteOuputFolder,
 };

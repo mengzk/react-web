@@ -1,7 +1,7 @@
 /**
  * Author: Meng
- * Date: 2024-07-12
- * Modify: 2024-07-12
+ * Date: 2024-07-10
+ * Modify: 2024-07-10
  * Desc: 上传
  */
 
@@ -54,7 +54,22 @@ function uploadFiles(path) {
   });
 }
 
+function requetAS(url, data = {}, method3) {
+  const method = method3 || "GET";
+  return instance
+    .request({ url, data, method })
+    .then((res) => {
+      console.log("---> requetAS res:", res.data);
+      return res.data;
+    })
+    .catch((err) => {
+      console.log("---> requetAS error:", err.code);
+      return null;
+    });
+}
+
 module.exports = {
   uploadFile,
-  uploadFiles
+  uploadFiles,
+  requetAS,
 };

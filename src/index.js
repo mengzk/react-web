@@ -15,6 +15,15 @@ import reportWebVitals from "./reportWebVitals";
 import { systemInit } from "./modules/system/index";
 import store from "./stores/app";
 
+/**
+ * 原生执行函数
+ * webView.evaluateJavascript("javascript:setAppAgent('$user')", ValueCallback<String> { value ->Log.i(TAG, "evaluateJavascript: $value") })
+ */
+function setAppAgent(res) {
+  localStorage.setItem("appAgent3", JSON.stringify(res));
+}
+window.setAppAgent = setAppAgent;
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

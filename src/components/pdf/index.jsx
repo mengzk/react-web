@@ -6,12 +6,13 @@
  */
 import React, { useState, useEffect, useRef } from "react";
 import * as PDFJS from "pdfjs-dist/legacy/build/pdf";
-import * as PDFWorker from "pdfjs-dist/legacy/build/pdf.worker";
+import "pdfjs-dist/legacy/build/pdf.worker";
 
 import { canvasScale, getPageList } from "./util";
 import "./index.css";
 
 const loopSize = 2; //
+let loopPosition = 0; //
 let isLoop = true; //
 let lastScrollY = 0; //
 let loopTimer = 0; //
@@ -45,7 +46,7 @@ function PDFView(props) {
       const timer = setTimeout(() => {
         clearTimeout(timer);
         startRender(loadRes);
-      }, 600);
+      }, 300);
     } catch (err) {
       console.warn("---> init pdf error:", err);
       setStatue(1);
@@ -54,14 +55,16 @@ function PDFView(props) {
 
   async function startRender(loadRes) {
     scrollListener(loadRes);
-    rendList = getPageList(3, 3);
+    rendList = getPageList(3, 2);
     await renderDocs(loadRes, 0, rendList);
-    loopRender(loadRes, 5);
+    loopRender(loadRes, 6, false, 3600);
   }
 
   function scrollListener(loadRes) {
     if (pdfRef.current) {
       pdfRef.current.addEventListener("scroll", (e) => {
+        const { scrollTop } = e.target;
+        if(Math.abs(scrollTop - lastScrollY) < 300){}
         isLoop = false;
         if (loopTimer) {
           clearTimeout(loopTimer);
@@ -88,6 +91,7 @@ function PDFView(props) {
     if (scrollTop > pageHeight) {
       position = Math.ceil(scrollTop / pageHeight) + 1;
     }
+    lastScrollY = scrollTop;
     // console.log("---> scrollTop:",scrollHeight, scrollTop, pageHeight, position);
     if (position > 0 && position < total && position != curNum) {
       setCurNum(position);
@@ -95,15 +99,19 @@ function PDFView(props) {
       await renderDocs(loadRes, 0, rendList);
       isLoop = true;
       let nextIdx = position + (loopSize + 1) * (isUp ? -1 : 1);
-      loopRender(loadRes, nextIdx, isUp);
+      loopRender(loadRes, nextIdx, isUp, 10);
     }
   }
 
-  function loopRender(loadRes, num, order) {
+  function loopRender(loadRes, num, order, time=3600) {
     if (isLoop) {
+      if(loopPosition === num){
+        return;
+      }
       if (loopTimer) {
         clearTimeout(loopTimer);
       }
+      loopPosition = num;
       loopTimer = setTimeout(() => {
         clearTimeout(loopTimer);
         console.log("---> loopRender:", num);
@@ -124,10 +132,10 @@ function PDFView(props) {
           let nextIdx = order ? list[0] : list[list.length - 1];
           nextIdx += order ? -1 : 1;
           renderDocs(loadRes, 0, list).finally(() => {
-            loopRender(loadRes, nextIdx, order);
+            loopRender(loadRes, nextIdx, order, 3600);
           });
         }
-      }, 5000);
+      }, time);
     }
   }
 

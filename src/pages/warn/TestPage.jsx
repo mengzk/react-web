@@ -5,7 +5,7 @@
  * Desc:
  */
 import React, { useEffect, useState } from "react";
-import { bnqBridge, rnToolV2 } from "../../libs/bnq/index";
+import { bnqBridge, rnToolV2, RNTool } from "../../libs/bnq/index";
 import "./test.css";
 
 import PDFView from "../../components/pdf";

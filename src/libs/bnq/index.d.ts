@@ -4,6 +4,7 @@
  * Desc: 调用原生Api
  */
 import HMApi from "./src/hmApi";
+import RNTool from "./src/tools1";
 import rnToolV2 from "./src/tools2";
 
 /**
@@ -36,4 +37,4 @@ declare function compatInvoke(
   callback: (res: any) => void
 ): void;
 
-export { HMApi, rnToolV2, bnqBridge, bnqEmitter, compatInvoke };
+export { rnToolV2, RNTool, bnqBridge };

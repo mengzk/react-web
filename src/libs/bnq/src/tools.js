@@ -80,6 +80,12 @@ class Tools {
     bnqHm.back(arg);
   }
   /**
+   * 页面返回
+   */
+  static pop(arg) {
+    bnqHm.pop(arg);
+  }
+  /**
    * 页面替换
    */
   static replace(arg) {

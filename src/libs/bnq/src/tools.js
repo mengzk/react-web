@@ -501,7 +501,7 @@ class Tools {
    */
   static isDebug(_, callback) {
     const bug = bnqHm.isDebug();
-    callback && callback(bug);
+    callback && callback({isDeveloperMode: bug});
   }
 
   /**

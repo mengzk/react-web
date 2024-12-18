@@ -5,8 +5,8 @@
  */
 
 import Tools from "./src/tools";
-import ToolsV1 from "./src/tools1";
-import ToolsV2 from "./src/tools2";
+import RNTool from "./src/tools1";
+import rnToolV2 from "./src/tools2";
 import HMApi from "./src/hmApi";
 import { hmDevice } from "./src/emitter";
 import { methodMap } from "./src/rnToHm";
@@ -38,7 +38,7 @@ function bnqEmitter(key, data = {}) {
     // const time = Date.now();
     Tools.emit({ key: "h5EmitToRN", event: key, data });
   } else {
-    ToolsV2.emit(key, data);
+    rnToolV2.emit(key, data);
   }
 }
 
@@ -56,13 +56,13 @@ function compatInvoke(key = "", data, callback) {
   } else {
     switch (key) {
       case "QRCodePage":
-        ToolsV2.push("QRCodePage", data, callback);
+        rnToolV2.push("QRCodePage", data, callback);
         break;
       case "emit":
-        ToolsV2.emit(key, data);
+        rnToolV2.emit(key, data);
         break;
       default:
-        ToolsV2.sendMsgToRN(key, data, callback);
+        rnToolV2.sendMsgToRN(key, data, callback);
         break;
     }
   }
@@ -77,15 +77,15 @@ function _hmBridge(key, data, callback) {
 
 // 版本1调用
 function _bridgeInvokeV1(key, data, callback) {
-  const methodList = Object.getOwnPropertyNames(ToolsV1).filter(
-    (prop) => typeof ToolsV1[prop] === "function"
+  const methodList = Object.getOwnPropertyNames(RNTool).filter(
+    (prop) => typeof RNTool[prop] === "function"
   );
   const hasMethod = methodList.includes(key);
   try {
     if (hasMethod) {
-      ToolsV1[key](data, callback);
+      RNTool[key](data, callback);
     } else {
-      ToolsV1.sendMessage(key, data, callback);
+      RNTool.sendMessage(key, data, callback);
     }
   } catch (error) {
     console.warn(`App不支持 ${key} 方法, 请联系开发人员`);
@@ -97,10 +97,10 @@ function _bridgeInvokeV2(key, data, callback) {
   try {
     switch (key) {
       case "QRCodePage":
-        ToolsV2.push("QRCodePage", data, callback);
+        rnToolV2.push("QRCodePage", data, callback);
         break;
       default:
-        ToolsV2.sendMsgToRN(key, data, callback);
+        rnToolV2.sendMsgToRN(key, data, callback);
         break;
     }
   } catch (error) {
@@ -108,6 +108,5 @@ function _bridgeInvokeV2(key, data, callback) {
   }
 }
 
-const rnToolV2 = ToolsV2; // 版本2工具
 // 导出
-export { HMApi, rnToolV2, bnqBridge, bnqEmitter, compatInvoke };
+export { RNTool, rnToolV2 };

@@ -29,6 +29,7 @@ const methodMap = {
   deviceInfoV2: 'deviceInfo',
   getDeviceInfo: 'deviceInfo',
   reqLoginInfoV2: 'userInfo',
+  reqLoginInfo: 'userInfo',
   previewFile: 'previewDocs',
   h5AllCache: 'clearStorage',
   h5SaveByKey: 'setStorage',

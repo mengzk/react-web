@@ -137,7 +137,7 @@ class RNTool2 {
   static push(routeName, param, callback) {
     const hm = hmDevice();
     if (hm) {
-      switch (key) {
+      switch (routeName) {
         case "QRCodePage":
           Tools.qrcodeScan();
           break;

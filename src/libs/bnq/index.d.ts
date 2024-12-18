@@ -14,12 +14,12 @@ import rnToolV2 from "./src/tools2";
  * @param callback 回调函数
  * @param version  版本号 默认2
  */
-declare function bnqBridge(
-  key: string,
-  data: any,
-  callback: (res: any) => void,
-  version?: number
-): void;
+// declare function bnqBridge(
+//   key: string,
+//   data: any,
+//   callback: (res: any) => void,
+//   version?: number
+// ): void;
 
 /**
  * 向原生发送Emitter消息
@@ -37,4 +37,4 @@ declare function compatInvoke(
   callback: (res: any) => void
 ): void;
 
-export { rnToolV2, RNTool, bnqBridge };
+export { rnToolV2, RNTool };

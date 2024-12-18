@@ -5,7 +5,7 @@
  * Desc:
  */
 import React, { useEffect, useState } from "react";
-import { bnqBridge, rnToolV2, RNTool } from "../../libs/bnq/index";
+import { rnToolV2, RNTool } from "../../libs/bnq/index";
 import "./test.css";
 
 import PDFView from "../../components/pdf";
@@ -55,7 +55,7 @@ function TestPage() {
     });
   }
   function onShare2() {
-    bnqBridge("sysShare", { url: "com.bnq.crm" });
+    // bnqBridge("sysShare", { url: "com.bnq.crm" });
   }
   function onNav() {
     rnToolV2.sendMsgToRN(
@@ -95,8 +95,7 @@ function TestPage() {
   function onPreviewDocs() {
     // https://decorationhome.oss-cn-hangzhou.aliyuncs.com/prod/images/bigscreen/pdf/2023Yearbook.pdf
     // https://decorationhome.oss-cn-hangzhou.aliyuncs.com/files/txt/%E5%90%88%E5%90%8C%E7%AD%BE%E7%BA%A6.txt
-    // bnqBridge("previewFile", { data: ['https://dhstatic.bthome.com/prod/images/bigscreen/pdf/2023Yearbook.pdf'] });
-    bnqBridge("previewFile", { data: [
+    rnToolV2.sendMsgToRN("previewFile", { data: [
       'https://dhstatic.bthome.com/prod/images/bigscreen/fitment/4dqy_ic1.png',
       'https://dhstatic.bthome.com/prod/images/bigscreen/fitment/4dqy_ic2.png',
       'https://dhstatic.bthome.com/prod/images/bigscreen/fitment/4dqy_ic3.png',
@@ -150,18 +149,13 @@ function TestPage() {
       console.log("record res ", res);
     });
   }
-  function onMediaPlay() {
-    bnqBridge("mediaPlayer", {}, (res) => {
-      console.log("mediaPlay res ", res);
-    });
-  }
   function getLocation() {
     rnToolV2.sendMsgToRN("GetGaodeLocationV2", {}, (res) => {
       console.log("location res ", res);
     });
   }
   function onChooseAddress() {
-    bnqBridge("chooseAddress", {}, (res) => {
+    rnToolV2.sendMsgToRN("chooseAddress", {}, (res) => {
       console.log("chooseAddress res ", res);
     });
   }
@@ -183,7 +177,7 @@ function TestPage() {
     });
   }
   function onAppInfo() {
-    bnqBridge("appInfo", {}, (res) => {
+    rnToolV2.sendMsgToRN("appInfo", {}, (res) => {
       console.log("appInfo res ", res);
     });
   }
@@ -198,16 +192,16 @@ function TestPage() {
     });
   }
   function onLogin() {
-    bnqBridge("login", {});
+    rnToolV2.sendMsgToRN("login", {});
   }
   function onLogout() {
-    bnqBridge("logout", {});
+    rnToolV2.sendMsgToRN("logout", {});
   }
   function onRemove() {
-    bnqEmitter("remove", { key: "removeMsg" });
+    rnToolV2.emit("remove", { key: "removeMsg" });
   }
   function onAddEmit() {
-    bnqEmitter("listener", { key: "addMsg" });
+    rnToolV2.emit("listener", { key: "addMsg" });
   }
   function onEmit() {
     rnToolV2.emit("refreshTaskDetail", { key: "refreshTaskDetail" });
@@ -259,9 +253,25 @@ function TestPage() {
     isLoading = !isLoading;
   }
 
+  function onChangeTitle() {
+    const num = Math.round(Math.random() * 100);
+    RNTool.setH5NavBarStyle({ hideNav: Date.now() % 2 === 0, title: "标题"+num });
+  }
+
+  function onPostMsgV1() {
+    RNTool.sendMessage("back", { }, (res) => {
+      console.log("---> res ", res);
+    });
+  }
+
   return (
     <div className="test">
       {/* <PDFView url="https://dhstatic.bthome.com/prod/images/bigscreen/pdf/2023Yearbook.pdf"/> */}
+      <h3>兼容RN百安居</h3>
+      <div className="test-actions">
+        <button onClick={onChangeTitle}>修改标题</button>
+        <button onClick={onPostMsgV1}>发消息</button>
+      </div>
       <h3>兼容RN住小橙</h3>
       <div className="test-actions">
         <button onClick={onChoosePhoto}>选择照片</button>

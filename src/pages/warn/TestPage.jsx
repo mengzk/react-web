@@ -9,9 +9,22 @@ import { rnToolV2, RNTool } from "../../libs/bnq/index";
 import "./test.css";
 
 import PDFView from "../../components/pdf";
+import Table from "../../components/table";
 import { loginAccount } from "../../modules/api";
 
 let isLoading = false;
+const columns = [
+  { header: 'Name', field: 'name' },
+  { header: 'Age', field: 'age' },
+  { header: 'Phone', field: 'phone' },
+  { header: 'Email', field: 'email' },
+];
+
+const data = [
+  { name: 'John Doe', age: 28, phone:'1873884893', email: 'john@example.com' },
+  { name: 'Jane Smith', age: 34, phone:'1873884893', email: 'jane@example.com' },
+  { name: 'Sam Johnson', age: 45, phone:'1873884893', email: 'sam@example.com' },
+];
 function TestPage() {
   const [imgs, setImgs] = useState([]);
   const [files, setFiles] = useState([]);
@@ -271,6 +284,7 @@ function TestPage() {
   return (
     <div className="test">
       {/* <PDFView url="https://dhstatic.bthome.com/prod/images/bigscreen/pdf/2023Yearbook.pdf"/> */}
+      <Table columns={columns} data={data} />
       <h3>兼容RN百安居</h3>
       <div className="test-actions">
         <button onClick={onChangeTitle}>修改标题</button>

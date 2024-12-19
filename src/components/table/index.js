@@ -9,7 +9,18 @@ import React from "react";
 import "./index.css";
 
 const innerWidth = window.innerWidth;
+const columns = [
+  { header: 'Name', field: 'name' },
+  { header: 'Age', field: 'age' },
+  { header: 'Phone', field: 'phone' },
+  { header: 'Email', field: 'email' },
+];
 
+const data = [
+  { name: 'John Doe', age: 28, phone:'1873884893', email: 'john@example.com' },
+  { name: 'Jane Smith', age: 34, phone:'1873884893', email: 'jane@example.com' },
+  { name: 'Sam Johnson', age: 45, phone:'1873884893', email: 'sam@example.com' },
+];
 function Table(props) {
   const { columns, data = [] } = props;
 

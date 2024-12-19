@@ -2,11 +2,18 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  background-color: white;
   /* border: 1px solid #dfe1e5; */
+
   font-size: 14px;
   color: #333;
-
-  background-color: white;
+}
+.v-table-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: #999;
 }
 .v-table-thead {
   width: 100%;
@@ -51,14 +58,14 @@
   text-align: left;
 } */
 
-.v-table tr:nth-child(even) {
+.v-table-body tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-.v-table tr:hover {
+.v-table-body tr:hover {
   background-color: #ff660010;
 }
 
-.v-table tr:active {
+.v-table-body tr:active {
   background-color: #e9e9e9;
 }

@@ -8,6 +8,11 @@ const instance = axios.create({
 // 请求事例
 export function httpClient(options) {
 
+  if (options.method === "GET") {
+    options.params = options.data
+    delete options.data
+  }
+
   return instance.request(options)
   .then((response) => {
     return response;

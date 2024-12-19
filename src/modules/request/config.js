@@ -10,12 +10,12 @@ import AppConfig from "../../config/index";
 // 环境及服务器设置
 export const env_hosts = {
   prod: {
-    api: "http://def.demo.com",
+    api: "http://api.demo.com",
     order: "http://order.demo.com",
     wx: "ws://iat-api.xfyun.cn/v2/iat",
   },
   dev: {
-    api: "http://192.168.253.154:8063",
+    api: "http://aimlai.com",
     order: "http://order.localhost:8087",
     ws: "ws://iat-api.xfyun.cn/v2/iat",
   },

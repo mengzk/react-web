@@ -9,6 +9,7 @@ import { rnToolV2, RNTool } from "../../libs/bnq/index";
 import "./test.css";
 
 import PDFView from "../../components/pdf";
+import { loginAccount } from "../../modules/api";
 
 let isLoading = false;
 function TestPage() {
@@ -17,6 +18,9 @@ function TestPage() {
 
   useEffect(() => {
     console.log("useEffect");
+    loginAccount().then((res) => {
+      console.log("login res ", res);
+    });
   }, []);
 
   function onResult(value, e) {

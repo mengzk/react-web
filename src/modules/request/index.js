@@ -3,7 +3,7 @@
  * Date: 2023-06-09
  * Desc: 2023-06-09
  */
-
+import {httpClient} from "./axios";
 import { network, requestUrl, mergeHeaders, mergeParams } from "./config";
 
 // 请求入口
@@ -23,7 +23,7 @@ export function request({
     const options = {
       method,
       url: requestUrl(host, url),
-      params: mergeParams(params),
+      data: mergeParams(params),
       headers: mergeHeaders(headers),
     };
     // 显示加载中
@@ -42,7 +42,7 @@ export function request({
       resolve(result);
     }
 
-    network(options)
+    httpClient(options)
       .then((res) => {
         result = parseData(res, url);
         // resolve(res);

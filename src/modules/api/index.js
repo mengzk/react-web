@@ -25,3 +25,15 @@ export function queryHomeData(params = { user: "123", memo: "12314" }) {
     headers: { token: "123123121" },
   });
 }
+
+/**
+ * @description: 登录接口
+ * @param {Object} params 请求参数
+ */
+export function loginAccount(params = { account: "123", pwd: "12314" }) {
+  return request({
+    url: "/account/v2/login",
+    method: "POST",
+    params,
+  });
+}

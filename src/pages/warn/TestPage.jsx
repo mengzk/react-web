@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import { rnToolV2, RNTool } from "../../libs/bnq/index";
 import "./test.css";
 
+import PDFView from "../../components/pdf";
 import { loginAccount } from "../../modules/api";
 
 let isLoading = false;
@@ -18,9 +19,6 @@ function TestPage() {
 
   useEffect(() => {
     console.log("useEffect");
-    loginAccount().then((res) => {
-      console.log("login res ", res);
-    });
   }, []);
 
   function onResult(value, e) {
@@ -59,6 +57,11 @@ function TestPage() {
     });
   }
   function onShare2() {
+    for (let index = 0; index < 100; index++) {
+      loginAccount().then((res) => {
+        console.log("login res ", res);
+      });
+    }
     // bnqBridge("sysShare", { url: "com.bnq.crm" });
   }
   function onNav() {
@@ -270,6 +273,8 @@ function TestPage() {
 
   return (
     <div className="test">
+    <PDFView url="https://dhstatic.bthome.com/prod/images/bigscreen/pdf/2023Yearbook.pdf"/>
+
       <h3>兼容RN百安居</h3>
       <div className="test-actions">
         <button onClick={onChangeTitle}>修改标题</button>

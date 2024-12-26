@@ -30,9 +30,9 @@ export function queryHomeData(params = { user: "123", memo: "12314" }) {
  * @description: 登录接口
  * @param {Object} params 请求参数
  */
-export function loginAccount(params = { password: "admin123", username: "admin" }) {
+export function loginAccount(params = { password: "123456", username: "admin" }) {
   return request({
-    url: "/healthcare/login",
+    url: "/account/login",
     method: "POST",
     params,
   });

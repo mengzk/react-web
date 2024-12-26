@@ -15,7 +15,7 @@ export const env_hosts = {
     wx: "ws://iat-api.xfyun.cn/v2/iat",
   },
   dev: {
-    api: "http://aimlai.com",
+    api: "http://192.168.253.154:8063",
     order: "http://order.localhost:8087",
     ws: "ws://iat-api.xfyun.cn/v2/iat",
   },

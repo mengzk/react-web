@@ -197,7 +197,15 @@ function PDFView(props) {
     if (props.loadView) {
       return props.loadView();
     }
-    return <div className="v-pdf-loading">加载中...</div>;
+    return (
+      <div className="v-pdf-loading">
+        {/* <img className="v-pdf-load-icon" src={pdfIc} alt="pdf" /> */}
+        <span>正在载入</span>
+        <div className="v-pdf-progress-box">
+          <div className="v-pdf-loading-progress"></div>
+        </div>
+      </div>
+    );
   }
 
   function errView() {

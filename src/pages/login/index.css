@@ -1,0 +1,115 @@
+.login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  /* background-color: white; */
+}
+
+.login .login-left {
+  width: 0;
+}
+
+.login .login-right {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.login .login-box {
+  width: 392px;
+  height: 500px;
+  margin: 0 24px;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.login .title {
+  color: #232323;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 48px;
+  margin-bottom: 32px;
+}
+
+.login .input-box {
+  width: 300px;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.login .input-label {
+  color: #676767;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.login .l-input {
+  /* width: 100%; */
+  height: 40px;
+  padding: 0 8px;
+  border-radius: 6px;
+  border: 1px solid #878787;
+}
+.login .l-input:focus {
+  border: 1px solid orange;
+}
+
+.login .login-hint {
+  width: 300px;
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.login .login-hint button {
+  border: none;
+  padding: 5px 16px;
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+.login .login-action {
+  width: 300px;
+  margin-top: auto;
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login .login-btn {
+  width: 100%;
+  height: 44px;
+  border-radius: 8px;
+
+  background-color: #232323;
+
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+@media (min-width: 1200px) {
+  .login-left {
+    flex: 5;
+    background-color: orange;
+  }
+
+  .login-right {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: white;
+  }
+}

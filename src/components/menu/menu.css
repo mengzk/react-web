@@ -1,0 +1,26 @@
+.v-menu-layout {
+  width: 230px;
+  height: 100%;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-right: solid 1px #e3e3e3;
+}
+
+.v-menu-view {
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+
+  color: #232323;
+  font-size: 18px;
+  font-weight: 600;
+}
+.v-menu-view:hover {
+  background-color: #3776eb10;
+}
+.v-menu-view.active {
+  color: white;
+  background-color: #3776eb;
+}

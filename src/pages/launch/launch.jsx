@@ -4,7 +4,7 @@
  * Modify: 2023-09-14
  * Desc: 启动页-可做成骨架屏
  */
-
+import React from "react";
 import Loading from "../../components/loading/index";
 import "./launch.css";
 

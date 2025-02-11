@@ -1,0 +1,82 @@
+.v-table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #dfe1e5;
+  border-radius: 3px;
+
+  font-size: 16px;
+  color: #232323;
+}
+.v-table-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: #999;
+}
+.v-table-thead {
+  width: 100%;
+  display: flex;
+  overflow: visible;
+  background-color: white;
+  border-bottom: solid 1px #dfe1e5;
+
+  color: #232323;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.v-table-tbody {
+  display: flex;
+  flex-direction: column;
+}
+.v-table-tr {
+  width: 100%;
+  display: flex;
+}
+.v-table-cell {
+  max-width: 100%;
+  text-align: left;
+
+  /* 自动换行 */
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+
+  color: #393939;
+  font-size: 16px;
+}
+.v-table-column {
+  flex: 1;
+  text-align: left;
+  padding: 16px 8px;
+  line-height: 1.2;
+  
+  /* border: 1px solid #dfe1e5; */
+}
+
+/* .v-table th, .v-table td {
+  border: 1px solid #dfe1e5;
+} */
+
+/* .v-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+} */
+
+.v-table-body tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.v-table-body tr:hover {
+  background-color: #3776eb10;
+}
+
+.v-table-body tr:active {
+  background-color: #e9e9e9;
+}

@@ -1,0 +1,88 @@
+.bnq-pagination {
+  --justify-content: space-between;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.bnq-pagination-item {
+  font-family: "PingFang SC";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  color: #1D2129;
+}
+
+.bnq-pagination-item-disabled {
+  color: #86909C;
+}
+
+.bnq-pagination-text-content {
+  font-family: "PingFang SC";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  color: #1D2129;
+  height: 25px;
+  line-height: 25px;
+  display: inline-block;
+  margin: 0 24px;
+}
+
+.bnq-pagination-split {
+  font-family: "PingFang SC";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  width: 20px;
+  text-align: center;
+  height: 25px;
+  line-height: 25px;
+  display: inline-block;
+}
+
+.bnq-pagination-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #E5E6EB;
+}
+
+.bnq-pagination-dot:not(:last-child) {
+  margin-right: 6px;
+}
+
+.bnq-pagination-dot-active {
+  background: #3478F6;
+}
+
+.bnq-pagination-capsule-content {
+  width: 72px;
+  height: 32px;
+  background: #FFF;
+  border-radius: 100px;
+  border: 1px solid #E5E6ED;
+  display: flex;
+  align-items: center;
+}
+
+.bnq-pagination-capsule-disabled {
+  color: #86909C;
+}
+
+.bnq-pagination-capsule-prev {
+  flex: 1;
+  text-align: center;
+}
+
+.bnq-pagination-capsule-next {
+  flex: 1;
+  text-align: center;
+}
+
+.bnq-pagination-capsule-line {
+  width: 0.5px;
+  height: 12px;
+  background: #E5E6EB;
+  display: inline-block;
+}

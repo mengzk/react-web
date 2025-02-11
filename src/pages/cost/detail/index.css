@@ -1,0 +1,4 @@
+.cost-detail {
+    display: flex;
+    flex-direction: column;
+}

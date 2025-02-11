@@ -4,27 +4,15 @@
  * Modify: 2023-09-14
  * Desc: scrollTop
  */
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
+
+import logoIcon from "../../assets/icon/logo.png";
 
 import "./toolbar.css";
 
-import logoIcon from "../../assets/icon/logo.png";
-import { usePageScroll } from "../../modules/hooks/scroll";
-
-const maxHeight = Math.round(window.innerHeight * 0.83);
 function Toolbar(props) {
-  const [aplha, setAplha] = useState({});
-  const lastHeight = useRef(0);
 
-  usePageScroll(({y}) => {
-    if (y < maxHeight || lastHeight.current <= maxHeight) {
-      lastHeight.current = y;
-      setAplha({ backgroundColor: `rgba(30, 30, 30, ${y / maxHeight})` });
-    }
-  });
-
-
-  function onBack() {
+  function onHome() {
     console.log("window.history:", window.history);
     // window.history.back();
   }
@@ -39,27 +27,19 @@ function Toolbar(props) {
 
   return (
     <>
-      <div className="v-toolbar-box" style={aplha}>
-        <div className="v-toolbar-btn" onClick={onBack}>
-          <img className="v-toolbar-logo" src={logoIcon} />
-          <span className="v-toolbar-name">网站</span>
+      <div className="v-tb-box">
+        <div className="v-tb-btn" onClick={onHome}>
+          <img className="v-tb-logo" src={logoIcon} />
+          <span className="v-tb-name">Logo</span>
         </div>
-        <ul className="v-toolbar-tab" onClick={onClickTab}>
-          <li id="home" className="v-toolbar-tab-li">
-            首页
-          </li>
-          <li id="goods" className="v-toolbar-tab-li">
-            产品
-          </li>
-          <li id="about" className="v-toolbar-tab-li">
-            关于
-          </li>
-          <li id="contact" className="v-toolbar-tab-li">
-            联系
-          </li>
-        </ul>
+        <div className="v-tb-tab" onClick={onClickTab}>
+          <span className="v-tb-tab-name">
+            名称
+          </span>
+          <img className="v-tb-tab-icon" src={logoIcon} />
+        </div>
       </div>
-      {/* <div className="v-toolbar-height" /> */}
+      <div className="v-tb-height" />
     </>
   );
 }

@@ -1,0 +1,70 @@
+/* semantic color variables for this project */
+:root {
+  --theme: #007bff;
+  --bg-color: #212026;
+  --box-color: rgba(255, 255, 255, 0.15);
+  --line-color: rgba(255, 255, 255, 0.3);
+
+  --border: #e0e0e0;
+  --border-hover: #d0d0d0;
+
+  --text: white;
+  --tit-color: white;
+  --sut-color: #e3e3e3;
+  --val-color: #d3d3d3;
+  --lab-color: #c3c3c3;
+  --date-color: #999999;
+  --hint-color: #999999;
+
+  --status: #ff6600;
+  --status2: #E55C5C;
+  --status3: #2EE56B;
+  --status4: #9900ff;
+  --status5: #E5C72E;
+
+  --lg: linear-gradient(90deg, #2EE56B 0%, #E5C72E 50%, #E52E2E 100%);
+  --lg2: linear-gradient(0deg, #f6f6f6 25%, #f9f9f9 37%, #f6f6f6 63%);
+  --lg3: linear-gradient(100deg, #f6f6f6 25%, #f9f9f9 37%, #f6f6f6 63%);
+
+  --border: solid 1px #e0e0e0;
+
+  --toolbar-height: 64px;
+  --status-height: 24px;
+  --safe-top: 24px;
+  --safe-bottom: 24px;
+  
+  --status-bar-height: env(safe-area-inset-top);
+  --safe-area-inset-top: env(safe-area-inset-top);
+  --safe-area-inset-right: env(safe-area-inset-right);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom);
+  --safe-area-inset-left: env(safe-area-inset-left);
+}
+/* 
+prefers-scheme支持三个值 :
+  -no-preference：无指定
+  -light：亮色
+  -dark：暗色
+// JS查询是系统是否为暗色
+matchMedia('(prefers-color-scheme: dark)').matches
+*/
+/* @media (prefers-scheme: dark) {
+  :root {
+    --background: var(--g-black);
+    --background-soft: var(--g-black-soft);
+    --background-mute: var(--g-black-mute);
+
+    --border: var(--g-divider-dark-2);
+    --border-hover: var(--g-divider-dark-1);
+
+    --heading: var(--g-text-dark-1);
+    --text: var(--g-text-dark-2);
+  }
+} */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

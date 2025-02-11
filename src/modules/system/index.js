@@ -38,4 +38,16 @@ function deviceInfo() {
   console.log(info);
 }
 
-export {};
+// 获取系统信息
+export function platformName() {
+  const u = navigator.userAgent;
+  const isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1;
+  const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+  if (isAndroid) {
+    return "android";
+  } else if (isIOS) {
+    return "ios";
+  } else {
+    return "web";
+  }
+};

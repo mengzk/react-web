@@ -5,63 +5,50 @@
  * Desc:
  */
 
-import AppConfig from "../../config/index";
+import Configs from "../../config/index";
+import Consts from "../../config/consts";
 
 // 环境及服务器设置
-export const env_hosts = {
+const appDomains = {
   prod: {
-    def: "http://def.demo.com",
+    api: "http://aimlai.com",
     order: "http://order.demo.com",
-    wx: "ws://iat-api.xfyun.cn/v2/iat",
-  },
-  test: {
-    def: "http://def-test.demo.com",
-    order: "http://order-test.demo.com",
-    ws: "ws://iat-api.xfyun.cn/v2/iat",
   },
   dev: {
-    def: "http://192.168.253.109:8087",
-    order: "http://order.localhost:8087",
-    ws: "ws://iat-api.xfyun.cn/v2/iat",
+    api: "/api",
+    order: "",
   },
 };
 
-// 获取网络host
-export function requestUrl(tag, path) {
-  return getHostFromTag(tag) + path;
-}
-
 // 获取指定标签环境域名
-export function getHostFromTag(tag, env) {
-  const envTag = env || AppConfig.defEnv;
-  const domain = tag || "def";
-  return env_hosts[envTag][domain];
+export function getDomainFromTag(tag) {
+  const key = tag || "api";
+  return appDomains[Configs.env][key];
 }
 
 // 请求头及参数处理
-export function mergeHeaders(headers={}) {
-  let token = "9AZMBYfKQdyaJzQ";
-  let agent = "123agent45678";
-  headers.appAgent = agent;
-  headers.token = token;
-  return headers;
+export function mergeHeaders(headers = {}) {
+  return {
+    Authorization: Consts.token,
+    ...headers,
+  };
 }
 
-
 // 请求头及参数处理
-export function mergeParams(params={}) {
-  params.token = '';
+export function mergeParams(params = {}) {
   return params;
-  ;
 }
 
-// 配置 
+// 配置
 export function network(options) {
   if (options.method == "POST") {
-    options.body = JSON.stringify(options.params);
-    delete options.params;
+    options.body = JSON.stringify(options.data);
+    delete options.data;
   }
 
-  return fetch(options.url, options)
-  .then((res) => res.json());
+  return fetch(options.url, {
+    ...options,
+    mode: "cors",
+    credentials: "include",
+  }).then((res) => res.json());
 }

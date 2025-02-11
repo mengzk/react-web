@@ -1,0 +1,9 @@
+.user-page {
+    display: flex;
+    flex-direction: column;
+}
+.user-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 280px);
+    grid-gap: 16px;
+}

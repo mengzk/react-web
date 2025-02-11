@@ -8,8 +8,8 @@
 import React, { useEffect, useCallback } from "react";
 import { RouterProvider } from "react-router-dom";
 
-import { AppTheme } from "./components/index";
 import useLaunch from "./modules/hooks/launch";
+import Account from "./modules/store/account";
 
 import routes from "./pages/routes";
 import LaunchPage from "./pages/launch/launch";
@@ -20,6 +20,7 @@ function App() {
   const { launch } = useLaunch();
 
   useEffect(() => {
+    Account.getInfo();
     loadInit();
     return () => {};
   }, []);
@@ -29,14 +30,7 @@ function App() {
   }, []);
 
   if (launch) {
-    return (
-      <AppTheme>
-        {/* <div className="App"> */}
-          <RouterProvider router={routes} />
-          {/* <RouterProvider router={routes} fallbackElement={<FallbackPage />} /> */}
-        {/* </div> */}
-      </AppTheme>
-    );
+    return <RouterProvider router={routes} />;
   } else {
     return <LaunchPage />;
   }

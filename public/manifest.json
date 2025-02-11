@@ -1,13 +1,13 @@
 {
   "short_name": "App",
   "name": "step",
-  "version": "0.0.6",
-  "env": "prod",
-  "date": "20240415175027",
+  "version": "0.0.1",
+  "env": "dev",
+  "date": "20231009141016",
   "dev": "0.0.1",
   "uat": "0.0.1",
-  "test": "0.0.2",
-  "prod": "0.0.6",
+  "test": "0.0.1",
+  "prod": "0.0.1",
   "icons": [
     {
       "src": "favicon.ico",

@@ -1,4 +1,4 @@
-.v-toolbar-box {
+.v-tb-box {
   width: 100vw;
   height: 56px;
   top: 0;
@@ -8,40 +8,45 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* background-color: transparent; */
+  background-color: white;
 }
 
-.v-toolbar-btn {
+.v-tb-btn {
   margin-left: 24px;
   display: flex;
   align-items: center;
 }
-.v-toolbar-logo {
+.v-tb-logo {
   width: 24px;
   height: 24px;
 }
-.v-toolbar-name {
-  color: white;
+.v-tb-name {
+  color: #232323;
   font-size: 14px;
   font-weight: 600;
   margin-left: 8px;
 }
-.v-toolbar-tab {
+.v-tb-tab {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 6vw 0 0;
-  column-gap: 64px;
+  padding: 0 24px 0 0;
 }
-.v-toolbar-tab-li {
-  color: white;
+.v-tb-tab-name {
+  color: #232323;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
+}
+.v-tb-tab-icon {
+  width: 40px;
+  height: 40px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background-color: orange;
 }
 
-
-.v-toolbar-height {
+.v-tb-height {
   width: 1px;
   min-height: 56px;
 }

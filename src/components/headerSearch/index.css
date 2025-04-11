@@ -1,0 +1,29 @@
+.v-search-header {
+  width: 100vw;
+  height: 56px;
+  min-height: 56px;
+  z-index: 67;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* background-color: white; */
+}
+
+.v-search-header-btn {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+}
+.v-search-header-back {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+}
+.v-search-header-right {
+  width: 16px;
+  min-width: 16px;
+}
+.v-search-header-height {
+  width: 1px;
+  min-height: 56px;
+}

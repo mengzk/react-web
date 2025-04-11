@@ -1,0 +1,39 @@
+:root {
+  --theme: #3478F6;
+  --bg: #F5F6FA;
+
+  --text: #1D2129;
+  --tit-color: #1D2129;
+  --sut-color: #4E5969;
+  --val-color: #4E5969;
+  --lab-color: #86909C;
+  --hint-color: #C9CDD4;
+
+  --status: #ff6600;
+  --status2: #FF2626;
+  --status3: #2EE56B;
+  --status4: #3478F6;
+  --status5: #E5C72E;
+
+  --bg-lg: linear-gradient(90deg, #2EE56B 0%, #E5C72E 50%, #E52E2E 100%);
+
+  --border-solid: solid 1px #e0e0e0;
+
+  --safe-top: 24px;
+  --safe-bottom: 24px;
+  
+  --status-bar-height: env(safe-area-inset-top);
+  --safe-inset-top: env(safe-area-inset-top);
+  --safe-inset-bottom: env(safe-area-inset-bottom);
+
+  --safe-inset-top0: constant(safe-area-inset-top);
+  --safe-inset-bottom0: constant(safe-area-inset-bottom);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

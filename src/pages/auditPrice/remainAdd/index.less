@@ -1,0 +1,91 @@
+.oara-remain-add {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .flex-box {
+    margin: 1px 10px;
+    padding-bottom: 16px;
+  }
+
+  .box-ar {
+    padding: 16px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+
+    &>:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+  }
+  .cell-label {
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: #4e5969;
+
+    & > :last-child {
+      color: red;
+      margin-left: 4px;
+    }
+  }
+  .label-box {
+    margin: 16px 0 12px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .memo-box {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+
+    .bnq-text-area-container-card {
+      background-color: #f8f9fb;
+      margin: 0;
+      border-radius: 8px;
+    }
+  }
+
+  .order-add {
+    margin-left: auto;
+    padding: 3px 12px;
+    color: #3478F6;
+    font-size: 16px;
+  }
+  
+  .order-item {
+    padding-bottom: 16px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: solid 1px #e5e6eb;
+
+    .order-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 8px 0;
+
+      &>span {
+        font-weight: 600;
+        font-size: 16px;
+        color: #1d2129;
+      }
+      &>img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    .order-item-label {
+      font-size: 16px;
+      color: #4e5969;
+    }
+    .order-item-value {
+      font-size: 16px;
+      color: #1d2129;
+    }
+  }
+}

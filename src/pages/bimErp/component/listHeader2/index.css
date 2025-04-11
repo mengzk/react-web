@@ -1,0 +1,38 @@
+.v-tab3-box {
+  width: 100vw;
+  height: 56px;
+  top: 0;
+  left: 0;
+  z-index: 91;
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* background-color: white; */
+}
+
+.v-tab3-action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.v-tab3-back {
+  width: 26px;
+  height: 26px;
+  padding-left: 10px;
+}
+.v-tab3-title {
+  color: #1D2129;
+  font-size: 16px;
+  padding: 8px 16px;
+
+  max-width: calc(100vw - 160px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.v-tab3-title.active {
+  color: #3478F6;
+  font-size: 18px;
+  font-weight: 500;
+}

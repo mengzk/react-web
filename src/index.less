@@ -1,0 +1,139 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  color: #4e5969;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  font-family: "PingFang SC";
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /* background-color: #F5F6FA; */
+}
+
+#root {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex {
+  flex: 1;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-center {
+  align-items: center;
+}
+
+.jc-center {
+  justify-content: center;
+}
+
+.ellip {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.opacity {
+  opacity: 0.6;
+}
+
+.scroll {
+  flex: 1;
+  /* scrollbar-color: #d9d9d9 transparent; */
+  overflow-y: auto; /* 当内容超出时启用垂直滚动 */
+  -webkit-overflow-scrolling: touch; /* 启用平滑滚动（适用于移动设备） */
+}
+
+.list {
+  flex: 1;
+  margin: 1px 10px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.footer-actions {
+  padding: 10px 16px;
+  display: flex;
+  background-color: white;
+  padding-bottom: calc(~"10px + constant(safe-area-inset-bottom)");
+  padding-bottom: calc(~"10px + env(safe-area-inset-bottom)");
+
+  & > :not(:first-child) {
+    margin-left: 16px;
+  }
+}
+
+.status {
+  background-color: #F5F7FF;
+  border-radius: 4px;
+  margin-left: 8px;
+  padding: 0 4px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #456899;
+}
+.status.red {
+  color: #FF2626;
+  background-color: #FFF2F2;
+}
+.status.blue {
+  color: #2166E6;
+  background-color: #EEF1FD;
+}
+.status.green {
+  color: #00c261;
+  background-color: #EDFAF4;
+}
+.status.yellow {
+  color: #ff6600;
+  background-color: #faf5ed;
+}
+.status.gray {
+  color: #456899;
+  background-color: #F5F7FF;
+}
+#popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9996;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+}

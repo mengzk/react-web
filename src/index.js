@@ -1,26 +1,32 @@
 /**
  * Author: Meng
- * Date: 2023-11-16
- * Modify: 2023-11-16
- * Desc: 
+ * Date: 2025-02-26
+ * Modify: 2025-02-26
+ * Desc: 入口文件
  */
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { systemInit } from "./modules/system/index";
+import App from "./pages/app";
 
-import './index.css';
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import { initConfig } from "./utils/boot";
+import { errHandler } from "./utils/error";
+
+import "./index.less";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <App />
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 reportWebVitals();
 
-systemInit();
-// console.log('process:', process.env)
+initConfig();
+errHandler();
+
+console.log("---> process", process.env);

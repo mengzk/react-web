@@ -1,0 +1,32 @@
+.ib-input-box-box {
+  min-height: 54px;
+  /* width: 154px; */
+  min-width: 154px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 4px;
+  background-color: #F7F8FA;
+  border: solid 1px #F7F8FA;
+}
+.ib-input-box-int-focus {
+  border: solid 1px #3478f6;
+}
+
+.ib-input-box-label {
+  color: #3478f6;
+  font-size: 14px;
+  line-height: 14px;
+  /* margin-bottom: 8px; */
+  margin: 0 16px 8px 16px;
+}
+.ib-input-box-lal {
+  color: #86909C;
+}
+.ib-input-box-text {
+  color: #000000;
+  font-size: 16px;
+  line-height: 16px;
+  margin: 0 16px;
+  width: calc(100% - 32px);
+}

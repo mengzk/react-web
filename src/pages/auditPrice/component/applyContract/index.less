@@ -1,0 +1,138 @@
+.cap-contract-info {
+  display: flex;
+  flex-direction: column;
+
+  .contract {
+    padding: 16px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f7ff;
+    .title {
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 16px;
+      color: #1d2129;
+    }
+    .desc {
+      display: flex;
+      margin-top: 8px;
+      font-size: 14px;
+      color: #4e5969;
+
+      & > :first-child {
+        min-width: 72px;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .cost-item {
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+
+    .cost-box {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      .label {
+        font-size: 14px;
+        color: #86909c;
+      }
+      .value {
+        margin-top: 8px;
+        font-weight: 600;
+        font-size: 24px;
+        color: #1d2129;
+      }
+      .cast-expand {
+        display: flex;
+        align-items: center;
+      }
+      .expand {
+        width: 22px;
+        height: 22px;
+        opacity: 0.6;
+        transform: rotateZ(270deg);
+        transition: all 0.3s;
+      }
+      .expand.up {
+        transform: rotateZ(90deg);
+        transition: all 0.3s;
+      }
+    }
+    .cost-box:last-child {
+      align-items: flex-end;
+    }
+  }
+  .refund-box {
+    margin-top: 8px;
+    padding: 16px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f5f7ff;
+
+    color: #1d2129;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .so-list {
+    margin-top: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .so-item {
+      padding: 16px;
+      line-height: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #F7F8FA;
+      border-bottom: solid 1px #e5e6eb;
+
+      .title {
+        margin-bottom: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #1d2129;
+      }
+      .desc {
+        margin-top: 8px;
+        font-size: 14px;
+        color: #4e5969;
+      }
+      .price {
+        color: #3478f6;
+      }
+    }
+    .so-item:last-child {
+      border-bottom: none;
+    }
+  }
+  .memo-box {
+    margin-top: 26px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e6eb;
+
+    display: flex;
+    flex-direction: column;
+    .label {
+      margin-bottom: 12px;
+      font-size: 16px;
+      color: #1d2129;
+    }
+    .bnq-text-area-container-card {
+      background-color: #f8f9fb;
+      margin: 0;
+      border-radius: 8px;
+    }
+  }
+}

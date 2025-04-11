@@ -1,8 +1,8 @@
 /**
  * Author: Meng
- * Date: 2023-11-16
- * Modify: 2023-11-16
- * Desc: 
+ * Date: 2025-02-27
+ * Modify: 2025-02-27
+ * Desc: 三方库封装
  */
 
-export {  };
+export { default as BnqApi } from "./native/index";

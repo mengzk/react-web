@@ -2,23 +2,52 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
-    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <title>React App</title>
+    <meta name="description" content="Web site created using react" />
+    <link rel="icon" href="https://dhstatic.bthome.com/img/favicon1.ico" />
+    <title>App</title>
+    <style>
+      #alert {
+        z-index: 999;
+        top: 0;
+        left: 0;
+        width: calc(100vw - 20px);
+        height: calc(100vh - 20px);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        padding: 10px;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      #alert p {
+        margin: 8px 0;
+        padding: 0;
+      }
+      #alert pre {
+        color: red;
+        font-size: 10px;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <div id="message"></div>
-    <div id="alert"></div>
     <div id="popup"></div>
+    <script>
+      window.onerror = function(message, source, lineno, colno, error) {
+        const alert = document.createElement('div');
+        alert.id="alert";
+        alert.innerHTML = `
+            <p>${message}</p>
+            <p>位置：${source} ｜ ${lineno}:${colno}</p>
+            <p>错误堆栈</p>
+            <pre>${error.stack}</pre>
+        `;
+        document.body.appendChild(alert);
+      };
+    </script>
   </body>
 </html>

@@ -1,0 +1,41 @@
+.sc-search {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .history-box {
+    display: flex;
+    flex-direction: column;
+
+    .history-title-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 16px 16px 8px 16px;
+
+      .title-text {
+        color: #323232;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .history-clear {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    .history-list {
+      margin: 0 16px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      .history-item {
+        margin: 6px 12px 6px 0;
+        padding: 6px 12px;
+        border-radius: 8px;
+        background-color: white;
+        font-size: 14px;
+        color: #323232;
+      }
+    }
+  }
+}

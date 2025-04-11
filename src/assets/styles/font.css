@@ -1,0 +1,73 @@
+
+.price {
+  color: #ff4d4f;
+}
+
+.error {
+  color: #ff4d4f;
+}
+.warn {
+  color: #faad14;
+}
+.success {
+  color: #52c41a;
+}
+
+/* 文本间距 */
+.ls1 {
+  letter-spacing: 1px;
+}
+.ls2 {
+  letter-spacing: 2px;
+}
+.ls3 {
+  letter-spacing: 3px;
+}
+.ls5 {
+  letter-spacing: 5px;
+}
+/* 文本装饰 */
+.td-u {
+  text-decoration: underline;
+}
+
+.td-n {
+  text-decoration: none;
+}
+
+/* 文本换行 */
+.ws-n {
+  white-space: normal;
+}
+
+/* 文本转换 */
+.tt-u {
+  text-transform: uppercase;
+}
+
+.tt-l {
+  text-transform: lowercase;
+}
+
+.tt-c {
+  text-transform: capitalize;
+}
+
+/* 文本阴影 */
+
+.ts1 {
+  text-shadow: 1px 1px 1px #000;
+}
+.ts2 {
+  text-shadow: 2px 2px 2px #000;
+}
+
+/* 文本颜色渐变 */
+.tg1 {
+  font-size: 28px;
+  font-weight: 500;
+  background: linear-gradient(299deg, #ffd8b9 5%, #dd9804 83%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

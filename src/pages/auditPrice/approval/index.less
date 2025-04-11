@@ -1,0 +1,83 @@
+.oaa-approval {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .box-apl {
+    margin: 0 10px 10px 10px;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+  }
+  .input-grid {
+    display: grid;
+    grid-row-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+
+    .ib-input-box-box {
+      width: 140px;
+      min-height: 54px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      border-radius: 4px;
+      background-color: #F7F8FA;
+      border: solid 1px #F7F8FA;
+    }
+  }
+  .goods {
+    // margin-top: 14px;
+    margin-bottom: 26px;
+    display: flex;
+    flex-direction: column;
+
+    .label-box {
+      display: flex;
+      align-items: center;
+      .label {
+        line-height: 1;
+        font-weight: 500;
+        font-size: 16px;
+        color: #1d2129;
+      }
+    }
+
+    .input-group {
+      display: flex;
+      margin-top: 10px;
+
+      .ib-input-box-box {
+        width: 100%;
+        min-height: 54px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 4px;
+        background-color: #F7F8FA;
+        border: solid 1px #F7F8FA;
+      }
+    }
+    .input-grid {
+      display: grid;
+      grid-gap: 10px;
+      margin-top: 10px;
+      grid-template-columns: repeat(2, 1fr);
+
+      .ib-input-box-box {
+        width: 160px;
+        min-height: 54px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 4px;
+        background-color: #F7F8FA;
+        border: solid 1px #F7F8FA;
+      }
+    }
+  }
+  .goods:last-child {
+    margin-bottom: 0;
+  }
+}

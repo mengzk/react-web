@@ -1,17 +1,24 @@
 /**
  * Author: Meng
- * Date: 2024-07-06
- * Modify: 2024-07-06
+ * Date: 2025-02-27
+ * Modify: 2025-02-27
  * Desc: 
  */
 
-const Consts = {
+const Constants = {
+  env: process.env.NODE_ENV,
+  inApp: false,
+  inBnq: false,
+  isIOS: false,
+  platform: 'web',
   version: '1.0.0',
-  platform: '',
   secret: '',
-  appid: '',
+  appId: '',
   token: '',
   userId: '',
+  userName: '',
+  userPhone: '',
+  userInfo: {},
   
   screen: {
     width: window.innerWidth,
@@ -22,4 +29,4 @@ const Consts = {
   },
 };
 
-export default Consts;
+export default Constants;

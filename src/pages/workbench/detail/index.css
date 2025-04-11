@@ -1,8 +1,0 @@
-.product-detail {
-  z-index: 1;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  /* background-color: rgba(0, 0, 0, 0.8); */
-}

@@ -1,0 +1,43 @@
+.v-header101-box {
+  width: 100vw;
+  height: 56px;
+  min-height: 56px;
+  z-index: 67;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  /* background-color: white; */
+}
+
+.v-header101-btn {
+  width: 100px;
+  padding: 0 0 0 10px;
+  display: flex;
+  align-items: center;
+}
+.v-header101-btn2 {
+  padding: 0 16px 0 0;
+  justify-content: flex-end;
+}
+.v-header101-back {
+  width: 26px;
+  height: 26px;
+}
+.v-header101-title {
+  color: #232323;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+
+  flex: 1;
+  max-width: calc(100vw - 200px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.v-header101-height {
+  width: 1px;
+  min-height: 56px;
+}

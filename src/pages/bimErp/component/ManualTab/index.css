@@ -1,0 +1,12 @@
+.v-manual-tab {
+  width: 100vw;
+  height: 56px;
+  top: 0;
+  left: 0;
+  z-index: 91;
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+}

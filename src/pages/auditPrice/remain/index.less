@@ -1,0 +1,67 @@
+.oarl-remain {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .item {
+    padding: 16px 16px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    line-height: 1;
+
+    .cell-top {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+
+      .title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #1D2129;
+      }
+      .hint {
+        color: #4E5969;
+        font-size: 14px;
+        margin-left: auto;
+      }
+      .next {
+        width: 18px;
+        height: 18px;
+        opacity: 0.7;
+        transform: rotateZ(180deg);
+      }
+    }
+    .desc {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #4E5969;
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
+      padding: 16px 16px;
+      border-radius: 8px;
+      background-color: #F1F4F9;
+
+      .cell {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        font-size: 14px;
+        color: #4E5969;
+
+        & > :last-child {
+          color: #1D2129;
+        }
+      }
+      .cell:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

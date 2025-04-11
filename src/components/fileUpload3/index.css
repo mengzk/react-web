@@ -1,0 +1,77 @@
+.bn-fud-view {
+  width: 100%;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
+}
+
+.bn-fud-view .bn-ud-im {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: center;
+}
+.bn-fud-view .bn-ud-im2 {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #F7F8FA;
+}
+.bn-ud-im .bn-ud-im-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.bn-ud-im .bn-ud-im-icon {
+  width: 36px;
+  height: 36px;
+  margin: 0 auto 8px auto;
+}
+.bn-ud-im .bn-ud-im-ne {
+  max-width: 80%;
+  max-height: 30px;
+  margin: 0 auto;
+  overflow: hidden;
+  /* white-space: nowrap; */
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  
+  text-align: center;
+  font-size: 10px;
+  line-height: 1.3;
+  color: #86909C;
+}
+.bn-ud-im .bn-ud-im-del {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 18px;
+  height: 18px;
+  z-index: 97;
+  border-radius: 50%;
+  border: solid 1px white;
+}
+.bn-ud-im2 .bn-ud-im-add {
+  color: #C8CDD5;
+  font-size: 26px;
+}
+.bn-ud-im2 .bn-ud-im-axt {
+  color: #C8CDD5;
+  font-size: 12px;
+  margin-top: 5px;
+}
